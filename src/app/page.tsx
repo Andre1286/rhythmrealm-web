@@ -205,7 +205,12 @@ export default function Home() {
             <input
               type="email"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event) => {
+                setEmail(event.target.value);
+                if (submitted) {
+                  setSubmitted(false);
+                }
+              }}
               placeholder="Email address"
               className="w-full flex-1 rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/40 focus:border-white/30"
             />
