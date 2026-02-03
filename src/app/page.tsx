@@ -1,15 +1,22 @@
 "use client";
 
+import Image from "next/image";
 import RhythmRealmLink from "../components/RhythmRealmLink";
 
-const UTM_BUTTON =
-  "https://RhythmRealm.net/?utm_source=hub&utm_medium=button&utm_campaign=where_did_the_time_go";
-const UTM_CARD =
-  "https://RhythmRealm.net/?utm_source=hub&utm_medium=card&utm_campaign=where_did_the_time_go";
-const BLOG_POST =
-  "https://www.rhythmrealm.net/post/don-t-forget-me-a-love-song-about-holding-on-official-music-video";
+const LINKS = {
+  songHub: "https://RhythmRealm.net",
+  lyricsStory:
+    "https://www.rhythmrealm.net/post/don-t-forget-me-a-love-song-about-holding-on-official-music-video",
+  bts: "https://www.rhythmrealm.net/post/don-t-forget-me-a-love-song-about-holding-on-official-music-video",
+  connect: "https://RhythmRealm.net",
+  youtubeEmbed: "https://www.youtube.com/embed/tzwQTNY-ssQ",
+};
 
 export default function Home() {
+  const handleWatchNow = () => {
+    document.getElementById("video")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
       {/* Header */}
@@ -27,7 +34,7 @@ export default function Home() {
         </div>
 
         <RhythmRealmLink
-          href={UTM_BUTTON}
+          href={LINKS.songHub}
           className="rounded-full border border-white/20 px-4 py-2 text-sm hover:bg-white hover:text-black"
         >
           RhythmRealm.net
@@ -36,34 +43,58 @@ export default function Home() {
 
       {/* Hero */}
       <section className="mx-auto w-full max-w-6xl px-6 pb-12 pt-4">
-        <div className="max-w-2xl">
-          <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
-            One link for everything
-          </h1>
-          <p className="mt-3 text-lg text-white/70">
-            Listen, watch, and explore the universe.
-          </p>
-        </div>
+        <div className="flex flex-col gap-8 md:grid md:grid-cols-[minmax(0,1fr)_360px] md:items-start md:gap-10">
+          <div className="max-w-2xl md:col-start-1">
+            <div className="text-xs uppercase tracking-widest text-white/50">
+              Universal Song Hub
+            </div>
+            <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
+              Andre Washington — “Don’t Forget Me” (Official Video)
+            </h1>
+            <p className="mt-3 text-lg text-white/70">
+              Pop music with rhythm and soul. Hit play, then explore the lyrics + story
+              on RhythmRealm.net.
+            </p>
+          </div>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <RhythmRealmLink
-            href={UTM_BUTTON}
-            className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
-          >
-            Discover more on RhythmRealm.net — Thank you for listening.
-          </RhythmRealmLink>
-          <RhythmRealmLink
-            href={UTM_CARD}
-            className="rounded-xl border border-white/20 px-5 py-3 text-center text-sm font-semibold hover:bg-white hover:text-black"
-          >
-            Explore the hub
-          </RhythmRealmLink>
+          <div className="md:col-start-2 md:row-start-1 md:row-end-3">
+            <Image
+              src="/andre-washington.png"
+              alt="Andre Washington portrait"
+              width={520}
+              height={520}
+              sizes="(max-width: 768px) 80vw, 360px"
+              priority={true}
+              className="w-full max-w-[360px] rounded-2xl border border-white/10 shadow-lg"
+            />
+          </div>
+
+          <div className="md:col-start-1">
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <button
+                type="button"
+                onClick={handleWatchNow}
+                className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
+              >
+                ▶ Watch Now
+              </button>
+              <RhythmRealmLink
+                href={LINKS.songHub}
+                className="rounded-xl border border-white/20 px-5 py-3 text-center text-sm font-semibold hover:bg-white hover:text-black"
+              >
+                Explore RhythmRealm.net
+              </RhythmRealmLink>
+            </div>
+            <p className="mt-4 text-xs text-white/60">
+              New release • Official video • Updated weekly
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Featured Video */}
       <section
-        id="featured-video"
+        id="video"
         className="mx-auto w-full max-w-6xl px-6 pb-14"
       >
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
@@ -78,7 +109,7 @@ export default function Home() {
             <div className="aspect-video w-full">
               <iframe
                 className="h-full w-full"
-                src="https://www.youtube.com/embed/tzwQTNY-ssQ"
+                src={LINKS.youtubeEmbed}
                 title="Featured video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -98,7 +129,7 @@ export default function Home() {
       {/* Quick Tiles */}
       <section className="mx-auto grid w-full max-w-6xl gap-6 px-6 pb-14 md:grid-cols-3">
         <RhythmRealmLink
-          href={UTM_CARD}
+          href={LINKS.lyricsStory}
           className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
         >
           <div className="text-xs uppercase tracking-widest text-white/50">Explore</div>
@@ -109,18 +140,18 @@ export default function Home() {
         </RhythmRealmLink>
 
         <RhythmRealmLink
-          href={UTM_CARD}
+          href={LINKS.bts}
           className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
         >
           <div className="text-xs uppercase tracking-widest text-white/50">Studio</div>
-          <h3 className="mt-3 text-lg font-semibold">Behind the Scenes</h3>
+          <h3 className="mt-3 text-lg font-semibold">Studio Behind the Scenes</h3>
           <p className="mt-2 text-sm text-white/70">
             See how the track came together and what’s next.
           </p>
         </RhythmRealmLink>
 
         <RhythmRealmLink
-          href={UTM_CARD}
+          href={LINKS.connect}
           className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
         >
           <div className="text-xs uppercase tracking-widest text-white/50">Connect</div>
@@ -147,24 +178,12 @@ export default function Home() {
             #RhythmRealmNet
           </div>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6">
             <RhythmRealmLink
-              href={UTM_BUTTON}
-              className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
+              href={LINKS.songHub}
+              className="inline-flex rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
             >
               Discover more on RhythmRealm.net — Thank you for listening.
-            </RhythmRealmLink>
-            <RhythmRealmLink
-              href={UTM_CARD}
-              className="rounded-xl border border-white/20 px-5 py-3 text-center text-sm font-semibold hover:bg-white hover:text-black"
-            >
-              Follow along on RhythmRealm.net
-            </RhythmRealmLink>
-            <RhythmRealmLink
-              href={BLOG_POST}
-              className="rounded-xl border border-white/20 px-5 py-3 text-center text-sm font-semibold hover:bg-white hover:text-black"
-            >
-              Read the blog post
             </RhythmRealmLink>
           </div>
         </div>
@@ -175,15 +194,15 @@ export default function Home() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-sm text-white/60">Stay connected</div>
           <div className="flex flex-wrap gap-4 text-sm">
-            <RhythmRealmLink href={UTM_BUTTON} className="text-white/70 hover:text-white">
+            <RhythmRealmLink href={LINKS.songHub} className="text-white/70 hover:text-white">
               RhythmRealm.net
             </RhythmRealmLink>
-            <RhythmRealmLink href={UTM_CARD} className="text-white/70 hover:text-white">
+            <RhythmRealmLink href={LINKS.connect} className="text-white/70 hover:text-white">
               Nova Kai on RhythmRealm.net
             </RhythmRealmLink>
           </div>
           <RhythmRealmLink
-            href={UTM_BUTTON}
+            href={LINKS.songHub}
             className="rounded-full border border-white/20 px-4 py-2 text-sm hover:bg-white hover:text-black"
           >
             RhythmRealm.net
