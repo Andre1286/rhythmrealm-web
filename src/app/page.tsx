@@ -49,7 +49,7 @@ export default function Home() {
               Universal Song Hub
             </div>
             <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
-              Andre Washington — “Don’t Forget Me” (Official Video)
+              Andre Washington - &quot;Do You Ever Wonder?&quot; (Official Single)
             </h1>
             <p className="mt-3 text-lg text-white/70">
               Pop music with rhythm and soul. Hit play, then explore the lyrics + story
@@ -59,13 +59,18 @@ export default function Home() {
 
           <div className="md:col-start-2 md:row-start-1 md:row-end-3">
             <Image
-              src="/andre-washington.png"
-              alt="Andre Washington portrait"
+              src="/do-you-ever-wonder.png"
+              alt="Do You Ever Wonder? cover art"
               width={520}
               height={520}
               sizes="(max-width: 768px) 80vw, 360px"
               priority={true}
               className="w-full max-w-[360px] rounded-2xl border border-white/10 shadow-lg"
+            />
+            <audio
+              controls
+              src="/audio/do-you-ever-wonder.mp3"
+              className="w-full mt-4"
             />
           </div>
 
@@ -76,7 +81,7 @@ export default function Home() {
                 onClick={handleWatchNow}
                 className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
               >
-                ▶ Watch Now
+                Watch Now
               </button>
               <RhythmRealmLink
                 href={LINKS.songHub}
@@ -86,7 +91,7 @@ export default function Home() {
               </RhythmRealmLink>
             </div>
             <p className="mt-4 text-xs text-white/60">
-              New release • Official video • Updated weekly
+              New release | Official video | Updated weekly
             </p>
           </div>
         </div>
@@ -146,7 +151,7 @@ export default function Home() {
           <div className="text-xs uppercase tracking-widest text-white/50">Studio</div>
           <h3 className="mt-3 text-lg font-semibold">Studio Behind the Scenes</h3>
           <p className="mt-2 text-sm text-white/70">
-            See how the track came together and what’s next.
+            See how the track came together and what's next.
           </p>
         </RhythmRealmLink>
 
@@ -183,7 +188,7 @@ export default function Home() {
               href={LINKS.songHub}
               className="inline-flex rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
             >
-              Discover more on RhythmRealm.net — Thank you for listening.
+              Discover more on RhythmRealm.net - Thank you for listening.
             </RhythmRealmLink>
           </div>
         </div>
