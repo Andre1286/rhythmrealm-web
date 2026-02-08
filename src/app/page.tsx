@@ -6,7 +6,7 @@ import RhythmRealmLink from "../components/RhythmRealmLink";
 const LINKS = {
   songHub: "https://RhythmRealm.net",
   lyricsStory:
-    "https://www.rhythmrealm.net/post/don-t-forget-me-a-love-song-about-holding-on-official-music-video",
+    "https://www.rhythmrealm.net/post/do-you-ever-wonder-why-i-wrote-this-song-and-what-press-play-really-means",
   bts: "https://www.rhythmrealm.net/post/don-t-forget-me-a-love-song-about-holding-on-official-music-video",
   connect: "https://RhythmRealm.net",
   youtubeEmbed: "https://www.youtube.com/embed/tzwQTNY-ssQ",
