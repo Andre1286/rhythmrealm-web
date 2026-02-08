@@ -70,7 +70,7 @@ export default function Home() {
             <audio
               controls
               src="/audio/do-you-ever-wonder.mp3"
-              controlsList="nodownload"
+              controlsList="nodownload noplaybackrate"
               onContextMenu={(event) => event.preventDefault()}
               className="w-full mt-4"
             />
