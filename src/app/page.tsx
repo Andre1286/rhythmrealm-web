@@ -9,7 +9,7 @@ const LINKS = {
     "https://www.rhythmrealm.net/post/do-you-ever-wonder-why-i-wrote-this-song-and-what-press-play-really-means",
   bts: "https://www.rhythmrealm.net/post/don-t-forget-me-a-love-song-about-holding-on-official-music-video",
   connect: "https://RhythmRealm.net",
-  youtubeEmbed: "https://www.youtube.com/embed/tzwQTNY-ssQ",
+  youtubeEmbed: "https://www.youtube.com/embed/6Ya1A-L4fQo",
 };
 
 export default function Home() {
@@ -22,9 +22,11 @@ export default function Home() {
       {/* Header */}
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
         <div className="flex items-center gap-3">
-          <img
+          <Image
             src="/rr-logo.png"
             alt="Rhythm Realm logo"
+            width={40}
+            height={40}
             className="h-10 w-10 rounded-full border border-cyan-300/40 shadow-[0_0_18px_rgba(34,211,238,0.35)]"
           />
           <div>
@@ -153,7 +155,7 @@ export default function Home() {
           <div className="text-xs uppercase tracking-widest text-white/50">Studio</div>
           <h3 className="mt-3 text-lg font-semibold">Studio Behind the Scenes</h3>
           <p className="mt-2 text-sm text-white/70">
-            See how the track came together and what's next.
+            See how the track came together and what&apos;s next.
           </p>
         </RhythmRealmLink>
 
