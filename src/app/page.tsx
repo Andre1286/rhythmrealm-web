@@ -9,7 +9,7 @@ const LINKS = {
     "https://www.rhythmrealm.net/post/do-you-ever-wonder-why-i-wrote-this-song-and-what-press-play-really-means",
   bts: "https://www.rhythmrealm.net/post/don-t-forget-me-a-love-song-about-holding-on-official-music-video",
   connect: "https://RhythmRealm.net",
-  youtubeEmbed: "https://www.youtube.com/embed/6Ya1A-L4fQo",
+  youtubeEmbed: "https://www.youtube.com/embed/pWQU2ojAZFU",
 };
 
 export default function Home() {
