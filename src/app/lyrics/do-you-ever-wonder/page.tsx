@@ -21,27 +21,18 @@ export default function DoYouEverWonderLyricsStoryPage() {
           <p className="mt-5 whitespace-pre-line text-base leading-relaxed text-white/80">
             {`Sometimes life feels like a tug-of-war.
 
-You look around and it feels like everyone is being pushed to pick a side. Right or left. Us or them. And after a while, it gets tiring. It can make you feel out of breath — like you’re running, but you’re not getting anywhere.
+It can seem like everyone is pushed to pick a side—right or left—and after a while it gets exhausting.
 
 That’s where “Do You Ever Wonder?” came from.
 
 This song is my way of saying: pause for a second… and think.
 
-Because when things feel cold, and love feels far away, we still have a choice. We can look for a better way. We can slow down, breathe, and try to see a brighter day.
-
-One line in this song is simple on purpose: pray.
-Not as a debate. Not as a fight.
-Just as a quiet moment to reset your heart.
-
-And then there’s the other idea: press play.
-Music has a way of bringing people back to themselves. That’s what I want this song to do for you.
-
-I make pop music with rhythm and soul, and this one is built for reflection, hope, and forward motion.`}
+When everything feels cold and love feels far away, we still have a choice. We can slow down, breathe, and look for a better way.`}
           </p>
         </div>
 
         <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <h2 className="text-2xl font-semibold">Lyrics</h2>
+          <h2 className="text-2xl font-semibold">Lyrics — &ldquo;Do You Ever Wonder?&rdquo;</h2>
 
           <h3 className="mt-6 text-lg font-semibold">Verse 1</h3>
           <p className="mt-2 whitespace-pre-line text-base leading-relaxed text-white/80">
@@ -76,18 +67,9 @@ I make pop music with rhythm and soul, and this one is built for reflection, hop
         </div>
 
         <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <h2 className="text-2xl font-semibold">Quick Takeaways</h2>
-          <ul className="mt-4 list-disc space-y-2 pl-5 text-base leading-relaxed text-white/80">
-            <li>Take a breath when the world feels divided and loud.</li>
-            <li>Choose reflection, hope, and a better way forward.</li>
-            <li>Let music reset your heart, then move with purpose.</li>
-          </ul>
-          <p className="mt-5 text-base leading-relaxed text-white/80">
-            pop music with rhythm and soul.
-          </p>
-          <p className="mt-2 text-base font-semibold text-cyan-200">#RhythmRealmNet</p>
-          <p className="mt-6 text-base font-semibold">
-            Discover more on RhythmRealm.net — Thank you for listening.
+          <p className="text-base leading-relaxed text-white/80">
+            RhythmRealm.net is the music hub now — music, video, right here on the
+            hub. Thanks for listening.
           </p>
         </div>
       </section>
