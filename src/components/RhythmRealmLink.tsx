@@ -1,6 +1,6 @@
 "use client";
 
-import type { AnchorHTMLAttributes, ReactNode } from "react";
+import type { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
 
 type RhythmRealmLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
@@ -26,15 +26,24 @@ export default function RhythmRealmLink({
   children,
   target = "_blank",
   rel = "noopener noreferrer",
+  onClick,
   ...props
 }: RhythmRealmLinkProps) {
-  const mergedHref =
-    typeof window === "undefined"
-      ? href
-      : mergeUtmParams(href, new URLSearchParams(window.location.search));
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    onClick?.(event);
+
+    if (event.defaultPrevented || typeof window === "undefined") {
+      return;
+    }
+
+    const mergedHref = mergeUtmParams(href, new URLSearchParams(window.location.search));
+    if (mergedHref !== href) {
+      event.currentTarget.href = mergedHref;
+    }
+  };
 
   return (
-    <a href={mergedHref} target={target} rel={rel} {...props}>
+    <a href={href} target={target} rel={rel} onClick={handleClick} {...props}>
       {children}
     </a>
   );

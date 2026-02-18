@@ -5,10 +5,7 @@ import RhythmRealmLink from "../components/RhythmRealmLink";
 
 const LINKS = {
   songHub: "https://RhythmRealm.net",
-  lyricsStory:
-    "https://www.rhythmrealm.net/post/do-you-ever-wonder-why-i-wrote-this-song-and-what-press-play-really-means",
-  bts: "https://www.rhythmrealm.net/post/don-t-forget-me-a-love-song-about-holding-on-official-music-video",
-  connect: "https://RhythmRealm.net",
+  lyricsStory: "/lyrics/do-you-ever-wonder",
   youtubeEmbed: "https://www.youtube.com/embed/pWQU2ojAZFU",
 };
 
@@ -136,9 +133,11 @@ export default function Home() {
       </section>
 
       {/* Quick Tiles */}
-      <section className="mx-auto grid w-full max-w-6xl gap-6 px-6 pb-14 md:grid-cols-3">
+      <section className="mx-auto grid w-full max-w-6xl gap-6 px-6 pb-14 md:grid-cols-1">
         <RhythmRealmLink
           href={LINKS.lyricsStory}
+          target="_self"
+          rel={undefined}
           className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
         >
           <div className="text-xs uppercase tracking-widest text-white/50">Explore</div>
@@ -147,67 +146,15 @@ export default function Home() {
             Read the full backstory and lyrics on RhythmRealm.net.
           </p>
         </RhythmRealmLink>
-
-        <RhythmRealmLink
-          href={LINKS.bts}
-          className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
-        >
-          <div className="text-xs uppercase tracking-widest text-white/50">Studio</div>
-          <h3 className="mt-3 text-lg font-semibold">Studio Behind the Scenes</h3>
-          <p className="mt-2 text-sm text-white/70">
-            See how the track came together and what&apos;s next.
-          </p>
-        </RhythmRealmLink>
-
-        <RhythmRealmLink
-          href={LINKS.connect}
-          className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
-        >
-          <div className="text-xs uppercase tracking-widest text-white/50">Connect</div>
-          <h3 className="mt-3 text-lg font-semibold">Stay Connected</h3>
-          <p className="mt-2 text-sm text-white/70">
-            Follow along with new drops and exclusive updates.
-          </p>
-        </RhythmRealmLink>
-      </section>
-
-      {/* Stay Connected */}
-      <section id="stay-connected" className="mx-auto w-full max-w-6xl px-6 pb-16">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <div className="text-xs uppercase tracking-widest text-white/50">
-            Stay connected
-          </div>
-          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
-            Rhythm Realm is your portal
-          </h2>
-          <p className="mt-3 text-sm text-white/70">
-            pop music with rhythm and soul.
-          </p>
-          <div className="mt-4 text-sm font-semibold text-cyan-200">
-            #RhythmRealmNet
-          </div>
-
-          <div className="mt-6">
-            <RhythmRealmLink
-              href={LINKS.songHub}
-              className="inline-flex rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
-            >
-              Discover more on RhythmRealm.net - Thank you for listening.
-            </RhythmRealmLink>
-          </div>
-        </div>
       </section>
 
       {/* Footer */}
       <footer className="mx-auto w-full max-w-6xl border-t border-white/10 px-6 py-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-sm text-white/60">Stay connected</div>
+          <div className="text-sm text-white/60">Official links</div>
           <div className="flex flex-wrap gap-4 text-sm">
             <RhythmRealmLink href={LINKS.songHub} className="text-white/70 hover:text-white">
               RhythmRealm.net
-            </RhythmRealmLink>
-            <RhythmRealmLink href={LINKS.connect} className="text-white/70 hover:text-white">
-              Nova Kai on RhythmRealm.net
             </RhythmRealmLink>
           </div>
           <RhythmRealmLink
