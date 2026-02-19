@@ -20,6 +20,8 @@ export default function AboutMePage() {
 
 Before releasing music as a solo artist, Andre was part of a group called IROC — International Rhythm of Composers. IROC was a four-member band built on real musicianship and teamwork: Wesley “Don” Fullwood (rest in peace) on bass, Nick Costa on guitar, Terry Timberlake on keyboards, and Andre Washington as the singer-songwriter. That chapter helped shape Andre’s sound and his focus on songs that carry meaning.
 
+Today, Andre Washington and Terry Timberlake still work together and collaborate on music, keeping that original creative connection alive.
+
 RhythmRealm.net is the music hub now — music, video, right here on the hub. Thanks for listening.`}
           </p>
         </div>
