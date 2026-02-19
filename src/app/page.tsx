@@ -6,6 +6,7 @@ import RhythmRealmLink from "../components/RhythmRealmLink";
 const LINKS = {
   songHub: "https://RhythmRealm.net",
   lyricsStory: "/lyrics/do-you-ever-wonder",
+  aboutMe: "/about-me",
   youtubeEmbed: "https://www.youtube.com/embed/pWQU2ojAZFU",
 };
 
@@ -144,6 +145,18 @@ export default function Home() {
           <h3 className="mt-3 text-lg font-semibold">Lyrics + Story</h3>
           <p className="mt-2 text-sm text-white/70">
             Read the full backstory and lyrics on RhythmRealm.net.
+          </p>
+        </RhythmRealmLink>
+        <RhythmRealmLink
+          href={LINKS.aboutMe}
+          target="_self"
+          rel={undefined}
+          className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
+        >
+          <div className="text-xs uppercase tracking-widest text-white/50">About</div>
+          <h3 className="mt-3 text-lg font-semibold">About Me</h3>
+          <p className="mt-2 text-sm text-white/70">
+            Learn more about Andre Washington and the story behind the music.
           </p>
         </RhythmRealmLink>
       </section>
