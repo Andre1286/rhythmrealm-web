@@ -4,5 +4,11 @@
     "title": "Do You Ever Wonder?",
     "artist": "Andre Washington",
     "src": "/audio/do-you-ever-wonder.mp3"
+  },
+  {
+    "id": "track-2",
+    "title": "If Only for the Love",
+    "artist": "Andre Washington",
+    "src": "/audio/if only for the love. By Andre Washington.mp3"
   }
 ]
