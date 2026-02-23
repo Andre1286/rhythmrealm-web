@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import PlaylistAudioPlayer from "../components/PlaylistAudioPlayer";
 import RhythmRealmLink from "../components/RhythmRealmLink";
 
 const LINKS = {
@@ -68,13 +69,7 @@ export default function Home() {
               priority={true}
               className="w-full max-w-[360px] rounded-2xl border border-white/10 shadow-lg"
             />
-            <audio
-              controls
-              src="/audio/do-you-ever-wonder.mp3"
-              controlsList="nodownload noplaybackrate"
-              onContextMenu={(event) => event.preventDefault()}
-              className="w-full mt-4"
-            />
+            <PlaylistAudioPlayer />
           </div>
 
           <div className="md:col-start-1">
