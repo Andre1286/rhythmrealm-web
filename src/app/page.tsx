@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Script from "next/script";
 import PlaylistAudioPlayer from "../components/PlaylistAudioPlayer";
 import RhythmRealmLink from "../components/RhythmRealmLink";
 
@@ -186,6 +187,16 @@ export default function Home() {
           </RhythmRealmLink>
         </div>
       </footer>
+      {/* ElevenLabs Voice Agent Widget */}
+      <div
+        dangerouslySetInnerHTML={{
+          __html: `<elevenlabs-convai agent-id="agent_4701kj6xffydea0a713mawg46zv6"></elevenlabs-convai>`,
+        }}
+      />
+      <Script
+        src="https://unpkg.com/@elevenlabs/convai-widget-embed"
+        strategy="afterInteractive"
+      />
     </main>
   );
 }
