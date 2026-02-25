@@ -190,7 +190,7 @@ export default function Home() {
       {/* ElevenLabs Voice Agent Widget */}
       <div
         dangerouslySetInnerHTML={{
-          __html: `<elevenlabs-convai agent-id="agent_4701kj6xffydea0a713mawg46zv6"></elevenlabs-convai>`,
+          __html: `<elevenlabs-convai agent-id="agent_3401kj6tq8x7e9jrcxz0tc01pnvb"></elevenlabs-convai>`,
         }}
       />
       <Script
