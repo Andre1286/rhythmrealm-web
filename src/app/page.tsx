@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import Script from "next/script";
 import PlaylistAudioPlayer from "../components/PlaylistAudioPlayer";
@@ -19,9 +19,67 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isWidgetEligible, setIsWidgetEligible] = useState(false);
   const [isPlayerInView, setIsPlayerInView] = useState(false);
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupWebsite, setSignupWebsite] = useState("");
+  const [signupStatus, setSignupStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle",
+  );
+  const [signupMessage, setSignupMessage] = useState("");
+  const [signupStartedAt] = useState(() => Date.now());
 
   const handleWatchNow = () => {
     document.getElementById("video")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleSignupSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (signupStatus === "loading") {
+      return;
+    }
+
+    setSignupStatus("loading");
+    setSignupMessage("");
+
+    const urlSearchParams =
+      typeof window === "undefined" ? new URLSearchParams() : new URLSearchParams(window.location.search);
+    const utm = Object.fromEntries(
+      Array.from(urlSearchParams.entries()).filter(([key]) => key.startsWith("utm_")),
+    );
+
+    try {
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: signupEmail,
+          website: signupWebsite,
+          startedAt: signupStartedAt,
+          sourceUrl: typeof window === "undefined" ? "" : window.location.href,
+          utm,
+        }),
+      });
+
+      const payload = (await response.json()) as {
+        ok?: boolean;
+        message?: string;
+      };
+
+      if (!response.ok || !payload.ok) {
+        setSignupStatus("error");
+        setSignupMessage(payload.message ?? "Unable to sign up right now. Please try again.");
+        return;
+      }
+
+      setSignupStatus("success");
+      setSignupMessage("Thanks for joining. You’re on the Rhythm Realm list.");
+      setSignupEmail("");
+      setSignupWebsite("");
+    } catch {
+      setSignupStatus("error");
+      setSignupMessage("Unable to sign up right now. Please try again.");
+    }
   };
 
   useEffect(() => {
@@ -199,6 +257,117 @@ export default function Home() {
           <p className="mt-2 text-sm text-white/70">
             Watch the lead visual, then dive deeper on RhythmRealm.net.
           </p>
+        </div>
+      </section>
+
+      {/* Lyrics + Story SEO */}
+      <section className="mx-auto w-full max-w-6xl px-6 pb-14">
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
+          <div className="text-xs uppercase tracking-widest text-white/50">LYRICS + STORY</div>
+          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
+            About &ldquo;Do You Ever Wonder?&rdquo;
+          </h2>
+          <p className="mt-3 text-sm text-white/70 sm:text-base">
+            Andre Washington’s official single blends pop music with rhythm and soul.
+            On RhythmRealm.net, you can read the lyrics and explore the story behind
+            &ldquo;Do You Ever Wonder?&rdquo;
+          </p>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+              <h3 className="text-sm font-semibold uppercase tracking-widest text-white/60">
+                Story Behind the Song
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/80">
+                &ldquo;Do You Ever Wonder?&rdquo; reflects on division, confusion, and hope.
+                The song invites listeners to slow down, think clearly, and search for a
+                better way forward when life feels pulled in opposite directions.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+              <h3 className="text-sm font-semibold uppercase tracking-widest text-white/60">
+                Lyrics (Excerpt)
+              </h3>
+              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-white/80">
+                {`Verse 1
+Do you ever wonder why we're here in this life?
+They make it very clear. You're either on the right or on the left.
+Any way you wind up out of breath.
+
+Chorus
+The way things go, it's all so cold, and there's no love anymore.
+We've got to find a better way for us to see a brighter day.`}
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <RhythmRealmLink
+              href={LINKS.lyricsStory}
+              target="_self"
+              rel={undefined}
+              className="inline-flex rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold hover:bg-white hover:text-black"
+            >
+              Read Full Lyrics + Story
+            </RhythmRealmLink>
+          </div>
+        </div>
+      </section>
+
+      {/* Stay Connected */}
+      <section className="mx-auto w-full max-w-6xl px-6 pb-14">
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
+          <div className="text-xs uppercase tracking-widest text-white/50">STAY CONNECTED</div>
+          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
+            Join the Rhythm Realm email list
+          </h2>
+          <p className="mt-3 text-sm text-white/70 sm:text-base">
+            Get music updates, new releases, videos, and behind-the-scenes news from
+            Rhythm Realm.
+          </p>
+
+          <form onSubmit={handleSignupSubmit} className="mt-5 flex flex-col gap-3 sm:flex-row">
+            <label htmlFor="signup-email" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="signup-email"
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              value={signupEmail}
+              onChange={(event) => setSignupEmail(event.target.value)}
+              placeholder="Enter your email"
+              className="w-full rounded-xl border border-white/20 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white sm:flex-1"
+            />
+            <input
+              type="text"
+              name="website"
+              value={signupWebsite}
+              onChange={(event) => setSignupWebsite(event.target.value)}
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden
+            />
+            <button
+              type="submit"
+              disabled={signupStatus === "loading"}
+              className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {signupStatus === "loading" ? "Submitting..." : "Join the List"}
+            </button>
+          </form>
+          {signupMessage ? (
+            <p
+              className={`mt-3 text-sm ${
+                signupStatus === "success" ? "text-cyan-200" : "text-red-300"
+              }`}
+            >
+              {signupMessage}
+            </p>
+          ) : null}
         </div>
       </section>
 
