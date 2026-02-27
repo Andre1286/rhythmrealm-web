@@ -88,7 +88,7 @@ export default function Home() {
     };
   }, [isMobile]);
 
-  const shouldShowWidget = !isMobile || (isWidgetEligible && !isPlayerInView);
+  const shouldShowWidget = (!isMobile || isWidgetEligible) && !isPlayerInView;
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -104,7 +104,7 @@ export default function Home() {
           />
           <div>
             <div className="text-sm font-semibold tracking-wide">RHYTHM REALM</div>
-            <div className="text-xs text-white/60">Universal Hub</div>
+            <div className="text-xs text-white/60">Official Music Hub</div>
           </div>
         </div>
 

@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteTitle = "Rhythm Realm | Universal Hub";
+const siteTitle = "Andre Washington – Do You Ever Wonder? (Official Single) | Rhythm Realm";
 const siteDescription =
-  "Rhythm Realm is the universal hub for Nova Kai: pop music with rhythm and soul.";
+  "Listen to “Do You Ever Wonder?” by Andre Washington. Stream the official single, read the lyrics, and explore the story behind the song on Rhythm Realm.";
 
 export const metadata: Metadata = {
   title: siteTitle,
