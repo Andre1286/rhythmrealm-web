@@ -127,8 +127,8 @@ export default function Home() {
               Andre Washington - &quot;Do You Ever Wonder?&quot; (Official Single)
             </h1>
             <p className="mt-3 text-lg text-white/70">
-              Pop music with rhythm and soul. Hit play, then explore the lyrics + story
-              on RhythmRealm.net.
+              Listen to the official single, read the lyrics, and explore the story on
+              RhythmRealm.net.
             </p>
           </div>
 
@@ -158,7 +158,7 @@ export default function Home() {
                 href={LINKS.songHub}
                 className="rounded-xl border border-white/20 px-5 py-3 text-center text-sm font-semibold hover:bg-white hover:text-black"
               >
-                Explore RhythmRealm.net
+                Discover More
               </RhythmRealmLink>
             </div>
             <p className="mt-4 text-xs text-white/60">
