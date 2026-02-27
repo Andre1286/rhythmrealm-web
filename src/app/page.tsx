@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Script from "next/script";
 import PlaylistAudioPlayer from "../components/PlaylistAudioPlayer";
@@ -14,9 +15,80 @@ const LINKS = {
 };
 
 export default function Home() {
+  const playerZoneRef = useRef<HTMLDivElement | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isWidgetEligible, setIsWidgetEligible] = useState(false);
+  const [isPlayerInView, setIsPlayerInView] = useState(false);
+
   const handleWatchNow = () => {
     document.getElementById("video")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const updateMobile = (event: MediaQueryList | MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+
+    updateMobile(mediaQuery);
+    mediaQuery.addEventListener("change", updateMobile);
+    return () => mediaQuery.removeEventListener("change", updateMobile);
+  }, []);
+
+  useEffect(() => {
+    const playerZone = playerZoneRef.current;
+    if (!playerZone) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsPlayerInView(entry.isIntersecting);
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(playerZone);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) {
+      return;
+    }
+
+    let hasTriggered = false;
+
+    const triggerWidget = () => {
+      if (hasTriggered) {
+        return;
+      }
+      hasTriggered = true;
+      setIsWidgetEligible(true);
+      window.removeEventListener("scroll", handleScroll);
+      window.clearTimeout(timerId);
+    };
+
+    const handleScroll = () => {
+      const scrollableHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollableHeight <= 0 ? 1 : window.scrollY / scrollableHeight;
+      if (progress >= 0.35) {
+        triggerWidget();
+      }
+    };
+
+    const timerId = window.setTimeout(triggerWidget, 8000);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.clearTimeout(timerId);
+    };
+  }, [isMobile]);
+
+  const shouldShowWidget = !isMobile || (isWidgetEligible && !isPlayerInView);
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -49,7 +121,7 @@ export default function Home() {
         <div className="flex flex-col gap-8 md:grid md:grid-cols-[minmax(0,1fr)_360px] md:items-start md:gap-10">
           <div className="max-w-2xl md:col-start-1">
             <div className="text-xs uppercase tracking-widest text-white/50">
-              Universal Song Hub
+              OFFICIAL SINGLE • LYRICS • STORY
             </div>
             <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
               Andre Washington - &quot;Do You Ever Wonder?&quot; (Official Single)
@@ -60,7 +132,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="md:col-start-2 md:row-start-1 md:row-end-3">
+          <div ref={playerZoneRef} className="md:col-start-2 md:row-start-1 md:row-end-3">
             <Image
               src="/do-you-ever-wonder.png"
               alt="Do You Ever Wonder? cover art"
@@ -188,11 +260,14 @@ export default function Home() {
         </div>
       </footer>
       {/* ElevenLabs Voice Agent Widget */}
-      <div
-        dangerouslySetInnerHTML={{
-          __html: `<elevenlabs-convai agent-id="agent_3401kj6tq8x7e9jrcxz0tc01pnvb"></elevenlabs-convai>`,
-        }}
-      />
+      {shouldShowWidget ? (
+        <div
+          className="convai-widget-safe"
+          dangerouslySetInnerHTML={{
+            __html: `<elevenlabs-convai agent-id="agent_3401kj6tq8x7e9jrcxz0tc01pnvb"></elevenlabs-convai>`,
+          }}
+        />
+      ) : null}
       <Script
         src="https://unpkg.com/@elevenlabs/convai-widget-embed"
         strategy="afterInteractive"
