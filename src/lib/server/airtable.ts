@@ -1,5 +1,29 @@
 import "server-only";
 
+export type SignupPersistenceErrorCode =
+  | "MISSING_ENV"
+  | "AIRTABLE_AUTH"
+  | "AIRTABLE_CONFIG"
+  | "AIRTABLE_FIELD_MISMATCH"
+  | "AIRTABLE_VALIDATION"
+  | "AIRTABLE_UNKNOWN";
+
+export class SignupPersistenceError extends Error {
+  constructor(
+    public readonly code: SignupPersistenceErrorCode,
+    message: string,
+    public readonly details?: {
+      statusCode?: number;
+      airtableType?: string;
+      airtableMessage?: string;
+      missingEnv?: string;
+    },
+  ) {
+    super(message);
+    this.name = "SignupPersistenceError";
+  }
+}
+
 const UTM_FIELD_MAP: Record<string, string> = {
   utm_source: "UTM Source",
   utm_medium: "UTM Medium",
@@ -11,9 +35,75 @@ const UTM_FIELD_MAP: Record<string, string> = {
 const requireEnv = (name: string): string => {
   const value = process.env[name];
   if (!value) {
-    throw new Error(`Missing required env var: ${name}`);
+    throw new SignupPersistenceError(
+      "MISSING_ENV",
+      `Missing required env var: ${name}`,
+      { missingEnv: name },
+    );
   }
   return value;
+};
+
+const parseAirtableError = (rawBody: string): {
+  airtableType?: string;
+  airtableMessage?: string;
+} => {
+  try {
+    const parsed = JSON.parse(rawBody) as {
+      error?: {
+        type?: string;
+        message?: string;
+      };
+    };
+    return {
+      airtableType: parsed.error?.type,
+      airtableMessage: parsed.error?.message,
+    };
+  } catch {
+    return {};
+  }
+};
+
+const classifyAirtableFailure = (
+  statusCode: number,
+  airtableType?: string,
+  airtableMessage?: string,
+): SignupPersistenceErrorCode => {
+  const signal = `${airtableType ?? ""} ${airtableMessage ?? ""}`.toLowerCase();
+
+  if (
+    signal.includes("unknown field name") ||
+    signal.includes("field") ||
+    signal.includes("column")
+  ) {
+    return "AIRTABLE_FIELD_MISMATCH";
+  }
+
+  if (
+    signal.includes("model_not_found") ||
+    signal.includes("model not found") ||
+    signal.includes("table")
+  ) {
+    return "AIRTABLE_CONFIG";
+  }
+
+  if (statusCode === 401 || statusCode === 403) {
+    return "AIRTABLE_AUTH";
+  }
+
+  if (statusCode === 404) {
+    return "AIRTABLE_CONFIG";
+  }
+
+  if (statusCode === 422) {
+    return "AIRTABLE_VALIDATION";
+  }
+
+  if (statusCode >= 500) {
+    return "AIRTABLE_UNKNOWN";
+  }
+
+  return "AIRTABLE_UNKNOWN";
 };
 
 export type SignupRecordInput = {
@@ -52,24 +142,41 @@ export const createSignupRecord = async (
     });
   }
 
-  const response = await fetch(
-    `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
+  try {
+    const response = await fetch(
+      `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          records: [{ fields }],
+        }),
       },
-      body: JSON.stringify({
-        records: [{ fields }],
-      }),
-    },
-  );
+    );
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(
-      `Airtable request failed: ${response.status} ${errorText}`,
+    if (!response.ok) {
+      const rawBody = await response.text();
+      const { airtableType, airtableMessage } = parseAirtableError(rawBody);
+      throw new SignupPersistenceError(
+        classifyAirtableFailure(response.status, airtableType, airtableMessage),
+        "Airtable request failed while saving signup.",
+        {
+          statusCode: response.status,
+          airtableType,
+          airtableMessage,
+        },
+      );
+    }
+  } catch (error) {
+    if (error instanceof SignupPersistenceError) {
+      throw error;
+    }
+    throw new SignupPersistenceError(
+      "AIRTABLE_UNKNOWN",
+      "Unexpected Airtable error while saving signup.",
     );
   }
 };
