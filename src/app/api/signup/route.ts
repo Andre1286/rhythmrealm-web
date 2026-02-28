@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { createSignupRecord } from "@/lib/server/airtable";
 
 const MIN_ELAPSED_MS = 1200;
+const SAFE_SERVER_ERROR_MESSAGE =
+  "Signup is temporarily unavailable. Please try again.";
 
 type SignupRequestBody = {
   email?: string;
@@ -20,6 +22,33 @@ const validationError = (message: string) =>
     { ok: false, error: "VALIDATION_ERROR", message },
     { status: 400 },
   );
+
+const classifySignupError = (
+  error: unknown,
+): "MISSING_ENV" | "AIRTABLE_4XX" | "AIRTABLE_5XX" | "UNKNOWN" => {
+  if (!(error instanceof Error)) {
+    return "UNKNOWN";
+  }
+
+  if (error.message.includes("Missing required env var:")) {
+    return "MISSING_ENV";
+  }
+
+  const airtableStatusMatch = error.message.match(/Airtable request failed:\s*(\d{3})/);
+  if (!airtableStatusMatch) {
+    return "UNKNOWN";
+  }
+
+  const statusCode = Number.parseInt(airtableStatusMatch[1], 10);
+  if (statusCode >= 400 && statusCode < 500) {
+    return "AIRTABLE_4XX";
+  }
+  if (statusCode >= 500) {
+    return "AIRTABLE_5XX";
+  }
+
+  return "UNKNOWN";
+};
 
 export async function POST(request: Request) {
   let payload: SignupRequestBody | null = null;
@@ -66,9 +95,13 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (error) {
-    console.error("Signup submission failed", error);
+    const rootCause = classifySignupError(error);
+    console.error("Signup submission failed", {
+      rootCause,
+      errorMessage: error instanceof Error ? error.message : String(error),
+    });
     return NextResponse.json(
-      { ok: false, error: "SERVER_ERROR", message: "Unable to save signup." },
+      { ok: false, error: "SERVER_ERROR", message: SAFE_SERVER_ERROR_MESSAGE },
       { status: 500 },
     );
   }
