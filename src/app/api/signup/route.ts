@@ -37,7 +37,6 @@ export async function POST(request: Request) {
 
   const email = payload?.email?.trim().toLowerCase() ?? "";
   const website = payload?.website?.trim() ?? "";
-  const sourceUrl = payload?.sourceUrl?.trim() ?? "";
   const startedAtValue = payload?.startedAt;
   const startedAt =
     typeof startedAtValue === "string"
@@ -64,9 +63,6 @@ export async function POST(request: Request) {
   try {
     await createSignupRecord({
       email,
-      sourceUrl: sourceUrl || undefined,
-      utm: payload?.utm,
-      userAgent: request.headers.get("user-agent"),
     });
 
     return NextResponse.json({ ok: true }, { status: 200 });

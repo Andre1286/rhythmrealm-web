@@ -24,14 +24,6 @@ export class SignupPersistenceError extends Error {
   }
 }
 
-const UTM_FIELD_MAP: Record<string, string> = {
-  utm_source: "UTM Source",
-  utm_medium: "UTM Medium",
-  utm_campaign: "UTM Campaign",
-  utm_term: "UTM Term",
-  utm_content: "UTM Content",
-};
-
 const requireEnv = (name: string): string => {
   const value = process.env[name];
   if (!value) {
@@ -108,9 +100,6 @@ const classifyAirtableFailure = (
 
 export type SignupRecordInput = {
   email: string;
-  sourceUrl?: string | null;
-  utm?: Record<string, string | undefined | null>;
-  userAgent?: string | null;
 };
 
 export const createSignupRecord = async (
@@ -123,24 +112,6 @@ export const createSignupRecord = async (
   const fields: Record<string, string> = {
     Email: input.email,
   };
-
-  if (input.sourceUrl) {
-    fields["Source URL"] = input.sourceUrl;
-  }
-
-  if (input.userAgent) {
-    fields["User Agent"] = input.userAgent;
-  }
-
-  if (input.utm) {
-    Object.entries(input.utm).forEach(([key, value]) => {
-      if (!value) return;
-      const fieldName = UTM_FIELD_MAP[key];
-      if (fieldName) {
-        fields[fieldName] = value;
-      }
-    });
-  }
 
   try {
     const response = await fetch(
