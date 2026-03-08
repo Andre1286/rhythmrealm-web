@@ -181,12 +181,14 @@ export default function Home() {
             <div className="text-xs uppercase tracking-widest text-white/50">
               OFFICIAL SINGLE • LYRICS • STORY
             </div>
-            <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
-              Andre Washington - &quot;Do You Ever Wonder?&quot; (Official Single)
+            <h1 className="mt-2 text-3xl font-bold leading-tight sm:text-4xl">
+              Do You Ever Wonder?
             </h1>
-            <p className="mt-3 text-lg text-white/70">
-              Listen to the official single, read the lyrics, and explore the story on
-              RhythmRealm.net.
+            <p className="mt-2 text-base font-medium text-white/75 sm:text-lg">
+              Andre Washington • Official Single
+            </p>
+            <p className="mt-3 max-w-[34ch] text-base leading-relaxed text-white/65 sm:max-w-2xl sm:text-lg">
+              Hear the song, read the lyrics, and discover the story behind Rhythm Realm.
             </p>
           </div>
 
