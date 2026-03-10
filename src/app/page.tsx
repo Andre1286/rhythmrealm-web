@@ -154,8 +154,8 @@ export default function Home() {
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
         <div className="flex items-center gap-3">
           <Image
-            src="/rr-logo.png"
-            alt="Rhythm Realm logo"
+            src="/rhythm-realm-logo.png"
+            alt="Official Rhythm Realm logo mark"
             width={40}
             height={40}
             className="h-10 w-10 rounded-full border border-cyan-300/40 shadow-[0_0_18px_rgba(34,211,238,0.35)]"
