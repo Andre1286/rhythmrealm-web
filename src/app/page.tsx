@@ -193,6 +193,15 @@ export default function Home() {
           </div>
 
           <div ref={playerZoneRef} className="md:col-start-2 md:row-start-1 md:row-end-3">
+            <div className="mb-4 flex justify-center">
+              <Image
+                src="/rhythm-realm-logo.png"
+                alt="Rhythm Realm logo mark"
+                width={72}
+                height={72}
+                className="h-14 w-14 rounded-full border border-cyan-300/30 opacity-90 shadow-[0_0_14px_rgba(34,211,238,0.25)] sm:h-16 sm:w-16"
+              />
+            </div>
             <Image
               src="/do-you-ever-wonder.png"
               alt="Do You Ever Wonder? cover art"
