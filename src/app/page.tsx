@@ -237,6 +237,37 @@ export default function Home() {
         </div>
       </section>
 
+      {/* New Music / Work in Progress */}
+      <section className="mx-auto w-full max-w-6xl px-6 pb-14">
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
+          <div className="inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-100">
+            Work in Progress
+          </div>
+          <div className="mt-5 grid gap-6 md:grid-cols-[220px_minmax(0,1fr)] md:items-center">
+            <div className="mx-auto w-full max-w-[220px]">
+              <Image
+                src="/dont-want-to-worry-about-you-cover-high.jpg"
+                alt="Cover art for “don’t want to worry about you”"
+                width={220}
+                height={220}
+                className="h-auto w-full rounded-2xl border border-white/10 shadow-lg"
+              />
+            </div>
+            <div>
+              <h2 className="text-2xl font-semibold sm:text-3xl">Working on New Music</h2>
+              <p className="mt-3 text-base font-medium text-white/75">
+                Current song in progress: &ldquo;don&rsquo;t want to worry about you&rdquo;
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">
+                I&rsquo;m currently working on a new song called &ldquo;don&rsquo;t want to worry about
+                you.&rdquo; It&rsquo;s still a work in progress, and more details will be shared soon.
+                Stay tuned for updates.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Video */}
       <section
         id="video"
