@@ -8,7 +8,7 @@ import RhythmRealmLink from "../components/RhythmRealmLink";
 
 const LINKS = {
   songHub: "https://RhythmRealm.net",
-  lyricsStory: "/lyrics/do-you-ever-wonder",
+  lyricsStory: "/do-you-ever-wonder",
   aboutMe: "/about-me",
   contactMe: "/contact-me",
   youtubeEmbed: "https://www.youtube.com/embed/pWQU2ojAZFU",
