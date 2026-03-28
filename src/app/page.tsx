@@ -361,11 +361,11 @@ We've got to find a better way for us to see a brighter day.`}
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
           <div className="text-xs uppercase tracking-widest text-white/50">STAY CONNECTED</div>
           <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
-            Join the Rhythm Realm email list
+            Join my email list
           </h2>
           <p className="mt-3 text-sm text-white/70 sm:text-base">
-            Get music updates, new releases, videos, and behind-the-scenes news from
-            Rhythm Realm.
+            Want a copy of the song? Enter your email and I will send the MP3 file
+            directly to your inbox.
           </p>
 
           <form onSubmit={handleSignupSubmit} className="mt-5 flex flex-col gap-3 sm:flex-row">
