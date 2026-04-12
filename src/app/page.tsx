@@ -27,8 +27,8 @@ export default function Home() {
   const [signupMessage, setSignupMessage] = useState("");
   const [signupStartedAt] = useState(() => Date.now());
 
-  const handleWatchNow = () => {
-    document.getElementById("video")?.scrollIntoView({ behavior: "smooth" });
+  const handleJoinList = () => {
+    document.getElementById("join-list")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleSignupSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -188,7 +188,8 @@ export default function Home() {
               Andre Washington • Official Single
             </p>
             <p className="mt-3 max-w-[34ch] text-base leading-relaxed text-white/65 sm:max-w-2xl sm:text-lg">
-              Hear the song, read the lyrics, and discover the story behind Rhythm Realm.
+              Stream the single, watch the official video, and get the MP3 sent directly to
+              your inbox.
             </p>
           </div>
 
@@ -218,53 +219,84 @@ export default function Home() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <button
                 type="button"
-                onClick={handleWatchNow}
+                onClick={handleJoinList}
                 className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
               >
-                Watch Now
+                Get MP3 + Join List
               </button>
               <RhythmRealmLink
-                href={LINKS.songHub}
+                href={LINKS.lyricsStory}
+                target="_self"
+                rel={undefined}
                 className="rounded-xl border border-white/20 px-5 py-3 text-center text-sm font-semibold hover:bg-white hover:text-black"
               >
-                Discover More
+                Read Lyrics + Story
               </RhythmRealmLink>
             </div>
             <p className="mt-4 text-xs text-white/60">
-              New release | Official video | Updated weekly
+              New release | Official video | Free MP3 via email
             </p>
           </div>
         </div>
       </section>
 
-      {/* New Music / Work in Progress */}
+      {/* Stay Connected */}
       <section className="mx-auto w-full max-w-6xl px-6 pb-14">
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <div className="inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-100">
-            Work in Progress
-          </div>
-          <div className="mt-5 grid gap-6 md:grid-cols-[220px_minmax(0,1fr)] md:items-center">
-            <div className="mx-auto w-full max-w-[220px]">
-              <Image
-                src="/dont-want-to-worry-about-you-cover-high.jpg"
-                alt="Cover art for “don’t want to worry about you”"
-                width={220}
-                height={220}
-                className="h-auto w-full rounded-2xl border border-white/10 shadow-lg"
-              />
-            </div>
-            <div>
-              <h2 className="text-2xl font-semibold sm:text-3xl">Working on New Music</h2>
-              <p className="mt-3 text-base font-medium text-white/75">
-                Current song in progress: &ldquo;don&rsquo;t want to worry about you&rdquo;
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">
-                I&rsquo;m currently working on a new song called &ldquo;don&rsquo;t want to worry about
-                you.&rdquo; It&rsquo;s still a work in progress, and more details will be shared soon.
-                Stay tuned for updates.
-              </p>
-            </div>
-          </div>
+          <div className="text-xs uppercase tracking-widest text-white/50">STAY CONNECTED</div>
+          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl" id="join-list">
+            Join my email list
+          </h2>
+          <p className="mt-3 text-sm text-white/70 sm:text-base">
+            Want a copy of the song? Enter your email and I will send the MP3 file
+            directly to your inbox.
+          </p>
+          <p className="mt-2 text-xs text-white/60">
+            No spam. You can unsubscribe at any time.
+          </p>
+
+          <form onSubmit={handleSignupSubmit} className="mt-5 flex flex-col gap-3 sm:flex-row">
+            <label htmlFor="signup-email" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="signup-email"
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              value={signupEmail}
+              onChange={(event) => setSignupEmail(event.target.value)}
+              placeholder="Enter your email"
+              className="w-full rounded-xl border border-white/20 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white sm:flex-1"
+            />
+            <input
+              type="text"
+              name="website"
+              value={signupWebsite}
+              onChange={(event) => setSignupWebsite(event.target.value)}
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden
+            />
+            <button
+              type="submit"
+              disabled={signupStatus === "loading"}
+              className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {signupStatus === "loading" ? "Submitting..." : "Join the List"}
+            </button>
+          </form>
+          {signupMessage ? (
+            <p
+              className={`mt-3 text-sm ${
+                signupStatus === "success" ? "text-cyan-200" : "text-red-300"
+              }`}
+            >
+              {signupMessage}
+            </p>
+          ) : null}
         </div>
       </section>
 
@@ -356,60 +388,34 @@ We've got to find a better way for us to see a brighter day.`}
         </div>
       </section>
 
-      {/* Stay Connected */}
+      {/* New Music / Work in Progress */}
       <section className="mx-auto w-full max-w-6xl px-6 pb-14">
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <div className="text-xs uppercase tracking-widest text-white/50">STAY CONNECTED</div>
-          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
-            Join my email list
-          </h2>
-          <p className="mt-3 text-sm text-white/70 sm:text-base">
-            Want a copy of the song? Enter your email and I will send the MP3 file
-            directly to your inbox.
-          </p>
-
-          <form onSubmit={handleSignupSubmit} className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <label htmlFor="signup-email" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="signup-email"
-              name="email"
-              type="email"
-              required
-              autoComplete="email"
-              value={signupEmail}
-              onChange={(event) => setSignupEmail(event.target.value)}
-              placeholder="Enter your email"
-              className="w-full rounded-xl border border-white/20 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white sm:flex-1"
-            />
-            <input
-              type="text"
-              name="website"
-              value={signupWebsite}
-              onChange={(event) => setSignupWebsite(event.target.value)}
-              className="hidden"
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden
-            />
-            <button
-              type="submit"
-              disabled={signupStatus === "loading"}
-              className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {signupStatus === "loading" ? "Submitting..." : "Join the List"}
-            </button>
-          </form>
-          {signupMessage ? (
-            <p
-              className={`mt-3 text-sm ${
-                signupStatus === "success" ? "text-cyan-200" : "text-red-300"
-              }`}
-            >
-              {signupMessage}
-            </p>
-          ) : null}
+          <div className="inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-100">
+            Work in Progress
+          </div>
+          <div className="mt-5 grid gap-6 md:grid-cols-[220px_minmax(0,1fr)] md:items-center">
+            <div className="mx-auto w-full max-w-[220px]">
+              <Image
+                src="/dont-want-to-worry-about-you-cover-high.jpg"
+                alt="Cover art for “don’t want to worry about you”"
+                width={220}
+                height={220}
+                className="h-auto w-full rounded-2xl border border-white/10 shadow-lg"
+              />
+            </div>
+            <div>
+              <h2 className="text-2xl font-semibold sm:text-3xl">Working on New Music</h2>
+              <p className="mt-3 text-base font-medium text-white/75">
+                Current song in progress: &ldquo;don&rsquo;t want to worry about you&rdquo;
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">
+                I&rsquo;m currently working on a new song called &ldquo;don&rsquo;t want to worry about
+                you.&rdquo; It&rsquo;s still a work in progress, and more details will be shared soon.
+                Stay tuned for updates.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

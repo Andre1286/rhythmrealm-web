@@ -9,9 +9,18 @@ type Track = {
   artist?: string;
 };
 
+const FALLBACK_TRACKS: Track[] = [
+  {
+    id: "fallback-track-1",
+    title: "Do You Ever Wonder?",
+    src: "/audio/do-you-ever-wonder.mp3",
+    artist: "Andre Washington",
+  },
+];
+
 export default function PlaylistAudioPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [tracks, setTracks] = useState<Track[]>([]);
+  const [tracks, setTracks] = useState<Track[]>(FALLBACK_TRACKS);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -24,21 +33,23 @@ export default function PlaylistAudioPlayer() {
       try {
         const response = await fetch("/tracks.json", { cache: "no-store" });
         if (!response.ok) {
+          setTracks(FALLBACK_TRACKS);
           return;
         }
         const data = (await response.json()) as Track[];
-        if (Array.isArray(data) && data.length > 0) {
-          setTracks(
-            data.filter(
+        const sanitizedTracks = Array.isArray(data)
+          ? data.filter(
               (track) =>
                 typeof track?.id === "string" &&
                 typeof track?.title === "string" &&
                 typeof track?.src === "string",
-            ),
-          );
-        }
+            )
+          : [];
+
+        setTracks(sanitizedTracks.length > 0 ? sanitizedTracks : FALLBACK_TRACKS);
       } catch {
         // Keep UI resilient if manifest is unavailable.
+        setTracks(FALLBACK_TRACKS);
       }
     };
 
@@ -180,9 +191,7 @@ export default function PlaylistAudioPlayer() {
             })}
           </ul>
         </>
-      ) : (
-        <div className="text-sm text-white/60">No tracks found in /tracks.json.</div>
-      )}
+      ) : null}
     </div>
   );
 }

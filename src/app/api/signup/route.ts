@@ -1,13 +1,8 @@
 import { NextResponse } from "next/server";
 
-import {
-  createSignupRecord,
-  SignupPersistenceError,
-} from "@/lib/server/airtable";
+import { createSignupRecord } from "@/lib/server/airtable";
 
 const MIN_ELAPSED_MS = 1200;
-const SAFE_SERVER_ERROR_MESSAGE =
-  "Signup is temporarily unavailable. Please try again.";
 
 type SignupRequestBody = {
   email?: string;
@@ -37,6 +32,7 @@ export async function POST(request: Request) {
 
   const email = payload?.email?.trim().toLowerCase() ?? "";
   const website = payload?.website?.trim() ?? "";
+  const sourceUrl = payload?.sourceUrl?.trim() ?? "";
   const startedAtValue = payload?.startedAt;
   const startedAt =
     typeof startedAtValue === "string"
@@ -63,19 +59,16 @@ export async function POST(request: Request) {
   try {
     await createSignupRecord({
       email,
+      sourceUrl: sourceUrl || undefined,
+      utm: payload?.utm,
+      userAgent: request.headers.get("user-agent"),
     });
 
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (error) {
-    const rootCause =
-      error instanceof SignupPersistenceError ? error.code : "AIRTABLE_UNKNOWN";
-    console.error("Signup submission failed", {
-      rootCause,
-      details: error instanceof SignupPersistenceError ? error.details : undefined,
-      errorMessage: error instanceof Error ? error.message : String(error),
-    });
+    console.error("Signup submission failed", error);
     return NextResponse.json(
-      { ok: false, error: "SERVER_ERROR", message: SAFE_SERVER_ERROR_MESSAGE },
+      { ok: false, error: "SERVER_ERROR", message: "Unable to save signup." },
       { status: 500 },
     );
   }

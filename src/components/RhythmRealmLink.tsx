@@ -25,10 +25,12 @@ export default function RhythmRealmLink({
   href,
   children,
   target = "_blank",
-  rel = "noopener noreferrer",
+  rel,
   onClick,
   ...props
 }: RhythmRealmLinkProps) {
+  const resolvedRel = rel ?? (target === "_blank" ? "noopener noreferrer" : undefined);
+
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event);
 
@@ -43,7 +45,7 @@ export default function RhythmRealmLink({
   };
 
   return (
-    <a href={href} target={target} rel={rel} onClick={handleClick} {...props}>
+    <a href={href} target={target} rel={resolvedRel} onClick={handleClick} {...props}>
       {children}
     </a>
   );
