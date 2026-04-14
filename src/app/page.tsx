@@ -7,7 +7,7 @@ import PlaylistAudioPlayer from "../components/PlaylistAudioPlayer";
 import RhythmRealmLink from "../components/RhythmRealmLink";
 
 const LINKS = {
-  songHub: "https://RhythmRealm.net",
+  songHub: "https://www.rhythmrealm.net",
   lyricsStory: "/do-you-ever-wonder",
   aboutMe: "/about-me",
   contactMe: "/contact-me",
@@ -29,6 +29,10 @@ export default function Home() {
 
   const handleJoinList = () => {
     document.getElementById("join-list")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleWatchVideo = () => {
+    document.getElementById("video")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleSignupSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -162,7 +166,7 @@ export default function Home() {
           />
           <div>
             <div className="text-sm font-semibold tracking-wide">RHYTHM REALM</div>
-            <div className="text-xs text-white/60">Official Music Hub</div>
+            <div className="text-xs text-white/60">Andre Washington • Official Music Hub</div>
           </div>
         </div>
 
@@ -179,17 +183,17 @@ export default function Home() {
         <div className="flex flex-col gap-8 md:grid md:grid-cols-[minmax(0,1fr)_360px] md:items-start md:gap-10">
           <div className="max-w-2xl md:col-start-1">
             <div className="text-xs uppercase tracking-widest text-white/50">
-              OFFICIAL SINGLE • LYRICS • STORY
+              FEATURED RELEASE • OFFICIAL VIDEO • LYRICS + STORY
             </div>
             <h1 className="mt-2 text-3xl font-bold leading-tight sm:text-4xl">
-              Do You Ever Wonder?
+              Andre Washington | Pop Music with Rhythm and Soul
             </h1>
             <p className="mt-2 text-base font-medium text-white/75 sm:text-lg">
-              Andre Washington • Official Single
+              Do You Ever Wonder?
             </p>
             <p className="mt-3 max-w-[34ch] text-base leading-relaxed text-white/65 sm:max-w-2xl sm:text-lg">
-              Stream the single, watch the official video, and get the MP3 sent directly to
-              your inbox.
+              The official home of Rhythm Realm. Listen direct, watch the official video, read
+              lyrics and story, and join the list at RhythmRealm.net.
             </p>
           </div>
 
@@ -222,17 +226,23 @@ export default function Home() {
                 onClick={handleJoinList}
                 className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
               >
-                Get MP3 + Join List
+                Join the List + Get the MP3
               </button>
               <RhythmRealmLink
                 href={LINKS.lyricsStory}
                 target="_self"
-                rel={undefined}
                 className="rounded-xl border border-white/20 px-5 py-3 text-center text-sm font-semibold hover:bg-white hover:text-black"
               >
                 Read Lyrics + Story
               </RhythmRealmLink>
             </div>
+            <button
+              type="button"
+              onClick={handleWatchVideo}
+              className="mt-3 text-left text-sm text-white/70 underline-offset-4 hover:text-white hover:underline"
+            >
+              Watch featured video
+            </button>
             <p className="mt-4 text-xs text-white/60">
               New release | Official video | Free MP3 via email
             </p>
@@ -241,10 +251,10 @@ export default function Home() {
       </section>
 
       {/* Stay Connected */}
-      <section className="mx-auto w-full max-w-6xl px-6 pb-14">
+      <section id="join-list" className="mx-auto w-full max-w-6xl scroll-mt-20 px-6 pb-14">
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
           <div className="text-xs uppercase tracking-widest text-white/50">STAY CONNECTED</div>
-          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl" id="join-list">
+          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
             Join my email list
           </h2>
           <p className="mt-3 text-sm text-white/70 sm:text-base">
@@ -318,7 +328,8 @@ export default function Home() {
               <iframe
                 className="h-full w-full"
                 src={LINKS.youtubeEmbed}
-                title="Featured video"
+                title="Do You Ever Wonder official video"
+                loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
@@ -379,7 +390,6 @@ We've got to find a better way for us to see a brighter day.`}
             <RhythmRealmLink
               href={LINKS.lyricsStory}
               target="_self"
-              rel={undefined}
               className="inline-flex rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold hover:bg-white hover:text-black"
             >
               Read Full Lyrics + Story
@@ -424,7 +434,6 @@ We've got to find a better way for us to see a brighter day.`}
         <RhythmRealmLink
           href={LINKS.lyricsStory}
           target="_self"
-          rel={undefined}
           className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
         >
           <div className="text-xs uppercase tracking-widest text-white/50">Explore</div>
@@ -436,7 +445,6 @@ We've got to find a better way for us to see a brighter day.`}
         <RhythmRealmLink
           href={LINKS.aboutMe}
           target="_self"
-          rel={undefined}
           className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
         >
           <div className="text-xs uppercase tracking-widest text-white/50">About</div>
@@ -448,7 +456,6 @@ We've got to find a better way for us to see a brighter day.`}
         <RhythmRealmLink
           href={LINKS.contactMe}
           target="_self"
-          rel={undefined}
           className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
         >
           <div className="text-xs uppercase tracking-widest text-white/50">Contact</div>
@@ -463,11 +470,6 @@ We've got to find a better way for us to see a brighter day.`}
       <footer className="mx-auto w-full max-w-6xl border-t border-white/10 px-6 py-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-sm text-white/60">Official links</div>
-          <div className="flex flex-wrap gap-4 text-sm">
-            <RhythmRealmLink href={LINKS.songHub} className="text-white/70 hover:text-white">
-              RhythmRealm.net
-            </RhythmRealmLink>
-          </div>
           <RhythmRealmLink
             href={LINKS.songHub}
             className="rounded-full border border-white/20 px-4 py-2 text-sm hover:bg-white hover:text-black"
