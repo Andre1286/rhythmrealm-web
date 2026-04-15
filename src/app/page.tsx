@@ -189,11 +189,11 @@ export default function Home() {
               Andre Washington | Pop Music with Rhythm and Soul
             </h1>
             <p className="mt-2 text-base font-medium text-white/75 sm:text-lg">
-              Do You Ever Wonder?
+              Featured release: Do You Ever Wonder?
             </p>
             <p className="mt-3 max-w-[34ch] text-base leading-relaxed text-white/65 sm:max-w-2xl sm:text-lg">
-              The official home of Rhythm Realm. Listen direct, watch the official video, read
-              lyrics and story, and join the list at RhythmRealm.net.
+              The official home of Andre Washington and Rhythm Realm. Listen direct, watch the
+              official video, read the lyrics and story, and join the list at RhythmRealm.net.
             </p>
           </div>
 
