@@ -14,6 +14,62 @@ const LINKS = {
   youtubeEmbed: "https://www.youtube.com/embed/pWQU2ojAZFU",
 };
 
+const FAQ_ENTRIES = [
+  {
+    question: "What is Rhythm Realm?",
+    answer:
+      "Rhythm Realm is the official home for Andre Washington’s music. It is a direct-to-listener music site built for people who love pop music with rhythm and soul.",
+  },
+  {
+    question: "Who is Andre Washington?",
+    answer:
+      "Andre Washington is an independent recording artist, songwriter, and producer. He creates original music with heart, groove, and story-driven emotion.",
+  },
+  {
+    question: "Where can I listen to Andre Washington’s music?",
+    answer:
+      "You can listen right here on RhythmRealm.net. Rhythm Realm focuses on a direct-to-listener experience through the website.",
+  },
+  {
+    question: "What kind of music does Andre Washington make?",
+    answer:
+      "Andre Washington makes pop music with rhythm and soul. His songs blend strong melodies, feeling, and modern production.",
+  },
+  {
+    question: "Why does Rhythm Realm use a direct-to-listener approach?",
+    answer:
+      "Rhythm Realm uses a direct-to-listener approach to build a closer connection with listeners. The website is the main place for discovering music, stories behind the songs, and future updates.",
+  },
+  {
+    question: "Can I find lyrics and song stories on RhythmRealm.net?",
+    answer:
+      "Yes. RhythmRealm.net is designed to share more than just songs. It can also feature lyrics, song meaning, and behind-the-music stories.",
+  },
+  {
+    question: "How do I stay updated on new music and site updates?",
+    answer:
+      "The best way to stay updated is by visiting RhythmRealm.net and joining the email list when signup is available.",
+  },
+  {
+    question: "What makes Rhythm Realm different?",
+    answer:
+      "Rhythm Realm is not just a music page. It is a home base for music, story, and artist connection, built around original songs and a direct relationship with listeners.",
+  },
+] as const;
+
+const FAQ_PAGE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ENTRIES.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
 export default function Home() {
   const playerZoneRef = useRef<HTMLDivElement | null>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -426,6 +482,30 @@ We've got to find a better way for us to see a brighter day.`}
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <Script
+        id="rhythm-realm-faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_PAGE_SCHEMA) }}
+      />
+      {/* Rhythm Realm FAQ */}
+      <section className="mx-auto w-full max-w-6xl px-6 pb-14">
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
+          <div className="text-xs uppercase tracking-widest text-white/50">FAQ</div>
+          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Rhythm Realm FAQ</h2>
+          <p className="mt-3 text-sm text-white/70 sm:text-base">
+            Answers to common questions about Rhythm Realm and Andre Washington.
+          </p>
+          <dl className="mt-6 space-y-4">
+            {FAQ_ENTRIES.map((item) => (
+              <div key={item.question} className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                <dt className="text-base font-semibold text-white">{item.question}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-white/80 sm:text-base">{item.answer}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
