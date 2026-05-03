@@ -129,7 +129,7 @@ export default function PlaylistAudioPlayer() {
   };
 
   return (
-    <div className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4">
+    <div className="sticky-audio-player mt-4 rounded-2xl border border-white/10 bg-black/30 p-4">
       {currentTrack ? (
         <>
           <audio
@@ -167,7 +167,7 @@ export default function PlaylistAudioPlayer() {
               Next
             </button>
           </div>
-          <ul className="mt-3 space-y-2">
+          <ul className="mt-3 max-h-40 space-y-2 overflow-y-auto pr-1">
             {tracks.map((track, index) => {
               const isSelected = index === currentIndex;
               return (
