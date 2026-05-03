@@ -5,6 +5,7 @@ import Image from "next/image";
 import Script from "next/script";
 import PlaylistAudioPlayer from "../components/PlaylistAudioPlayer";
 import RhythmRealmLink from "../components/RhythmRealmLink";
+import { FAQ_ENTRIES } from "@/lib/faqEntries";
 
 const LINKS = {
   songHub: "https://www.rhythmrealm.net",
@@ -12,62 +13,6 @@ const LINKS = {
   aboutMe: "/about-me",
   contactMe: "/contact-me",
   youtubeEmbed: "https://www.youtube.com/embed/pWQU2ojAZFU",
-};
-
-const FAQ_ENTRIES = [
-  {
-    question: "What is Rhythm Realm?",
-    answer:
-      "Rhythm Realm is the official home for Andre Washington’s music. It is a direct-to-listener music site built for people who love pop music with rhythm and soul.",
-  },
-  {
-    question: "Who is Andre Washington?",
-    answer:
-      "Andre Washington is an independent recording artist, songwriter, and producer. He creates original music with heart, groove, and story-driven emotion.",
-  },
-  {
-    question: "Where can I listen to Andre Washington’s music?",
-    answer:
-      "You can listen right here on RhythmRealm.net. Rhythm Realm focuses on a direct-to-listener experience through the website.",
-  },
-  {
-    question: "What kind of music does Andre Washington make?",
-    answer:
-      "Andre Washington makes pop music with rhythm and soul. His songs blend strong melodies, feeling, and modern production.",
-  },
-  {
-    question: "Why does Rhythm Realm use a direct-to-listener approach?",
-    answer:
-      "Rhythm Realm uses a direct-to-listener approach to build a closer connection with listeners. The website is the main place for discovering music, stories behind the songs, and future updates.",
-  },
-  {
-    question: "Can I find lyrics and song stories on RhythmRealm.net?",
-    answer:
-      "Yes. RhythmRealm.net is designed to share more than just songs. It can also feature lyrics, song meaning, and behind-the-music stories.",
-  },
-  {
-    question: "How do I stay updated on new music and site updates?",
-    answer:
-      "The best way to stay updated is by visiting RhythmRealm.net and joining the email list when signup is available.",
-  },
-  {
-    question: "What makes Rhythm Realm different?",
-    answer:
-      "Rhythm Realm is not just a music page. It is a home base for music, story, and artist connection, built around original songs and a direct relationship with listeners.",
-  },
-] as const;
-
-const FAQ_PAGE_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FAQ_ENTRIES.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
 };
 
 export default function Home() {
@@ -209,7 +154,7 @@ export default function Home() {
   const shouldShowWidget = (!isMobile || isWidgetEligible) && !isPlayerInView;
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-black pb-64 text-white">
       {/* Header */}
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
         <div className="flex items-center gap-3">
@@ -248,8 +193,8 @@ export default function Home() {
               Featured release: Do You Ever Wonder?
             </p>
             <p className="mt-3 max-w-[34ch] text-base leading-relaxed text-white/65 sm:max-w-2xl sm:text-lg">
-              The official home of Andre Washington and Rhythm Realm. Listen direct, watch the
-              official video, read the lyrics and story, and join the list at RhythmRealm.net.
+              Listen now, keep scrolling while music plays, and get the free MP3 by joining the
+              email list below.
             </p>
           </div>
 
@@ -282,7 +227,7 @@ export default function Home() {
                 onClick={handleJoinList}
                 className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
               >
-                Join the List + Get the MP3
+                Get the Free MP3
               </button>
               <RhythmRealmLink
                 href={LINKS.lyricsStory}
@@ -302,6 +247,55 @@ export default function Home() {
             <p className="mt-4 text-xs text-white/60">
               New release | Official video | Free MP3 via email
             </p>
+            <div className="mt-5 rounded-2xl border border-cyan-300/30 bg-cyan-300/10 p-4">
+              <h2 className="text-lg font-semibold sm:text-xl">Get the Free MP3</h2>
+              <p className="mt-2 text-sm text-white/80">
+                Enter your email now and get &ldquo;Do You Ever Wonder?&rdquo; sent directly to
+                your inbox.
+              </p>
+              <form onSubmit={handleSignupSubmit} className="mt-4 flex flex-col gap-3 sm:flex-row">
+                <label htmlFor="hero-signup-email" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="hero-signup-email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={signupEmail}
+                  onChange={(event) => setSignupEmail(event.target.value)}
+                  placeholder="Enter your email for the free MP3"
+                  className="w-full rounded-xl border border-white/20 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white sm:flex-1"
+                />
+                <input
+                  type="text"
+                  name="website"
+                  value={signupWebsite}
+                  onChange={(event) => setSignupWebsite(event.target.value)}
+                  className="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden
+                />
+                <button
+                  type="submit"
+                  disabled={signupStatus === "loading"}
+                  className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {signupStatus === "loading" ? "Submitting..." : "Get the Free MP3"}
+                </button>
+              </form>
+              {signupMessage ? (
+                <p
+                  className={`mt-3 text-sm ${
+                    signupStatus === "success" ? "text-cyan-200" : "text-red-300"
+                  }`}
+                >
+                  {signupMessage}
+                </p>
+              ) : null}
+            </div>
           </div>
         </div>
       </section>
@@ -311,7 +305,7 @@ export default function Home() {
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
           <div className="text-xs uppercase tracking-widest text-white/50">STAY CONNECTED</div>
           <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
-            Join my email list
+            Get the Free MP3
           </h2>
           <p className="mt-3 text-sm text-white/70 sm:text-base">
             Want a copy of the song? Enter your email and I will send the MP3 file
@@ -351,7 +345,7 @@ export default function Home() {
               disabled={signupStatus === "loading"}
               className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {signupStatus === "loading" ? "Submitting..." : "Join the List"}
+              {signupStatus === "loading" ? "Submitting..." : "Get the Free MP3"}
             </button>
           </form>
           {signupMessage ? (
@@ -415,8 +409,14 @@ export default function Home() {
           </p>
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-white/60">
+            <article
+              className="rounded-2xl border border-white/10 bg-black/30 p-5"
+              aria-labelledby="story-behind-song-heading"
+            >
+              <h3
+                id="story-behind-song-heading"
+                className="text-sm font-semibold uppercase tracking-widest text-white/60"
+              >
                 Story Behind the Song
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-white/80">
@@ -424,9 +424,15 @@ export default function Home() {
                 The song invites listeners to slow down, think clearly, and search for a
                 better way forward when life feels pulled in opposite directions.
               </p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-white/60">
+            </article>
+            <article
+              className="rounded-2xl border border-white/10 bg-black/30 p-5"
+              aria-labelledby="lyrics-excerpt-heading"
+            >
+              <h3
+                id="lyrics-excerpt-heading"
+                className="text-sm font-semibold uppercase tracking-widest text-white/60"
+              >
                 Lyrics (Excerpt)
               </h3>
               <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-white/80">
@@ -439,7 +445,7 @@ Chorus
 The way things go, it's all so cold, and there's no love anymore.
 We've got to find a better way for us to see a brighter day.`}
               </p>
-            </div>
+            </article>
           </div>
 
           <div className="mt-6">
@@ -457,10 +463,11 @@ We've got to find a better way for us to see a brighter day.`}
       {/* New Music / Work in Progress */}
       <section className="mx-auto w-full max-w-6xl px-6 pb-14">
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <div className="inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-100">
-            Work in Progress
-          </div>
-          <div className="mt-5 grid gap-6 md:grid-cols-[220px_minmax(0,1fr)] md:items-center">
+          <h2 className="text-2xl font-semibold sm:text-3xl">Work in Progress</h2>
+          <article
+            className="mt-5 grid gap-6 md:grid-cols-[220px_minmax(0,1fr)] md:items-center"
+            aria-labelledby="working-on-new-music-heading"
+          >
             <div className="mx-auto w-full max-w-[220px]">
               <Image
                 src="/dont-want-to-worry-about-you-cover-high.jpg"
@@ -471,7 +478,9 @@ We've got to find a better way for us to see a brighter day.`}
               />
             </div>
             <div>
-              <h2 className="text-2xl font-semibold sm:text-3xl">Working on New Music</h2>
+              <h3 id="working-on-new-music-heading" className="text-2xl font-semibold sm:text-3xl">
+                Working on New Music
+              </h3>
               <p className="mt-3 text-base font-medium text-white/75">
                 Current song in progress: &ldquo;don&rsquo;t want to worry about you&rdquo;
               </p>
@@ -481,15 +490,17 @@ We've got to find a better way for us to see a brighter day.`}
                 Stay tuned for updates.
               </p>
             </div>
-          </div>
+          </article>
         </div>
       </section>
 
+      {/* Old in-body FAQ schema block kept for rollback.
       <Script
         id="rhythm-realm-faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_PAGE_SCHEMA) }}
       />
+      */}
       {/* Rhythm Realm FAQ */}
       <section className="mx-auto w-full max-w-6xl px-6 pb-14">
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
@@ -498,6 +509,7 @@ We've got to find a better way for us to see a brighter day.`}
           <p className="mt-3 text-sm text-white/70 sm:text-base">
             Answers to common questions about Rhythm Realm and Andre Washington.
           </p>
+          {/* Old FAQ layout kept for rollback.
           <dl className="mt-6 space-y-4">
             {FAQ_ENTRIES.map((item) => (
               <div key={item.question} className="rounded-2xl border border-white/10 bg-black/30 p-5">
@@ -506,6 +518,20 @@ We've got to find a better way for us to see a brighter day.`}
               </div>
             ))}
           </dl>
+          */}
+          <div className="mt-6 space-y-4">
+            {FAQ_ENTRIES.map((item) => (
+              <details
+                key={item.question}
+                className="group rounded-2xl border border-white/10 bg-black/30 p-5"
+              >
+                <summary className="cursor-pointer list-none text-base font-semibold text-white">
+                  {item.question}
+                </summary>
+                <p className="mt-2 text-sm leading-relaxed text-white/80 sm:text-base">{item.answer}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 
