@@ -1,602 +1,294 @@
-"use client";
-
-import { useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
-import Script from "next/script";
-import PlaylistAudioPlayer from "../components/PlaylistAudioPlayer";
-import RhythmRealmLink from "../components/RhythmRealmLink";
+
+import EmailSignupForm from "@/components/EmailSignupForm";
+import PlaylistAudioPlayer from "@/components/PlaylistAudioPlayer";
+import RhythmRealmLink from "@/components/RhythmRealmLink";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
+import YouTubeVideoCard from "@/components/YouTubeVideoCard";
 import { FAQ_ENTRIES } from "@/lib/faqEntries";
 
-const LINKS = {
-  songHub: "https://www.rhythmrealm.net",
-  lyricsStory: "/do-you-ever-wonder",
-  aboutMe: "/about-me",
-  contactMe: "/contact-me",
-  youtubeEmbed: "https://www.youtube.com/embed/pWQU2ojAZFU",
-};
+const featuredSong = "Do You Ever Wonder?";
+
+const featureCards = [
+  {
+    href: "/music",
+    eyebrow: "Listen",
+    title: "Music",
+    text: "Hear featured songs from Andre Washington and keep the Rhythm Realm player close.",
+    target: "home-card-music",
+  },
+  {
+    href: "/about-andre-washington",
+    eyebrow: "Artist",
+    title: "About Andre Washington",
+    text: "Meet the independent artist, songwriter, and producer behind Rhythm Realm.",
+    target: "home-card-about",
+  },
+  {
+    href: "/behind-the-music",
+    eyebrow: "Stories",
+    title: "Behind the Music",
+    text: "Go deeper into the meaning, process, and emotion behind each release.",
+    target: "home-card-behind-the-music",
+  },
+  {
+    href: "/contact",
+    eyebrow: "Connect",
+    title: "Contact / Email Signup",
+    text: "Reach Andre directly and join the email list for music updates.",
+    target: "home-card-contact",
+  },
+];
 
 export default function Home() {
-  const playerZoneRef = useRef<HTMLDivElement | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isWidgetEligible, setIsWidgetEligible] = useState(false);
-  const [isPlayerInView, setIsPlayerInView] = useState(false);
-  const [signupEmail, setSignupEmail] = useState("");
-  const [signupWebsite, setSignupWebsite] = useState("");
-  const [signupStatus, setSignupStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle",
-  );
-  const [signupMessage, setSignupMessage] = useState("");
-  const [signupStartedAt] = useState(() => Date.now());
-
-  const handleJoinList = () => {
-    document.getElementById("join-list")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleWatchVideo = () => {
-    document.getElementById("video")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleSignupSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (signupStatus === "loading") {
-      return;
-    }
-
-    setSignupStatus("loading");
-    setSignupMessage("");
-
-    const urlSearchParams =
-      typeof window === "undefined" ? new URLSearchParams() : new URLSearchParams(window.location.search);
-    const utm = Object.fromEntries(
-      Array.from(urlSearchParams.entries()).filter(([key]) => key.startsWith("utm_")),
-    );
-
-    try {
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: signupEmail,
-          website: signupWebsite,
-          startedAt: signupStartedAt,
-          sourceUrl: typeof window === "undefined" ? "" : window.location.href,
-          utm,
-        }),
-      });
-
-      const payload = (await response.json()) as {
-        ok?: boolean;
-        message?: string;
-      };
-
-      if (!response.ok || !payload.ok) {
-        setSignupStatus("error");
-        setSignupMessage(payload.message ?? "Unable to sign up right now. Please try again.");
-        return;
-      }
-
-      setSignupStatus("success");
-      setSignupMessage("Thanks for joining. You’re on the Rhythm Realm list.");
-      setSignupEmail("");
-      setSignupWebsite("");
-    } catch {
-      setSignupStatus("error");
-      setSignupMessage("Unable to sign up right now. Please try again.");
-    }
-  };
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 767px)");
-    const updateMobile = (event: MediaQueryList | MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
-
-    updateMobile(mediaQuery);
-    mediaQuery.addEventListener("change", updateMobile);
-    return () => mediaQuery.removeEventListener("change", updateMobile);
-  }, []);
-
-  useEffect(() => {
-    const playerZone = playerZoneRef.current;
-    if (!playerZone) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsPlayerInView(entry.isIntersecting);
-      },
-      { threshold: 0.35 },
-    );
-
-    observer.observe(playerZone);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!isMobile) {
-      return;
-    }
-
-    let hasTriggered = false;
-
-    const triggerWidget = () => {
-      if (hasTriggered) {
-        return;
-      }
-      hasTriggered = true;
-      setIsWidgetEligible(true);
-      window.removeEventListener("scroll", handleScroll);
-      window.clearTimeout(timerId);
-    };
-
-    const handleScroll = () => {
-      const scrollableHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollableHeight <= 0 ? 1 : window.scrollY / scrollableHeight;
-      if (progress >= 0.35) {
-        triggerWidget();
-      }
-    };
-
-    const timerId = window.setTimeout(triggerWidget, 8000);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.clearTimeout(timerId);
-    };
-  }, [isMobile]);
-
-  const shouldShowWidget = (!isMobile || isWidgetEligible) && !isPlayerInView;
-
   return (
-    <main className="min-h-screen bg-black pb-64 text-white">
-      {/* Header */}
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
-        <div className="flex items-center gap-3">
-          <Image
-            src="/rhythm-realm-logo.png"
-            alt="Official Rhythm Realm logo mark"
-            width={40}
-            height={40}
-            className="h-10 w-10 rounded-full border border-cyan-300/40 shadow-[0_0_18px_rgba(34,211,238,0.35)]"
-          />
-          <div>
-            <div className="text-sm font-semibold tracking-wide">RHYTHM REALM</div>
-            <div className="text-xs text-white/60">Andre Washington • Official Music Hub</div>
+    <main className="min-h-screen bg-black pb-44 text-white">
+      <SiteHeader />
+
+      <section className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-center">
+        <div>
+          <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+            Official Music Home
           </div>
-        </div>
-
-        <RhythmRealmLink
-          href={LINKS.songHub}
-          className="rounded-full border border-white/20 px-4 py-2 text-sm hover:bg-white hover:text-black"
-        >
-          RhythmRealm.net
-        </RhythmRealmLink>
-      </header>
-
-      {/* Hero */}
-      <section className="mx-auto w-full max-w-6xl px-6 pb-12 pt-4">
-        <div className="flex flex-col gap-8 md:grid md:grid-cols-[minmax(0,1fr)_360px] md:items-start md:gap-10">
-          <div className="max-w-2xl md:col-start-1">
-            <div className="text-xs uppercase tracking-widest text-white/50">
-              FEATURED RELEASE • OFFICIAL VIDEO • LYRICS + STORY
-            </div>
-            <h1 className="mt-2 text-3xl font-bold leading-tight sm:text-4xl">
-              Andre Washington | Pop Music with Rhythm and Soul
-            </h1>
-            <p className="mt-2 text-base font-medium text-white/75 sm:text-lg">
-              Featured release: Do You Ever Wonder?
-            </p>
-            <p className="mt-3 max-w-[34ch] text-base leading-relaxed text-white/65 sm:max-w-2xl sm:text-lg">
-              Listen now, keep scrolling while music plays, and get the free MP3 by joining the
-              email list below.
-            </p>
-          </div>
-
-          <div ref={playerZoneRef} className="md:col-start-2 md:row-start-1 md:row-end-3">
-            <div className="mb-4 flex justify-center">
-              <Image
-                src="/rhythm-realm-logo.png"
-                alt="Rhythm Realm logo mark"
-                width={72}
-                height={72}
-                className="h-14 w-14 rounded-full border border-cyan-300/30 opacity-90 shadow-[0_0_14px_rgba(34,211,238,0.25)] sm:h-16 sm:w-16"
-              />
-            </div>
-            <Image
-              src="/do-you-ever-wonder.png"
-              alt="Do You Ever Wonder? cover art"
-              width={520}
-              height={520}
-              sizes="(max-width: 768px) 80vw, 360px"
-              priority={true}
-              className="w-full max-w-[360px] rounded-2xl border border-white/10 shadow-lg"
-            />
-            <PlaylistAudioPlayer />
-          </div>
-
-          <div className="md:col-start-1">
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <button
-                type="button"
-                onClick={handleJoinList}
-                className="rounded-xl bg-white px-5 py-3 text-center text-sm font-semibold text-black hover:opacity-90"
-              >
-                Get the Free MP3
-              </button>
-              <RhythmRealmLink
-                href={LINKS.lyricsStory}
-                target="_self"
-                className="rounded-xl border border-white/20 px-5 py-3 text-center text-sm font-semibold hover:bg-white hover:text-black"
-              >
-                Read Lyrics + Story
-              </RhythmRealmLink>
-            </div>
-            <button
-              type="button"
-              onClick={handleWatchVideo}
-              className="mt-3 text-left text-sm text-white/70 underline-offset-4 hover:text-white hover:underline"
-            >
-              Watch featured video
-            </button>
-            <p className="mt-4 text-xs text-white/60">
-              New release | Official video | Free MP3 via email
-            </p>
-            <div className="mt-5 rounded-2xl border border-cyan-300/30 bg-cyan-300/10 p-4">
-              <h2 className="text-lg font-semibold sm:text-xl">Get the Free MP3</h2>
-              <p className="mt-2 text-sm text-white/80">
-                Enter your email now and get &ldquo;Do You Ever Wonder?&rdquo; sent directly to
-                your inbox.
-              </p>
-              <form onSubmit={handleSignupSubmit} className="mt-4 flex flex-col gap-3 sm:flex-row">
-                <label htmlFor="hero-signup-email" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  id="hero-signup-email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={signupEmail}
-                  onChange={(event) => setSignupEmail(event.target.value)}
-                  placeholder="Enter your email for the free MP3"
-                  className="w-full rounded-xl border border-white/20 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white sm:flex-1"
-                />
-                <input
-                  type="text"
-                  name="website"
-                  value={signupWebsite}
-                  onChange={(event) => setSignupWebsite(event.target.value)}
-                  className="hidden"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden
-                />
-                <button
-                  type="submit"
-                  disabled={signupStatus === "loading"}
-                  className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {signupStatus === "loading" ? "Submitting..." : "Get the Free MP3"}
-                </button>
-              </form>
-              {signupMessage ? (
-                <p
-                  className={`mt-3 text-sm ${
-                    signupStatus === "success" ? "text-cyan-200" : "text-red-300"
-                  }`}
-                >
-                  {signupMessage}
-                </p>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stay Connected */}
-      <section id="join-list" className="mx-auto w-full max-w-6xl scroll-mt-20 px-6 pb-14">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <div className="text-xs uppercase tracking-widest text-white/50">STAY CONNECTED</div>
-          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
-            Get the Free MP3
-          </h2>
-          <p className="mt-3 text-sm text-white/70 sm:text-base">
-            Want a copy of the song? Enter your email and I will send the MP3 file
-            directly to your inbox.
+          <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+            Rhythm Realm is Andre Washington&apos;s home for pop music with rhythm and soul.
+          </h1>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
+            RhythmRealm.net is the main destination for Andre Washington&apos;s
+            music. Listen to the songs, watch the visuals, read the stories, and
+            stay connected to the emotion behind the music.
           </p>
-          <p className="mt-2 text-xs text-white/60">
-            No spam. You can unsubscribe at any time.
-          </p>
-
-          <form onSubmit={handleSignupSubmit} className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <label htmlFor="signup-email" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="signup-email"
-              name="email"
-              type="email"
-              required
-              autoComplete="email"
-              value={signupEmail}
-              onChange={(event) => setSignupEmail(event.target.value)}
-              placeholder="Enter your email"
-              className="w-full rounded-xl border border-white/20 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white sm:flex-1"
-            />
-            <input
-              type="text"
-              name="website"
-              value={signupWebsite}
-              onChange={(event) => setSignupWebsite(event.target.value)}
-              className="hidden"
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden
-            />
-            <button
-              type="submit"
-              disabled={signupStatus === "loading"}
-              className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {signupStatus === "loading" ? "Submitting..." : "Get the Free MP3"}
-            </button>
-          </form>
-          {signupMessage ? (
-            <p
-              className={`mt-3 text-sm ${
-                signupStatus === "success" ? "text-cyan-200" : "text-red-300"
-              }`}
-            >
-              {signupMessage}
-            </p>
-          ) : null}
-        </div>
-      </section>
-
-      {/* Featured Video */}
-      <section
-        id="video"
-        className="mx-auto w-full max-w-6xl px-6 pb-14"
-      >
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <div className="text-xs uppercase tracking-widest text-white/50">
-            Featured Right Now
-          </div>
-          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
-            Featured video
-          </h2>
-
-          <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-black/30">
-            <div className="aspect-video w-full">
-              <iframe
-                className="h-full w-full"
-                src={LINKS.youtubeEmbed}
-                title="Do You Ever Wonder official video"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
-
-          <p className="mt-5 text-sm text-white/70">
-            Artist and producer: Andre Washington.
-          </p>
-          <p className="mt-2 text-sm text-white/70">
-            Watch the lead visual, then dive deeper on RhythmRealm.net.
-          </p>
-        </div>
-      </section>
-
-      {/* Lyrics + Story SEO */}
-      <section className="mx-auto w-full max-w-6xl px-6 pb-14">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <div className="text-xs uppercase tracking-widest text-white/50">LYRICS + STORY</div>
-          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
-            About &ldquo;Do You Ever Wonder?&rdquo;
-          </h2>
-          <p className="mt-3 text-sm text-white/70 sm:text-base">
-            Andre Washington’s official single blends pop music with rhythm and soul.
-            On RhythmRealm.net, you can read the lyrics and explore the story behind
-            &ldquo;Do You Ever Wonder?&rdquo;
-          </p>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <article
-              className="rounded-2xl border border-white/10 bg-black/30 p-5"
-              aria-labelledby="story-behind-song-heading"
-            >
-              <h3
-                id="story-behind-song-heading"
-                className="text-sm font-semibold uppercase tracking-widest text-white/60"
-              >
-                Story Behind the Song
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/80">
-                &ldquo;Do You Ever Wonder?&rdquo; reflects on division, confusion, and hope.
-                The song invites listeners to slow down, think clearly, and search for a
-                better way forward when life feels pulled in opposite directions.
-              </p>
-            </article>
-            <article
-              className="rounded-2xl border border-white/10 bg-black/30 p-5"
-              aria-labelledby="lyrics-excerpt-heading"
-            >
-              <h3
-                id="lyrics-excerpt-heading"
-                className="text-sm font-semibold uppercase tracking-widest text-white/60"
-              >
-                Lyrics (Excerpt)
-              </h3>
-              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-white/80">
-                {`Verse 1
-Do you ever wonder why we're here in this life?
-They make it very clear. You're either on the right or on the left.
-Any way you wind up out of breath.
-
-Chorus
-The way things go, it's all so cold, and there's no love anymore.
-We've got to find a better way for us to see a brighter day.`}
-              </p>
-            </article>
-          </div>
-
-          <div className="mt-6">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <RhythmRealmLink
-              href={LINKS.lyricsStory}
+              href="/music"
               target="_self"
-              className="inline-flex rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold hover:bg-white hover:text-black"
+              className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
             >
-              Read Full Lyrics + Story
+              Listen Now
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/do-you-ever-wonder"
+              target="_self"
+              className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
+            >
+              Open Featured Song
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="#signup"
+              target="_self"
+              className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
+            >
+              Join Updates
             </RhythmRealmLink>
           </div>
         </div>
-      </section>
 
-      {/* New Music / Work in Progress */}
-      <section className="mx-auto w-full max-w-6xl px-6 pb-14">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <h2 className="text-2xl font-semibold sm:text-3xl">Work in Progress</h2>
-          <article
-            className="mt-5 grid gap-6 md:grid-cols-[220px_minmax(0,1fr)] md:items-center"
-            aria-labelledby="working-on-new-music-heading"
-          >
-            <div className="mx-auto w-full max-w-[220px]">
-              <Image
-                src="/dont-want-to-worry-about-you-cover-high.jpg"
-                alt="Cover art for “don’t want to worry about you”"
-                width={220}
-                height={220}
-                className="h-auto w-full rounded-2xl border border-white/10 shadow-lg"
-              />
+        <div className="mx-auto w-full max-w-[390px]">
+          <div className="relative">
+            <div className="absolute -inset-4 rounded-[2rem] border border-cyan-200/10 bg-cyan-200/[0.04]" />
+            <Image
+              src="/do-you-ever-wonder.png"
+              alt="Do You Ever Wonder? cover art"
+              width={780}
+              height={780}
+              priority
+              className="relative aspect-square w-full rounded-lg border border-white/10 object-cover shadow-2xl"
+            />
+          </div>
+          <div className="mt-6">
+            <div className="text-xs uppercase tracking-[0.18em] text-white/45">
+              Featured Release
             </div>
-            <div>
-              <h3 id="working-on-new-music-heading" className="text-2xl font-semibold sm:text-3xl">
-                Working on New Music
-              </h3>
-              <p className="mt-3 text-base font-medium text-white/75">
-                Current song in progress: &ldquo;don&rsquo;t want to worry about you&rdquo;
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">
-                I&rsquo;m currently working on a new song called &ldquo;don&rsquo;t want to worry about
-                you.&rdquo; It&rsquo;s still a work in progress, and more details will be shared soon.
-                Stay tuned for updates.
-              </p>
-            </div>
-          </article>
+            <h2 className="mt-2 text-2xl font-semibold">{featuredSong}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-white/65">
+              A reflective single from Andre Washington about searching for a
+              better way forward.
+            </p>
+          </div>
+          <PlaylistAudioPlayer />
         </div>
       </section>
 
-      {/* Old in-body FAQ schema block kept for rollback.
-      <Script
-        id="rhythm-realm-faq-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_PAGE_SCHEMA) }}
-      />
-      */}
-      {/* Rhythm Realm FAQ */}
-      <section className="mx-auto w-full max-w-6xl px-6 pb-14">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
-          <div className="text-xs uppercase tracking-widest text-white/50">FAQ</div>
-          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Rhythm Realm FAQ</h2>
-          <p className="mt-3 text-sm text-white/70 sm:text-base">
-            Answers to common questions about Rhythm Realm and Andre Washington.
-          </p>
-          {/* Old FAQ layout kept for rollback.
-          <dl className="mt-6 space-y-4">
-            {FAQ_ENTRIES.map((item) => (
-              <div key={item.question} className="rounded-2xl border border-white/10 bg-black/30 p-5">
-                <dt className="text-base font-semibold text-white">{item.question}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-white/80 sm:text-base">{item.answer}</dd>
+      <section className="border-y border-white/10 bg-white/[0.035]">
+        <div className="mx-auto grid w-full max-w-6xl gap-6 px-6 py-12 md:grid-cols-3">
+          <div>
+            <div className="text-3xl font-semibold">Direct</div>
+            <p className="mt-2 text-sm leading-relaxed text-white/62">
+              A website-first home for songs, stories, and connection.
+            </p>
+          </div>
+          <div>
+            <div className="text-3xl font-semibold">Soulful</div>
+            <p className="mt-2 text-sm leading-relaxed text-white/62">
+              Pop music shaped by rhythm, melody, and lived emotion.
+            </p>
+          </div>
+          <div>
+            <div className="text-3xl font-semibold">Growing</div>
+            <p className="mt-2 text-sm leading-relaxed text-white/62">
+              A clean hub ready for more songs, videos, and behind-the-music pages.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-6xl px-6 py-16">
+        <div className="grid gap-8 border-b border-white/10 pb-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              What Is Rhythm Realm?
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              A clear home base for Andre Washington&apos;s music.
+            </h2>
+          </div>
+          <div className="space-y-4 text-base leading-relaxed text-white/68">
+            <p>
+              Rhythm Realm is the official website for Andre Washington. It is
+              built so listeners can come straight to the source for music,
+              videos, lyrics, song stories, and updates.
+            </p>
+            <p>
+              The sound is pop music with rhythm and soul: melodic, emotional,
+              and personal without losing the groove. This first version keeps
+              the site simple so every visitor can quickly understand where to
+              listen, what to explore, and how to stay connected.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Explore
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Start with the music. Stay for the story.
+            </h2>
+          </div>
+          <RhythmRealmLink
+            href="/music"
+            target="_self"
+            className="inline-flex rounded-lg border border-white/18 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-black"
+          >
+            View Music
+          </RhythmRealmLink>
+        </div>
+
+        <div className="mt-8 grid gap-5 md:grid-cols-2">
+          {featureCards.map((card) => (
+            <RhythmRealmLink
+              key={card.href}
+              href={card.href}
+              target="_self"
+              className="rounded-lg border border-white/10 bg-white/[0.04] p-5 transition hover:border-cyan-200/40 hover:bg-cyan-200/[0.06]"
+            >
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">
+                {card.eyebrow}
               </div>
-            ))}
-          </dl>
-          */}
-          <div className="mt-6 space-y-4">
+              <h3 className="mt-3 text-2xl font-semibold">{card.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/66">{card.text}</p>
+            </RhythmRealmLink>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto grid w-full max-w-6xl gap-8 px-6 pb-16 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-center">
+        <Image
+          src="/dont-want-to-worry-about-you-cover-high.jpg"
+          alt="Cover art for don't want to worry about you"
+          width={520}
+          height={520}
+          className="mx-auto aspect-square w-full max-w-[260px] rounded-lg border border-white/10 object-cover shadow-2xl"
+        />
+        <div>
+          <div className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">
+            Work in Progress
+          </div>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+            Working on new music
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/68">
+            Andre is currently working on a new song called &quot;don&apos;t want
+            to worry about you.&quot; This section keeps the original landing-page
+            update alive while giving future releases a natural place to grow.
+          </p>
+          <RhythmRealmLink
+            href="/contact"
+            target="_self"
+            className="mt-6 inline-flex rounded-lg border border-white/18 px-5 py-3 text-sm font-semibold transition hover:bg-white hover:text-black"
+          >
+            Join for Updates
+          </RhythmRealmLink>
+        </div>
+      </section>
+
+      <section className="mx-auto grid w-full max-w-6xl gap-8 px-6 pb-16 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
+        <div>
+          <div className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-100/80">
+            Featured Song Page
+          </div>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+            Do You Ever Wonder?
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/68">
+            The first song page brings the release together: cover art, lyrics,
+            story, audio, and the official video in one focused place.
+          </p>
+          <RhythmRealmLink
+            href="/do-you-ever-wonder"
+            target="_self"
+            className="mt-6 inline-flex rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100"
+          >
+            Visit the Song Page
+          </RhythmRealmLink>
+        </div>
+
+        <YouTubeVideoCard
+          title="Watch the official video"
+          description="The video link is already connected. Open the official YouTube video for Do You Ever Wonder? directly from RhythmRealm.net."
+          imageSrc="/do-you-ever-wonder.png"
+          imageAlt="Do You Ever Wonder? cover art"
+          youtubeUrl="https://www.youtube.com/watch?v=pWQU2ojAZFU"
+        />
+      </section>
+
+      <section className="mx-auto w-full max-w-6xl px-6 pb-16">
+        <div className="border-t border-white/10 pt-14">
+          <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+            FAQ
+          </div>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+            Rhythm Realm FAQ
+          </h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
             {FAQ_ENTRIES.map((item) => (
               <details
                 key={item.question}
-                className="group rounded-2xl border border-white/10 bg-black/30 p-5"
+                className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
               >
                 <summary className="cursor-pointer list-none text-base font-semibold text-white">
                   {item.question}
                 </summary>
-                <p className="mt-2 text-sm leading-relaxed text-white/80 sm:text-base">{item.answer}</p>
+                <p className="mt-3 text-sm leading-relaxed text-white/68">{item.answer}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Quick Tiles */}
-      <section className="mx-auto grid w-full max-w-6xl gap-6 px-6 pb-14 md:grid-cols-1">
-        <RhythmRealmLink
-          href={LINKS.lyricsStory}
-          target="_self"
-          className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
-        >
-          <div className="text-xs uppercase tracking-widest text-white/50">Explore</div>
-          <h3 className="mt-3 text-lg font-semibold">Lyrics + Story</h3>
-          <p className="mt-2 text-sm text-white/70">
-            Read the full backstory and lyrics on RhythmRealm.net.
-          </p>
-        </RhythmRealmLink>
-        <RhythmRealmLink
-          href={LINKS.aboutMe}
-          target="_self"
-          className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
-        >
-          <div className="text-xs uppercase tracking-widest text-white/50">About</div>
-          <h3 className="mt-3 text-lg font-semibold">About Me</h3>
-          <p className="mt-2 text-sm text-white/70">
-            Learn more about Andre Washington and the story behind the music.
-          </p>
-        </RhythmRealmLink>
-        <RhythmRealmLink
-          href={LINKS.contactMe}
-          target="_self"
-          className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-white/30"
-        >
-          <div className="text-xs uppercase tracking-widest text-white/50">Contact</div>
-          <h3 className="mt-3 text-lg font-semibold">Contact Me</h3>
-          <p className="mt-2 text-sm text-white/70">
-            Reach out directly by email for collaborations and inquiries.
-          </p>
-        </RhythmRealmLink>
+      <section className="border-t border-white/10 bg-cyan-200/[0.055]">
+        <div className="mx-auto w-full max-w-6xl px-6 py-14">
+          <EmailSignupForm
+            title="Get Rhythm Realm updates"
+            description="Join the list for release notes, song stories, videos, and direct updates from Andre Washington."
+            buttonLabel="Join Updates"
+          />
+        </div>
       </section>
 
-      {/* Footer */}
-      <footer className="mx-auto w-full max-w-6xl border-t border-white/10 px-6 py-10">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-sm text-white/60">Official links</div>
-          <RhythmRealmLink
-            href={LINKS.songHub}
-            className="rounded-full border border-white/20 px-4 py-2 text-sm hover:bg-white hover:text-black"
-          >
-            RhythmRealm.net
-          </RhythmRealmLink>
-        </div>
-      </footer>
-      {/* ElevenLabs Voice Agent Widget */}
-      {shouldShowWidget ? (
-        <div
-          className="convai-widget-safe"
-          dangerouslySetInnerHTML={{
-            __html: `<elevenlabs-convai agent-id="agent_3401kj6tq8x7e9jrcxz0tc01pnvb"></elevenlabs-convai>`,
-          }}
-        />
-      ) : null}
-      <Script
-        src="https://unpkg.com/@elevenlabs/convai-widget-embed"
-        strategy="afterInteractive"
-      />
+      <SiteFooter />
     </main>
   );
 }
