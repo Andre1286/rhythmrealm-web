@@ -1,10 +1,10 @@
 export default function Head() {
   return (
     <>
-      <title>Andre Washington – Do You Ever Wonder? (Official Single) | Rhythm Realm</title>
+      <title>Rhythm Realm | Official Music Home of Andre Washington</title>
       <meta
         name="description"
-        content="Listen to “Do You Ever Wonder?” by Andre Washington. Stream the official single, read the lyrics, and explore the story behind the song on Rhythm Realm."
+        content="Rhythm Realm is the official music home of Andre Washington, featuring pop music with rhythm, soul, and real emotion."
       />
     </>
   );

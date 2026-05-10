@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-import { FAQ_ENTRIES } from "@/lib/faqEntries";
 
-const siteTitle = "Andre Washington – Do You Ever Wonder? (Official Single) | Rhythm Realm";
+const siteTitle = "Rhythm Realm | Official Music Home of Andre Washington";
 const siteDescription =
-  "Listen to “Do You Ever Wonder?” by Andre Washington. Stream the official single, read the lyrics, and explore the story behind the song on Rhythm Realm.";
+  "Rhythm Realm is the official music home of Andre Washington, featuring pop music with rhythm, soul, and real emotion.";
 const canonicalUrl = "https://www.rhythmrealm.net";
 
 export const metadata: Metadata = {
   metadataBase: new URL(canonicalUrl),
-  title: siteTitle,
+  title: {
+    default: siteTitle,
+    template: "%s | Rhythm Realm",
+  },
   description: siteDescription,
   alternates: {
     canonical: "/",
@@ -20,12 +22,13 @@ export const metadata: Metadata = {
     description: siteDescription,
     type: "website",
     url: canonicalUrl,
+    siteName: "Rhythm Realm",
     images: [
       {
-        url: "/do-you-ever-wonder.png",
+        url: "/rhythm-realm-logo.png",
         width: 1200,
         height: 1200,
-        alt: "Do You Ever Wonder single artwork",
+        alt: "Rhythm Realm logo",
       },
     ],
   },
@@ -33,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
-    images: ["/do-you-ever-wonder.png"],
+    images: ["/rhythm-realm-logo.png"],
   },
 };
 
@@ -55,26 +58,15 @@ export default function RootLayout({
         "@type": "Person",
         name: "Andre Washington",
         url: canonicalUrl,
+        sameAs: [canonicalUrl],
       },
       {
         "@type": "WebSite",
         name: "Rhythm Realm",
         url: canonicalUrl,
+        description: siteDescription,
       },
     ],
-  };
-
-  const faqPageSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQ_ENTRIES.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
   };
 
   return (
@@ -83,10 +75,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
         />
       </head>
       <body className="antialiased">
