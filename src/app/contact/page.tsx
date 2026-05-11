@@ -29,7 +29,8 @@ export default function ContactPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-lg">
             For collaborations, music inquiries, or direct messages, use email.
-            For release updates and song notes, join the Rhythm Realm list.
+            Join the Rhythm Realm list for new songs, behind-the-music stories,
+            and direct updates from Andre Washington.
           </p>
           <div className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5">
             <div className="text-xs uppercase tracking-[0.18em] text-white/45">
@@ -47,8 +48,8 @@ export default function ContactPage() {
 
         <div className="rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-6">
           <EmailSignupForm
-            title="Join the email list"
-            description="Get release updates, song stories, and Rhythm Realm news from Andre Washington."
+            title="Join the Rhythm Realm list"
+            description="Join the Rhythm Realm list and get new songs, behind-the-music stories, and direct updates from Andre Washington."
             buttonLabel="Join the List"
           />
         </div>

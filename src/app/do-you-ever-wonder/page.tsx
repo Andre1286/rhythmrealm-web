@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         url: "/do-you-ever-wonder/cover-art.png",
         width: 1200,
         height: 1200,
-        alt: "Do You Ever Wonder? cover art",
+        alt: "Do You Ever Wonder? by Andre Washington cover art",
       },
     ],
   },
@@ -40,7 +40,7 @@ export default function DoYouEverWonderPage() {
       <section className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[360px_minmax(0,1fr)] lg:items-center">
         <Image
           src="/do-you-ever-wonder/cover-art.png"
-          alt="Do You Ever Wonder? cover art"
+          alt="Do You Ever Wonder? by Andre Washington cover art"
           width={720}
           height={720}
           className="mx-auto aspect-square w-full max-w-[360px] rounded-lg border border-white/10 object-cover shadow-2xl"
@@ -202,7 +202,7 @@ export default function DoYouEverWonderPage() {
               title="Watch Do You Ever Wonder?"
               description="The official video is connected here. If an embedded YouTube player is blocked by the browser, this card still gives visitors a clear way to watch the video on YouTube."
               imageSrc="/do-you-ever-wonder/cover-art.png"
-              imageAlt="Do You Ever Wonder? cover art"
+              imageAlt="Do You Ever Wonder? by Andre Washington cover art"
               youtubeUrl={videoWatchUrl}
             />
           </div>

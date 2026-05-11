@@ -254,6 +254,31 @@ export default function Home() {
         />
       </section>
 
+      <section className="border-y border-white/10 bg-white/[0.035]">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-12 md:flex-row md:items-center md:justify-between">
+          <div className="max-w-3xl">
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Behind the Song
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Behind the Song: Do You Ever Wonder?
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-white/68">
+              A closer look at the feeling, story, and meaning behind Andre
+              Washington&apos;s song &quot;Do You Ever Wonder?&quot; Read the story
+              and stay connected with new Rhythm Realm music.
+            </p>
+          </div>
+          <RhythmRealmLink
+            href="/do-you-ever-wonder"
+            target="_self"
+            className="inline-flex shrink-0 rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100"
+          >
+            Read Behind the Song
+          </RhythmRealmLink>
+        </div>
+      </section>
+
       <section className="mx-auto w-full max-w-6xl px-6 pb-16">
         <div className="border-t border-white/10 pt-14">
           <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
@@ -281,9 +306,9 @@ export default function Home() {
       <section className="border-t border-white/10 bg-cyan-200/[0.055]">
         <div className="mx-auto w-full max-w-6xl px-6 py-14">
           <EmailSignupForm
-            title="Get Rhythm Realm updates"
-            description="Join the list for release notes, song stories, videos, and direct updates from Andre Washington."
-            buttonLabel="Join Updates"
+            title="Join the Rhythm Realm list"
+            description="Join the Rhythm Realm list and get new songs, behind-the-music stories, and direct updates from Andre Washington."
+            buttonLabel="Join the List"
           />
         </div>
       </section>
