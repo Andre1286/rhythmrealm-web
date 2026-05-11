@@ -5,13 +5,13 @@ import BlogArticlePage from "@/components/BlogArticlePage";
 import { BLOG_POSTS, getBlogPost } from "@/lib/blogPosts";
 import { absoluteUrl } from "@/lib/seo";
 
-type PostPageProps = {
+type BlogPostPageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
 
-const routePrefix = "/post/";
+const routePrefix = "/blog/";
 
 export const dynamicParams = false;
 
@@ -22,7 +22,9 @@ export const generateStaticParams = () =>
     }),
   );
 
-export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogPost(slug);
 
@@ -50,7 +52,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   };
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const post = getBlogPost(slug);
 

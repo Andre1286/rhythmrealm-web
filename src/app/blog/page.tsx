@@ -49,7 +49,7 @@ export default function BlogPage() {
               className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
             >
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">
-                Rhythm Realm Notes
+                {post.category ?? "Rhythm Realm Notes"}
               </div>
               <h2 className="mt-3 text-2xl font-semibold">{post.title}</h2>
               <p className="mt-3 text-sm leading-relaxed text-white/68">{post.excerpt}</p>
