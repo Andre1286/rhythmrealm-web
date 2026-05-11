@@ -6,7 +6,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "About Andre Washington | Rhythm Realm",
+  title: "About Andre Washington",
   description:
     "Learn about Andre Washington, the independent recording artist behind Rhythm Realm.",
   alternates: {

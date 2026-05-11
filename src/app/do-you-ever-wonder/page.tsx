@@ -6,27 +6,29 @@ import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import YouTubeVideoCard from "@/components/YouTubeVideoCard";
+import { absoluteUrl } from "@/lib/seo";
 
 const videoWatchUrl = "https://www.youtube.com/watch?v=pWQU2ojAZFU";
 const songTitle = "Do You Ever Wonder?";
 
 export const metadata: Metadata = {
-  title: "Do You Ever Wonder? | Andre Washington | Rhythm Realm",
+  title: "Do You Ever Wonder? by Andre Washington",
   description:
-    "Listen to Do You Ever Wonder? by Andre Washington, read the lyrics, watch the official video, and explore the story behind the song.",
+    "Listen to Do You Ever Wonder? by Andre Washington, watch the official video, read the story, and explore more music on RhythmRealm.net.",
   alternates: {
     canonical: "/do-you-ever-wonder",
   },
   openGraph: {
-    title: "Do You Ever Wonder? | Andre Washington | Rhythm Realm",
+    title: "Do You Ever Wonder? by Andre Washington | Rhythm Realm",
     description:
-      "Listen to the official single from Andre Washington and read the story behind the song.",
+      "Listen to Do You Ever Wonder? by Andre Washington, watch the official video, and read the story on RhythmRealm.net.",
+    url: absoluteUrl("/do-you-ever-wonder"),
     images: [
       {
         url: "/do-you-ever-wonder/cover-art.png",
         width: 1200,
         height: 1200,
-        alt: "Do You Ever Wonder? cover art",
+        alt: "Do You Ever Wonder? by Andre Washington cover art",
       },
     ],
   },
@@ -40,7 +42,7 @@ export default function DoYouEverWonderPage() {
       <section className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[360px_minmax(0,1fr)] lg:items-center">
         <Image
           src="/do-you-ever-wonder/cover-art.png"
-          alt="Do You Ever Wonder? cover art"
+          alt="Do You Ever Wonder? by Andre Washington cover art"
           width={720}
           height={720}
           className="mx-auto aspect-square w-full max-w-[360px] rounded-lg border border-white/10 object-cover shadow-2xl"
@@ -66,7 +68,7 @@ export default function DoYouEverWonderPage() {
           />
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <RhythmRealmLink
-              href="#lyrics"
+              href="/lyrics/do-you-ever-wonder"
               target="_self"
               className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
             >
@@ -202,7 +204,7 @@ export default function DoYouEverWonderPage() {
               title="Watch Do You Ever Wonder?"
               description="The official video is connected here. If an embedded YouTube player is blocked by the browser, this card still gives visitors a clear way to watch the video on YouTube."
               imageSrc="/do-you-ever-wonder/cover-art.png"
-              imageAlt="Do You Ever Wonder? cover art"
+              imageAlt="Do You Ever Wonder? by Andre Washington cover art"
               youtubeUrl={videoWatchUrl}
             />
           </div>

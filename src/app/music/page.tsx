@@ -27,7 +27,7 @@ const tracks = [
 ];
 
 export const metadata: Metadata = {
-  title: "Music | Rhythm Realm",
+  title: "Music",
   description:
     "Listen to music from Andre Washington on Rhythm Realm, including Do You Ever Wonder? and more direct-to-listener releases.",
   alternates: {

@@ -2,27 +2,26 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const siteTitle = "Rhythm Realm | Official Music Home of Andre Washington";
-const siteDescription =
-  "Rhythm Realm is the official music home of Andre Washington, featuring pop music with rhythm, soul, and real emotion.";
-const canonicalUrl = "https://www.rhythmrealm.net";
+import {
+  SITE_DESCRIPTION,
+  SITE_HOME_URL,
+  SITE_NAME,
+  SITE_TITLE,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(canonicalUrl),
+  metadataBase: new URL(SITE_HOME_URL),
   title: {
-    default: siteTitle,
-    template: "%s | Rhythm Realm",
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: siteDescription,
-  alternates: {
-    canonical: "/",
-  },
+  description: SITE_DESCRIPTION,
   openGraph: {
-    title: siteTitle,
-    description: siteDescription,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     type: "website",
-    url: canonicalUrl,
-    siteName: "Rhythm Realm",
+    url: SITE_HOME_URL,
+    siteName: SITE_NAME,
     images: [
       {
         url: "/rhythm-realm-logo.png",
@@ -34,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: siteTitle,
-    description: siteDescription,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ["/rhythm-realm-logo.png"],
   },
 };
@@ -50,21 +49,21 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
-        name: "Rhythm Realm",
-        url: canonicalUrl,
-        description: siteDescription,
+        name: SITE_NAME,
+        url: SITE_HOME_URL,
+        description: SITE_DESCRIPTION,
       },
       {
         "@type": "Person",
         name: "Andre Washington",
-        url: canonicalUrl,
-        sameAs: [canonicalUrl],
+        url: SITE_HOME_URL,
+        sameAs: [SITE_HOME_URL],
       },
       {
         "@type": "WebSite",
-        name: "Rhythm Realm",
-        url: canonicalUrl,
-        description: siteDescription,
+        name: SITE_NAME,
+        url: SITE_HOME_URL,
+        description: SITE_DESCRIPTION,
       },
     ],
   };
