@@ -13,6 +13,7 @@ const footerLinks = [
     label: "Behind the Music",
     target: "footer-behind-the-music",
   },
+  { href: "/blog", label: "Blog", target: "footer-blog" },
   { href: "/contact", label: "Contact", target: "footer-contact" },
 ];
 

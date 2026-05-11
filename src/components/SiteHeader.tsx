@@ -15,6 +15,7 @@ const navLinks = [
     label: "Behind the Music",
     target: "nav-behind-the-music",
   },
+  { href: "/blog", label: "Blog", target: "nav-blog" },
   { href: "/contact", label: "Contact", target: "nav-contact" },
 ];
 

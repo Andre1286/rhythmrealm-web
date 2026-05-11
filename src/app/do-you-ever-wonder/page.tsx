@@ -6,21 +6,23 @@ import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import YouTubeVideoCard from "@/components/YouTubeVideoCard";
+import { absoluteUrl } from "@/lib/seo";
 
 const videoWatchUrl = "https://www.youtube.com/watch?v=pWQU2ojAZFU";
 const songTitle = "Do You Ever Wonder?";
 
 export const metadata: Metadata = {
-  title: "Do You Ever Wonder? | Andre Washington | Rhythm Realm",
+  title: "Do You Ever Wonder? by Andre Washington",
   description:
-    "Listen to Do You Ever Wonder? by Andre Washington, read the lyrics, watch the official video, and explore the story behind the song.",
+    "Listen to Do You Ever Wonder? by Andre Washington, watch the official video, read the story, and explore more music on RhythmRealm.net.",
   alternates: {
     canonical: "/do-you-ever-wonder",
   },
   openGraph: {
-    title: "Do You Ever Wonder? | Andre Washington | Rhythm Realm",
+    title: "Do You Ever Wonder? by Andre Washington | Rhythm Realm",
     description:
-      "Listen to the official single from Andre Washington and read the story behind the song.",
+      "Listen to Do You Ever Wonder? by Andre Washington, watch the official video, and read the story on RhythmRealm.net.",
+    url: absoluteUrl("/do-you-ever-wonder"),
     images: [
       {
         url: "/do-you-ever-wonder/cover-art.png",
@@ -66,7 +68,7 @@ export default function DoYouEverWonderPage() {
           />
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <RhythmRealmLink
-              href="#lyrics"
+              href="/lyrics/do-you-ever-wonder"
               target="_self"
               className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
             >

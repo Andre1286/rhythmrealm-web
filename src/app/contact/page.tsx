@@ -6,7 +6,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "Contact and Email Signup | Rhythm Realm",
+  title: "Contact and Email Signup",
   description:
     "Contact Andre Washington and join the Rhythm Realm email list for music updates.",
   alternates: {

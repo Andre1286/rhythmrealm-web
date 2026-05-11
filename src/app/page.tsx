@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 
 import EmailSignupForm from "@/components/EmailSignupForm";
@@ -7,8 +8,29 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import YouTubeVideoCard from "@/components/YouTubeVideoCard";
 import { FAQ_ENTRIES } from "@/lib/faqEntries";
+import { SITE_DESCRIPTION, SITE_HOME_URL, SITE_TITLE } from "@/lib/seo";
 
 const featuredSong = "Do You Ever Wonder?";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: SITE_TITLE,
+  },
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: SITE_HOME_URL,
+  },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_HOME_URL,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+};
 
 const featureCards = [
   {
@@ -31,6 +53,20 @@ const featureCards = [
     title: "Behind the Music",
     text: "Go deeper into the meaning, process, and emotion behind each release.",
     target: "home-card-behind-the-music",
+  },
+  {
+    href: "/lyrics/do-you-ever-wonder",
+    eyebrow: "Lyrics",
+    title: "Do You Ever Wonder? Lyrics",
+    text: "Read the lyrics for Andre Washington's featured Rhythm Realm song.",
+    target: "home-card-lyrics-do-you-ever-wonder",
+  },
+  {
+    href: "/blog",
+    eyebrow: "Blog",
+    title: "Rhythm Realm Blog",
+    text: "Read music stories, song notes, and simple reflections from Rhythm Realm.",
+    target: "home-card-blog",
   },
   {
     href: "/contact",

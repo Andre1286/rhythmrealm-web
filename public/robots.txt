@@ -3,3 +3,8 @@ Allow: /
 
 User-agent: GPTBot
 Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.rhythmrealm.net/sitemap.xml
