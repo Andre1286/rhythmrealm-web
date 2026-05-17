@@ -23,6 +23,54 @@ export type BlogPost = {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "coming-over-yesterday",
+    title:
+      "Coming Over Yesterday — A New Song from Terry T Productions featuring Andre Washington",
+    seoTitle:
+      "Coming Over Yesterday by Terry T Productions featuring Andre Washington | Rhythm Realm",
+    description:
+      'A brief look behind "Coming Over Yesterday," a new love song about showing up, staying loyal, and being there before the moment even arrives.',
+    excerpt:
+      'A brief look behind "Coming Over Yesterday," a new love song about showing up, staying loyal, and being there before the moment even arrives.',
+    canonicalPath: "/blog/coming-over-yesterday",
+    category: "Work in Progress",
+    tags: [
+      "Coming Over Yesterday",
+      "Terry T Productions",
+      "Andre Washington",
+      "Terry Timberlake",
+      "IROC",
+      "International Rhythm of Composers",
+      "Rhythm Realm",
+      "RhythmRealmNet",
+    ],
+    sections: [
+      {
+        heading: "A New Song from Terry T Productions",
+        body: [
+          '"Coming Over Yesterday" is a new song from Terry T Productions featuring Andre Washington.',
+          "Written with Terry Timberlake — known as Terry T — the song carries the feeling of love, loyalty, and being ready to show up when someone needs you. Terry T is a keyboard player, producer, and former member of IROC, International Rhythm of Composers.",
+        ],
+      },
+      {
+        heading: "A Modern Love Story",
+        body: [
+          'The lyrics bring a modern love story into a soulful pop setting. Lines like "Pick up the phone and call" and "FaceTime me whenever you want" give the song a present-day feel, but the heart of the song is simple: when love calls, you make time.',
+        ],
+      },
+      {
+        heading: "Still a Work in Progress",
+        body: [
+          '"Coming Over Yesterday" is still a work in progress, but the emotion is already clear. It is about devotion, connection, and that rare kind of love where someone is ready to be there before they are even asked.',
+        ],
+      },
+    ],
+    closing: [
+      "Discover more on https://RhythmRealm.net — Thank you for listening.",
+      "#RhythmRealmNet",
+    ],
+  },
+  {
     slug: "story-behind-do-you-ever-wonder",
     title: 'The Story Behind "Do You Ever Wonder?"',
     seoTitle:
