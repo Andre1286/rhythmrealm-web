@@ -232,23 +232,27 @@ export default function Home() {
 
       <section className="mx-auto grid w-full max-w-6xl gap-8 px-6 pb-16 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-center">
         <Image
-          src="/dont-want-to-worry-about-you-cover-high.jpg"
-          alt="Cover art for don't want to worry about you"
+          src="/coming-over-yesterday-cover.png"
+          alt="Cover art for Coming Over Yesterday"
           width={520}
           height={520}
           className="mx-auto aspect-square w-full max-w-[260px] rounded-lg border border-white/10 object-cover shadow-2xl"
         />
         <div>
           <div className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">
-            Work in Progress
+            WORK IN PROGRESS
           </div>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-            Working on new music
+            Coming Over Yesterday
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/68">
-            Andre is currently working on a new song called &quot;don&apos;t want
-            to worry about you.&quot; This section keeps the original landing-page
-            update alive while giving future releases a natural place to grow.
+            &quot;Coming Over Yesterday&quot; is a new Terry T Productions song
+            featuring Andre Washington. Written with Terry Timberlake — keyboard
+            player, producer, and former member of IROC, International Rhythm of
+            Composers — the song is about love, loyalty, and being there before
+            the moment even arrives. With lines like &quot;Pick up the phone and
+            call&quot; and &quot;FaceTime me whenever you want,&quot; the song brings a
+            modern love story into a soulful pop setting.
           </p>
           <RhythmRealmLink
             href="/contact"
