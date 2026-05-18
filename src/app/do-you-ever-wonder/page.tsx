@@ -9,40 +9,136 @@ import YouTubeVideoCard from "@/components/YouTubeVideoCard";
 import { absoluteUrl } from "@/lib/seo";
 
 const videoWatchUrl = "https://www.youtube.com/watch?v=pWQU2ojAZFU";
-const songTitle = "Do You Ever Wonder?";
+const songTitle = "Do You Ever Wonder";
+const artistName = "Andre Washington";
+
+const lyricSections = [
+  {
+    label: "Verse 1",
+    lines: [
+      "Do you ever wonder why we're here in this life?",
+      "They make it very clear.",
+      "You're either on the right or on the left.",
+      "Any way you wind up out of breath.",
+    ],
+  },
+  {
+    label: "Chorus",
+    lines: [
+      "The way things go, it's all so cold,",
+      "and there's no love anymore.",
+      "We've got to find a better way",
+      "for us to see a brighter day.",
+    ],
+  },
+  {
+    label: "Verse 2",
+    lines: [
+      "If you have the time, I'd like to say,",
+      "the way to solve our problems is to pray.",
+      "This world we live in is in disarray.",
+      "Sit back, relax, and just press play.",
+    ],
+  },
+  {
+    label: "Verse 3",
+    lines: [
+      "Do you ever wonder why we're here?",
+      "In this life, they make it very clear.",
+      "You're either on the right or on the left.",
+      "Anyway, you wind up out of breath.",
+    ],
+  },
+];
+
+const faqItems = [
+  {
+    question: "What is “Do You Ever Wonder” by Andre Washington?",
+    answer:
+      "“Do You Ever Wonder” is a Rhythm Realm song by Andre Washington, created for listeners who enjoy pop music with rhythm and soul.",
+  },
+  {
+    question: "Where can I read the lyrics to “Do You Ever Wonder”?",
+    answer: "You can read the lyrics on RhythmRealm.net.",
+  },
+  {
+    question: "Who is Andre Washington?",
+    answer:
+      "Andre Washington is an independent recording artist and music entrepreneur behind Rhythm Realm.",
+  },
+  {
+    question: "What is Rhythm Realm?",
+    answer:
+      "Rhythm Realm is an independent music brand focused on pop music with rhythm and soul.",
+  },
+];
 
 export const metadata: Metadata = {
-  title: "Do You Ever Wonder? by Andre Washington",
+  title: {
+    absolute: "Do You Ever Wonder Lyrics – Andre Washington | Rhythm Realm",
+  },
   description:
-    "Listen to Do You Ever Wonder? by Andre Washington, watch the official video, read the story, and explore more music on RhythmRealm.net.",
+    "Read the lyrics and story behind “Do You Ever Wonder” by Andre Washington. A Rhythm Realm song for fans of pop music with rhythm and soul.",
   alternates: {
     canonical: "/do-you-ever-wonder",
   },
   openGraph: {
-    title: "Do You Ever Wonder? by Andre Washington | Rhythm Realm",
+    title: "Do You Ever Wonder Lyrics – Andre Washington | Rhythm Realm",
     description:
-      "Listen to Do You Ever Wonder? by Andre Washington, watch the official video, and read the story on RhythmRealm.net.",
+      "Read the lyrics and story behind “Do You Ever Wonder” by Andre Washington. A Rhythm Realm song for fans of pop music with rhythm and soul.",
     url: absoluteUrl("/do-you-ever-wonder"),
     images: [
       {
         url: "/do-you-ever-wonder/cover-art.png",
         width: 1200,
         height: 1200,
-        alt: "Do You Ever Wonder? by Andre Washington cover art",
+        alt: "Do You Ever Wonder by Andre Washington cover art",
       },
     ],
   },
 };
 
 export default function DoYouEverWonderPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MusicRecording",
+        name: songTitle,
+        url: absoluteUrl("/do-you-ever-wonder"),
+        image: absoluteUrl("/do-you-ever-wonder/cover-art.png"),
+        byArtist: {
+          "@type": "Person",
+          name: artistName,
+        },
+        description: metadata.description,
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
 
       <section className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[360px_minmax(0,1fr)] lg:items-center">
         <Image
           src="/do-you-ever-wonder/cover-art.png"
-          alt="Do You Ever Wonder? by Andre Washington cover art"
+          alt="Do You Ever Wonder by Andre Washington cover art"
           width={720}
           height={720}
           className="mx-auto aspect-square w-full max-w-[360px] rounded-lg border border-white/10 object-cover shadow-2xl"
@@ -53,12 +149,13 @@ export default function DoYouEverWonderPage() {
             Official Single
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-            {songTitle}
+            Do You Ever Wonder Lyrics
           </h1>
-          <p className="mt-2 text-lg text-white/72">Andre Washington</p>
+          <p className="mt-2 text-lg text-white/72">{artistName}</p>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-lg">
-            A reflective pop release from Rhythm Realm about division, hope,
-            prayer, and the search for a brighter day.
+            Read the lyrics and story behind &ldquo;Do You Ever Wonder&rdquo; by
+            Andre Washington, a Rhythm Realm song for fans of pop music with
+            rhythm and soul.
           </p>
           <audio
             controls
@@ -68,18 +165,18 @@ export default function DoYouEverWonderPage() {
           />
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <RhythmRealmLink
-              href="/lyrics/do-you-ever-wonder"
+              href="#lyrics"
               target="_self"
               className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
             >
               Read Lyrics
             </RhythmRealmLink>
             <RhythmRealmLink
-              href="#official-video"
+              href="#story-behind-the-song"
               target="_self"
               className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
             >
-              Watch Video
+              Story Behind the Song
             </RhythmRealmLink>
             <RhythmRealmLink
               href="/music"
@@ -98,52 +195,21 @@ export default function DoYouEverWonderPage() {
             <div className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">
               Lyrics
             </div>
-            <h2 className="mt-3 text-3xl font-semibold">Lyrics - {songTitle}</h2>
+            <h2 className="mt-3 text-3xl font-semibold">Lyrics</h2>
             <div className="mt-6 space-y-5 text-sm leading-relaxed text-white/78 sm:text-base">
-              <p>
-                <span className="font-semibold text-white">[Verse 1]</span>
-                <br />
-                Do you ever wonder why we&apos;re here in this life?
-                <br />
-                They make it very clear.
-                <br />
-                You&apos;re either on the right or on the left.
-                <br />
-                Any way you wind up out of breath.
-              </p>
-              <p>
-                <span className="font-semibold text-white">[Chorus]</span>
-                <br />
-                The way things go, it&apos;s all so cold,
-                <br />
-                and there&apos;s no love anymore.
-                <br />
-                We&apos;ve got to find a better way
-                <br />
-                for us to see a brighter day.
-              </p>
-              <p>
-                <span className="font-semibold text-white">[Verse 2]</span>
-                <br />
-                If you have the time, I&apos;d like to say,
-                <br />
-                the way to solve our problems is to pray.
-                <br />
-                This world we live in is in disarray.
-                <br />
-                Sit back, relax, and just press play.
-              </p>
-              <p>
-                <span className="font-semibold text-white">[Verse 3]</span>
-                <br />
-                Do you ever wonder why we&apos;re here?
-                <br />
-                In this life, they make it very clear.
-                <br />
-                You&apos;re either on the right or on the left.
-                <br />
-                Anyway, you wind up out of breath.
-              </p>
+              {lyricSections.map((section) => (
+                <section key={section.label}>
+                  <h3 className="font-semibold text-white">[{section.label}]</h3>
+                  <p className="mt-2">
+                    {section.lines.map((line) => (
+                      <span key={line}>
+                        {line}
+                        <br />
+                      </span>
+                    ))}
+                  </p>
+                </section>
+              ))}
             </div>
           </div>
 
@@ -156,25 +222,28 @@ export default function DoYouEverWonderPage() {
               apart, and still believing there is a better way to move forward.
             </p>
             <RhythmRealmLink
-              href="/behind-the-music"
+              href="#story-behind-the-song"
               target="_self"
               className="mt-5 inline-flex rounded-lg border border-white/18 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-black"
             >
-              Behind the Music
+              Read the Story
             </RhythmRealmLink>
           </aside>
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-6 py-14">
+      <section
+        id="story-behind-the-song"
+        className="mx-auto w-full max-w-6xl px-6 py-14"
+      >
         <div className="max-w-3xl">
           <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
             Story
           </div>
-          <h2 className="mt-3 text-3xl font-semibold">The story behind the song</h2>
+          <h2 className="mt-3 text-3xl font-semibold">Story Behind the Song</h2>
           <div className="mt-5 space-y-5 text-base leading-relaxed text-white/70">
             <p>
-              &quot;Do You Ever Wonder?&quot; was created from a place of reflection. It
+              &ldquo;Do You Ever Wonder&rdquo; was created from a place of reflection. It
               asks what happens when the noise gets loud, the world feels divided,
               and people still need love, clarity, and hope.
             </p>
@@ -191,6 +260,40 @@ export default function DoYouEverWonderPage() {
         </div>
       </section>
 
+      <section className="border-y border-white/10 bg-white/[0.035]">
+        <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-14 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.7fr)]">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">
+              Artist
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold">About Andre Washington</h2>
+            <p className="mt-5 max-w-3xl text-base leading-relaxed text-white/70">
+              Andre Washington is an independent recording artist and music
+              entrepreneur behind Rhythm Realm. His work focuses on direct,
+              heartfelt pop music with rhythm, soul, and a clear connection to
+              listeners.
+            </p>
+          </div>
+          <div className="rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-5">
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-100/80">
+              Rhythm Realm
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-white/72">
+              Rhythm Realm is the independent music brand where fans can listen
+              to songs, read lyrics, follow the stories behind releases, and stay
+              connected with new music.
+            </p>
+            <RhythmRealmLink
+              href="/about-andre-washington"
+              target="_self"
+              className="mt-5 inline-flex rounded-lg border border-white/18 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-black"
+            >
+              About Andre
+            </RhythmRealmLink>
+          </div>
+        </div>
+      </section>
+
       <section id="official-video" className="border-y border-white/10 bg-white/[0.035]">
         <div className="mx-auto w-full max-w-6xl px-6 py-14">
           <div className="max-w-3xl">
@@ -201,12 +304,66 @@ export default function DoYouEverWonderPage() {
           </div>
           <div className="mt-7">
             <YouTubeVideoCard
-              title="Watch Do You Ever Wonder?"
+              title="Watch Do You Ever Wonder"
               description="The official video is connected here. If an embedded YouTube player is blocked by the browser, this card still gives visitors a clear way to watch the video on YouTube."
               imageSrc="/do-you-ever-wonder/cover-art.png"
-              imageAlt="Do You Ever Wonder? by Andre Washington cover art"
+              imageAlt="Do You Ever Wonder by Andre Washington cover art"
               youtubeUrl={videoWatchUrl}
             />
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-6xl px-6 py-14">
+        <div className="max-w-3xl">
+          <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+            More Music
+          </div>
+          <h2 className="mt-3 text-3xl font-semibold">More Rhythm Realm Music</h2>
+          <p className="mt-5 text-base leading-relaxed text-white/70">
+            Keep exploring Rhythm Realm for more songs from Andre Washington,
+            including new releases, music stories, videos, and updates for fans
+            of pop music with rhythm and soul.
+          </p>
+        </div>
+        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <RhythmRealmLink
+            href="/music"
+            target="_self"
+            className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
+          >
+            Explore Music
+          </RhythmRealmLink>
+          <RhythmRealmLink
+            href="/blog/story-behind-do-you-ever-wonder"
+            target="_self"
+            className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
+          >
+            Read More Stories
+          </RhythmRealmLink>
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-white/[0.035]">
+        <div className="mx-auto w-full max-w-6xl px-6 py-14">
+          <div className="max-w-3xl">
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">
+              Questions
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold">FAQ</h2>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {faqItems.map((faq) => (
+              <section
+                key={faq.question}
+                className="rounded-lg border border-white/10 bg-black/32 p-5"
+              >
+                <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/70">
+                  {faq.answer}
+                </p>
+              </section>
+            ))}
           </div>
         </div>
       </section>

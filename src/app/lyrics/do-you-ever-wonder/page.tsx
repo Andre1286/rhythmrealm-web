@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   description:
     "Read the lyrics for Do You Ever Wonder? by Andre Washington and listen to the official Rhythm Realm song on RhythmRealm.net.",
   alternates: {
-    canonical: "/lyrics/do-you-ever-wonder",
+    canonical: "/do-you-ever-wonder",
   },
   openGraph: {
     title: "Do You Ever Wonder? Lyrics | Andre Washington",
     description:
       "Read the lyrics for Do You Ever Wonder? by Andre Washington and listen on RhythmRealm.net.",
-    url: absoluteUrl("/lyrics/do-you-ever-wonder"),
+    url: absoluteUrl("/do-you-ever-wonder"),
   },
 };
 

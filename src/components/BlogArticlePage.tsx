@@ -10,6 +10,7 @@ type BlogArticlePageProps = {
 };
 
 export default function BlogArticlePage({ post }: BlogArticlePageProps) {
+  const showSoulfulSongLink = post.slug === "unveiling-the-essence-of-soulful-music";
   const blogPostingJsonLd = {
     "@type": "BlogPosting",
     headline: post.title,
@@ -125,6 +126,24 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
           ))}
         </div>
 
+        {showSoulfulSongLink ? (
+          <section className="mt-12 border-t border-white/10 pt-10">
+            <h2 className="text-2xl font-semibold">Featured Rhythm Realm Song</h2>
+            <p className="mt-4 text-base leading-relaxed text-white/72">
+              For a direct example of soulful pop from Rhythm Realm,{" "}
+              <RhythmRealmLink
+                href="https://www.rhythmrealm.net/do-you-ever-wonder"
+                target="_self"
+                className="font-semibold text-cyan-100 hover:text-white"
+              >
+                read the lyrics and story behind &ldquo;Do You Ever Wonder&rdquo; by
+                Andre Washington
+              </RhythmRealmLink>
+              .
+            </p>
+          </section>
+        ) : null}
+
         {post.keyTakeaways?.length ? (
           <section className="mt-12 border-t border-white/10 pt-10">
             <h2 className="text-2xl font-semibold">Key Takeaways</h2>
@@ -169,11 +188,11 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
             Listen to Do You Ever Wonder?
           </RhythmRealmLink>
           <RhythmRealmLink
-            href="/lyrics/do-you-ever-wonder"
+            href="/do-you-ever-wonder#lyrics"
             target="_self"
             className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
           >
-            Read Lyrics
+            Read Lyrics and Story
           </RhythmRealmLink>
         </div>
       </article>
