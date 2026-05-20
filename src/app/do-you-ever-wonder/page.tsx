@@ -9,6 +9,8 @@ import YouTubeVideoCard from "@/components/YouTubeVideoCard";
 import { absoluteUrl } from "@/lib/seo";
 
 const videoWatchUrl = "https://www.youtube.com/watch?v=pWQU2ojAZFU";
+const insideTheSongVideoPath =
+  "/do-you-ever-wonder-inside-the-song/do-you-ever-wonder-inside-the-song.mp4";
 const songTitle = "Do You Ever Wonder";
 const artistName = "Andre Washington";
 
@@ -256,6 +258,80 @@ export default function DoYouEverWonderPage() {
               That is the heart of Rhythm Realm: music that lets real emotion
               breathe while keeping rhythm and melody at the center.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="inside-the-song"
+        className="border-y border-white/10 bg-white/[0.035]"
+      >
+        <div className="mx-auto w-full max-w-6xl px-6 py-14">
+          <div className="max-w-3xl">
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Inside the Song
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Inside the Song: Do You Ever Wonder?
+            </h2>
+          </div>
+
+          <div className="mt-7 space-y-7">
+            <div className="max-w-4xl space-y-5 text-base leading-relaxed text-white/70">
+              <p>
+                &ldquo;Do You Ever Wonder?&rdquo; is a reflective song about trying to find
+                meaning in a world that can feel cold, divided, and disconnected.
+              </p>
+              <p>
+                At Rhythm Realm, the music lives directly on RhythmRealm.net. No
+                algorithm has to decide whether you hear it. No feed has to push
+                it in front of you. You can go straight to the source, listen to
+                the song, read the lyrics, and connect with the story behind the
+                music.
+              </p>
+              <p>
+                Join the email list and receive an MP3 download of &ldquo;Do You Ever
+                Wonder?&rdquo; or other songs featured on the website.
+              </p>
+              <p>
+                Rhythm Realm is also working on new music, including &ldquo;Coming
+                Over Yesterday,&rdquo; a collaboration with Terry T Productions.
+              </p>
+            </div>
+
+            <div className="max-w-5xl">
+              <div className="overflow-hidden rounded-lg border border-cyan-200/20 bg-black shadow-2xl shadow-cyan-950/20">
+                <video
+                  className="aspect-video w-full bg-black object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/do-you-ever-wonder/cover-art.png"
+                >
+                  <source src={insideTheSongVideoPath} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="mt-6 max-w-4xl space-y-5 rounded-lg border border-white/10 bg-black/32 p-5 text-sm leading-relaxed text-white/70 sm:text-base">
+                <p>
+                  Music should not get lost in the noise. RhythmRealm.net is the
+                  direct-to-listener home for Andre Washington&rsquo;s songs, stories,
+                  lyrics, and updates.
+                </p>
+                <p>
+                  Visit https://RhythmRealm.net, join the email list, and get an
+                  MP3 download.
+                </p>
+                <p>
+                  Also stay connected for upcoming music, including &ldquo;Coming Over
+                  Yesterday,&rdquo; a collaboration with Terry T Productions.
+                </p>
+                <p>
+                  Discover more on RhythmRealm.net &mdash; Thank you for
+                  listening.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
