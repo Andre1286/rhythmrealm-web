@@ -25,7 +25,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "coming-over-yesterday",
     title:
-      "Coming Over Yesterday — A New Song from Terry T Productions featuring Andre Washington",
+      "Coming Over Yesterday - A New Single from Terry T Productions featuring Andre Washington",
     seoTitle:
       "Coming Over Yesterday by Terry T Productions featuring Andre Washington | Rhythm Realm",
     description:
@@ -33,7 +33,7 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt:
       'A brief look behind "Coming Over Yesterday," a new love song about showing up, staying loyal, and being there before the moment even arrives.',
     canonicalPath: "/blog/coming-over-yesterday",
-    category: "Work in Progress",
+    category: "Latest Single",
     tags: [
       "Coming Over Yesterday",
       "Terry T Productions",
@@ -46,10 +46,10 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sections: [
       {
-        heading: "A New Song from Terry T Productions",
+        heading: "A New Single from Terry T Productions",
         body: [
-          '"Coming Over Yesterday" is a new song from Terry T Productions featuring Andre Washington.',
-          "Written with Terry Timberlake — known as Terry T — the song carries the feeling of love, loyalty, and being ready to show up when someone needs you. Terry T is a keyboard player, producer, and former member of IROC, International Rhythm of Composers.",
+          '"Coming Over Yesterday" is a new single from Terry T Productions featuring Andre Washington.',
+          "Written with Terry Timberlake \u2014 known as Terry T \u2014 the song carries the feeling of love, loyalty, and being ready to show up when someone needs you. Terry T is a keyboard player, producer, and former member of IROC, International Rhythm of Composers.",
         ],
       },
       {
@@ -59,14 +59,15 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
-        heading: "Still a Work in Progress",
+        heading: "Now Featured on Rhythm Realm",
         body: [
-          '"Coming Over Yesterday" is still a work in progress, but the emotion is already clear. It is about devotion, connection, and that rare kind of love where someone is ready to be there before they are even asked.',
+          "Coming Over Yesterday is a soulful love song about showing up before you\u2019re even asked \u2014 being there with heart, timing, and devotion.",
+          "Song length: 3:23.",
         ],
       },
     ],
     closing: [
-      "Discover more on https://RhythmRealm.net — Thank you for listening.",
+      "Discover more on RhythmRealm.net \u2014 Thank you for listening.",
       "#RhythmRealmNet",
     ],
   },
