@@ -10,7 +10,9 @@ import YouTubeVideoCard from "@/components/YouTubeVideoCard";
 import { FAQ_ENTRIES } from "@/lib/faqEntries";
 import { SITE_DESCRIPTION, SITE_HOME_URL, SITE_TITLE } from "@/lib/seo";
 
-const featuredSong = "Do You Ever Wonder?";
+const featuredSong = "Coming Over Yesterday";
+const featuredCredit = "Terry T Productions featuring Andre Washington";
+const featuredDuration = "3:23";
 
 export const metadata: Metadata = {
   title: {
@@ -104,11 +106,11 @@ export default function Home() {
               Listen Now
             </RhythmRealmLink>
             <RhythmRealmLink
-              href="/do-you-ever-wonder"
+              href="/music"
               target="_self"
               className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
             >
-              Open Featured Song
+              Open Latest Single
             </RhythmRealmLink>
             <RhythmRealmLink
               href="#signup"
@@ -124,8 +126,8 @@ export default function Home() {
           <div className="relative">
             <div className="absolute -inset-4 rounded-[2rem] border border-cyan-200/10 bg-cyan-200/[0.04]" />
             <Image
-              src="/do-you-ever-wonder.png"
-              alt="Do You Ever Wonder? cover art"
+              src="/coming-over-yesterday-cover.jpg"
+              alt="Coming Over Yesterday cover art"
               width={780}
               height={780}
               priority
@@ -137,9 +139,13 @@ export default function Home() {
               Featured Release
             </div>
             <h2 className="mt-2 text-2xl font-semibold">{featuredSong}</h2>
+            <div className="mt-2 text-sm font-semibold text-cyan-100/70">
+              {featuredCredit} | {featuredDuration}
+            </div>
             <p className="mt-2 text-sm leading-relaxed text-white/65">
-              A reflective single from Andre Washington about searching for a
-              better way forward.
+              Coming Over Yesterday is a soulful love song about showing up
+              before you&rsquo;re even asked &mdash; being there with heart,
+              timing, and devotion.
             </p>
           </div>
           <PlaylistAudioPlayer />
@@ -232,7 +238,7 @@ export default function Home() {
 
       <section className="mx-auto grid w-full max-w-6xl gap-8 px-6 pb-16 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-center">
         <Image
-          src="/coming-over-yesterday-cover.png"
+          src="/coming-over-yesterday-cover.jpg"
           alt="Cover art for Coming Over Yesterday"
           width={520}
           height={520}
@@ -240,26 +246,31 @@ export default function Home() {
         />
         <div>
           <div className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">
-            WORK IN PROGRESS
+            Latest Single
           </div>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
             Coming Over Yesterday
           </h2>
+          <div className="mt-3 text-sm font-semibold text-cyan-100/75">
+            {featuredCredit} | {featuredDuration}
+          </div>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/68">
-            &quot;Coming Over Yesterday&quot; is a new Terry T Productions song
-            featuring Andre Washington. Written with Terry Timberlake — keyboard
-            player, producer, and former member of IROC, International Rhythm of
-            Composers — the song is about love, loyalty, and being there before
-            the moment even arrives. With lines like &quot;Pick up the phone and
-            call&quot; and &quot;FaceTime me whenever you want,&quot; the song brings a
-            modern love story into a soulful pop setting.
+            Coming Over Yesterday is a soulful love song about showing up before
+            you&rsquo;re even asked &mdash; being there with heart, timing, and
+            devotion.
           </p>
+          <audio
+            controls
+            controlsList="nodownload noplaybackrate"
+            src="/audio/coming-over-yesterday.mp3"
+            className="mt-6 w-full max-w-xl"
+          />
           <RhythmRealmLink
-            href="/contact"
+            href="/music"
             target="_self"
-            className="mt-6 inline-flex rounded-lg border border-white/18 px-5 py-3 text-sm font-semibold transition hover:bg-white hover:text-black"
+            className="mt-5 inline-flex max-w-xl rounded-lg border border-white/18 px-5 py-3 text-left text-sm font-semibold leading-snug transition hover:bg-white hover:text-black"
           >
-            Join for Updates
+            Discover more on RhythmRealm.net &mdash; Thank you for listening.
           </RhythmRealmLink>
         </div>
       </section>

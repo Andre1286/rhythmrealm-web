@@ -7,6 +7,18 @@ import SiteHeader from "@/components/SiteHeader";
 
 const tracks = [
   {
+    title: "Coming Over Yesterday",
+    artist: "Terry T Productions featuring Andre Washington",
+    duration: "3:23",
+    href: "/blog/coming-over-yesterday",
+    audio: "/audio/coming-over-yesterday.mp3",
+    cover: "/coming-over-yesterday-cover.jpg",
+    description:
+      "Coming Over Yesterday is a soulful love song about showing up before you\u2019re even asked \u2014 being there with heart, timing, and devotion.",
+    cta: "Discover more on RhythmRealm.net \u2014 Thank you for listening.",
+    buttonLabel: "Read the Story",
+  },
+  {
     title: "Do You Ever Wonder?",
     artist: "Andre Washington",
     href: "/do-you-ever-wonder",
@@ -29,7 +41,7 @@ const tracks = [
 export const metadata: Metadata = {
   title: "Music",
   description:
-    "Listen to music from Andre Washington on Rhythm Realm, including Do You Ever Wonder? and more direct-to-listener releases.",
+    "Listen to Coming Over Yesterday, Do You Ever Wonder?, and more direct-to-listener releases from Rhythm Realm.",
   alternates: {
     canonical: "/music",
   },
@@ -68,13 +80,17 @@ export default function MusicPage() {
                 className="aspect-square w-full max-w-36 rounded-lg border border-white/10 object-cover"
               />
               <div>
-                <div className="text-xs uppercase tracking-[0.18em] text-white/45">
+                <div className="text-sm font-semibold text-white/55">
                   {track.artist}
+                  {track.duration ? ` | ${track.duration}` : ""}
                 </div>
                 <h2 className="mt-2 text-2xl font-semibold">{track.title}</h2>
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/68 sm:text-base">
                   {track.description}
                 </p>
+                {track.cta ? (
+                  <p className="mt-4 text-sm font-semibold text-cyan-100">{track.cta}</p>
+                ) : null}
                 <audio
                   controls
                   controlsList="nodownload noplaybackrate"
@@ -87,7 +103,10 @@ export default function MusicPage() {
                     target="_self"
                     className="inline-flex rounded-lg border border-white/18 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-black"
                   >
-                    {track.href === "/do-you-ever-wonder" ? "Open Song Page" : "Ask for Updates"}
+                    {track.buttonLabel ??
+                      (track.href === "/do-you-ever-wonder"
+                        ? "Open Song Page"
+                        : "Ask for Updates")}
                   </RhythmRealmLink>
                 </div>
               </div>
