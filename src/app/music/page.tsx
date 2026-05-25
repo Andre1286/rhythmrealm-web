@@ -8,7 +8,7 @@ import SiteHeader from "@/components/SiteHeader";
 const tracks = [
   {
     title: "Coming Over Yesterday",
-    artist: "Terry Timberlake featuring Andre Washington",
+    artist: "Terry T Productions featuring Andre Washington",
     duration: "3:23",
     href: "/blog/coming-over-yesterday",
     audio: "/audio/coming-over-yesterday.mp3",

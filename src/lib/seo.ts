@@ -3,6 +3,6 @@ export const SITE_ORIGIN = "https://www.rhythmrealm.net";
 export const SITE_HOME_URL = `${SITE_ORIGIN}/`;
 export const SITE_TITLE = "Rhythm Realm | Andre Washington Music";
 export const SITE_DESCRIPTION =
-  "Visit RhythmRealm.net, the official home for Andre Washington music. Listen to Coming Over Yesterday, Do You Ever Wonder?, read lyrics and stories, and join email updates.";
+  "Discover Rhythm Realm, the official music home of Andre Washington. Listen to pop music with rhythm and soul, explore lyrics, videos, stories, motion comics, and updates on RhythmRealm.net.";
 
 export const absoluteUrl = (path = "/") => new URL(path, SITE_HOME_URL).toString();
