@@ -8,11 +8,18 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import YouTubeVideoCard from "@/components/YouTubeVideoCard";
 import { FAQ_ENTRIES } from "@/lib/faqEntries";
-import { SITE_DESCRIPTION, SITE_HOME_URL, SITE_TITLE } from "@/lib/seo";
+import { absoluteUrl, SITE_DESCRIPTION, SITE_HOME_URL, SITE_TITLE } from "@/lib/seo";
 
 const featuredSong = "Coming Over Yesterday";
-const featuredCredit = "Terry Timberlake featuring Andre Washington";
+const featuredCredit = "Terry T Productions featuring Andre Washington";
 const featuredDuration = "3:23";
+const featuredDescription =
+  "Andre Washington and Terry T Productions are shaping a new love song about being there before the moment even asks. Follow the progress, lyrics, and release updates on RhythmRealm.net.";
+const explainerTitle = "Rhythm Realm: The Architecture of Connection";
+const explainerDescription =
+  "Watch Rhythm Realm: The Architecture of Connection, a short explainer video about how RhythmRealm.net connects songs, lyrics, stories, videos, and fan updates in one official music hub.";
+const motionComicDescription =
+  "Explore Rhythm Realm motion comic stories connected to the music, visuals, and creative world of RhythmRealm.net.";
 const rhythmRealmExplainerVideo =
   "/videos/rhythm-realm-architecture-of-connection.mp4";
 
@@ -24,6 +31,36 @@ const motionComicChapters = [
   {
     title: "Motion Comic Book 2",
     src: "/comics/rhythm-realm-comic-book-1/rhythm-realm-motion-comic-book-2.mp4",
+  },
+];
+
+const comingOverYesterdayFaqItems = [
+  {
+    question: "What is Coming Over Yesterday?",
+    answer:
+      "Coming Over Yesterday is a Rhythm Realm love song by Terry T Productions featuring Andre Washington.",
+  },
+  {
+    question: "What is the song about?",
+    answer:
+      "The song is about showing up early, making time, and being there for someone before the moment even asks.",
+  },
+  {
+    question: "Where can I read the lyrics?",
+    answer: "The lyrics are available on RhythmRealm.net.",
+  },
+];
+
+const explainerFaqItems = [
+  {
+    question: "What is Rhythm Realm?",
+    answer:
+      "Rhythm Realm is Andre Washington's official music hub for songs, videos, lyrics, stories, motion comics, and fan updates.",
+  },
+  {
+    question: "What is The Architecture of Connection?",
+    answer:
+      "The Architecture of Connection is a Rhythm Realm explainer video showing how the website connects the music, story, visuals, and audience in one place.",
   },
 ];
 
@@ -110,6 +147,13 @@ const featureCards = [
     target: "home-card-behind-the-music",
   },
   {
+    href: "/do-you-ever-wonder",
+    eyebrow: "Song Page",
+    title: "Do You Ever Wonder? by Andre Washington",
+    text: "Listen to the song, read the story, and follow the meaning behind the release.",
+    target: "home-card-song-do-you-ever-wonder",
+  },
+  {
     href: "/lyrics/do-you-ever-wonder",
     eyebrow: "Lyrics",
     title: "Do You Ever Wonder? Lyrics",
@@ -117,11 +161,39 @@ const featureCards = [
     target: "home-card-lyrics-do-you-ever-wonder",
   },
   {
+    href: "#coming-over-yesterday",
+    eyebrow: "Work in Progress",
+    title: "Coming Over Yesterday",
+    text: "Follow the current Rhythm Realm feature by Terry T Productions featuring Andre Washington.",
+    target: "home-card-coming-over-yesterday",
+  },
+  {
     href: "#coming-over-yesterday-lyrics",
     eyebrow: "Lyrics",
     title: "Coming Over Yesterday Lyrics",
     text: "Read the words behind the latest soulful Rhythm Realm release.",
     target: "home-card-lyrics-coming-over-yesterday",
+  },
+  {
+    href: "#what-rhythm-realm-is-building",
+    eyebrow: "Explainer Video",
+    title: explainerTitle,
+    text: "Watch how RhythmRealm.net connects music, lyrics, stories, videos, and fan updates.",
+    target: "home-card-explainer-video",
+  },
+  {
+    href: "#motion-comic-book-1",
+    eyebrow: "Motion Comics",
+    title: "Motion Comic Book 1",
+    text: "Explore the first Rhythm Realm motion comic chapter connected to the creative world.",
+    target: "home-card-motion-comic-book-1",
+  },
+  {
+    href: "#motion-comic-book-2",
+    eyebrow: "Motion Comics",
+    title: "Motion Comic Book 2",
+    text: "Explore the second Rhythm Realm motion comic chapter connected to the music and visuals.",
+    target: "home-card-motion-comic-book-2",
   },
   {
     href: "/blog",
@@ -140,8 +212,71 @@ const featureCards = [
 ];
 
 export default function Home() {
+  const homepageFaqItems = [
+    ...comingOverYesterdayFaqItems,
+    ...explainerFaqItems,
+    ...FAQ_ENTRIES,
+  ];
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MusicRecording",
+        name: featuredSong,
+        byArtist: {
+          "@type": "Organization",
+          name: "Terry T Productions",
+        },
+        contributor: {
+          "@type": "Person",
+          name: "Andre Washington",
+        },
+        url: absoluteUrl("/blog/coming-over-yesterday"),
+        image: absoluteUrl("/coming-over-yesterday-cover.jpg"),
+        audio: absoluteUrl("/audio/coming-over-yesterday.mp3"),
+        duration: "PT3M23S",
+        description: featuredDescription,
+      },
+      {
+        "@type": "VideoObject",
+        name: explainerTitle,
+        description: explainerDescription,
+        url: absoluteUrl("/#what-rhythm-realm-is-building"),
+        contentUrl: absoluteUrl(rhythmRealmExplainerVideo),
+        thumbnailUrl: absoluteUrl("/rhythm-realm-logo.png"),
+      },
+      {
+        "@type": "CreativeWork",
+        name: "Motion Comic Book 1",
+        description: motionComicDescription,
+        url: absoluteUrl("/#motion-comic-book-1"),
+      },
+      {
+        "@type": "CreativeWork",
+        name: "Motion Comic Book 2",
+        description: motionComicDescription,
+        url: absoluteUrl("/#motion-comic-book-2"),
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: homepageFaqItems.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-black pb-44 text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
 
       <section className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-center">
@@ -150,7 +285,7 @@ export default function Home() {
             Official Music Home
           </div>
           <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-            Rhythm Realm is Andre Washington&apos;s home for pop music with rhythm and soul.
+            Rhythm Realm: Pop Music With Rhythm and Soul
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
             RhythmRealm.net is the main destination for Andre Washington&apos;s
@@ -166,11 +301,11 @@ export default function Home() {
               Listen Now
             </RhythmRealmLink>
             <RhythmRealmLink
-              href="/music"
+              href="#coming-over-yesterday"
               target="_self"
               className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
             >
-              Open Latest Single
+              Follow Coming Over Yesterday
             </RhythmRealmLink>
             <RhythmRealmLink
               href="#signup"
@@ -196,16 +331,14 @@ export default function Home() {
           </div>
           <div className="mt-6">
             <div className="text-xs uppercase tracking-[0.18em] text-white/45">
-              Featured Release
+              Work in Progress
             </div>
             <h2 className="mt-2 text-2xl font-semibold">{featuredSong}</h2>
             <div className="mt-2 text-sm font-semibold text-cyan-100/70">
               {featuredCredit} | {featuredDuration}
             </div>
             <p className="mt-2 text-sm leading-relaxed text-white/65">
-              Coming Over Yesterday is a soulful love song about showing up
-              before you&rsquo;re even asked &mdash; being there with heart,
-              timing, and devotion.
+              {featuredDescription}
             </p>
           </div>
           <PlaylistAudioPlayer />
@@ -269,12 +402,10 @@ export default function Home() {
               Explainer Video
             </div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              What Rhythm Realm Is Building
+              {explainerTitle}
             </h2>
             <p className="mt-5 text-base leading-relaxed text-white/68 sm:text-lg">
-              Rhythm Realm is a home for pop music with rhythm and soul &mdash;
-              songs, stories, visuals, and direct-to-listener releases from
-              Andre Washington and collaborators.
+              {explainerDescription}
             </p>
           </div>
 
@@ -288,6 +419,20 @@ export default function Home() {
               <source src={rhythmRealmExplainerVideo} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+          </div>
+
+          <div className="grid gap-4 lg:col-span-2 md:grid-cols-2">
+            {explainerFaqItems.map((item) => (
+              <section
+                key={item.question}
+                className="rounded-lg border border-white/10 bg-white/[0.035] p-5"
+              >
+                <h3 className="text-lg font-semibold text-white">{item.question}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/68">
+                  {item.answer}
+                </p>
+              </section>
+            ))}
           </div>
         </div>
 
@@ -340,7 +485,7 @@ export default function Home() {
         />
         <div>
           <div className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">
-            Latest Single
+            Work in Progress
           </div>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
             Coming Over Yesterday
@@ -349,9 +494,7 @@ export default function Home() {
             {featuredCredit} | {featuredDuration}
           </div>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/68">
-            Coming Over Yesterday is a soulful love song about showing up before
-            you&rsquo;re even asked &mdash; being there with heart, timing, and
-            devotion.
+            {featuredDescription}
           </p>
           <audio
             controls
@@ -366,6 +509,13 @@ export default function Home() {
               className="inline-flex rounded-lg bg-white px-5 py-3 text-left text-sm font-semibold leading-snug text-black transition hover:bg-cyan-100"
             >
               Read the lyrics
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/blog/coming-over-yesterday"
+              target="_self"
+              className="inline-flex rounded-lg border border-cyan-200/30 px-5 py-3 text-left text-sm font-semibold leading-snug text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
+            >
+              Read Coming Over Yesterday story
             </RhythmRealmLink>
             <RhythmRealmLink
               href="/music"
@@ -407,6 +557,21 @@ export default function Home() {
                         <br />
                       </span>
                     ))}
+                  </p>
+                </section>
+              ))}
+            </div>
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {comingOverYesterdayFaqItems.map((item) => (
+                <section
+                  key={item.question}
+                  className="rounded-lg border border-cyan-200/20 bg-cyan-200/[0.055] p-5"
+                >
+                  <h4 className="text-lg font-semibold text-white">
+                    {item.question}
+                  </h4>
+                  <p className="mt-3 text-sm leading-relaxed text-white/70">
+                    {item.answer}
                   </p>
                 </section>
               ))}
@@ -455,12 +620,10 @@ export default function Home() {
               Motion Comic
             </div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Rhythm Realm Motion Comic &mdash; Book 1
+              Rhythm Realm Motion Comics
             </h2>
             <p className="mt-4 text-base leading-relaxed text-white/68 sm:text-lg">
-              Step inside the visual world of Rhythm Realm. These motion comic
-              chapters bring the music, story, and characters together in a
-              cinematic experience.
+              {motionComicDescription}
             </p>
           </div>
 
@@ -468,6 +631,11 @@ export default function Home() {
             {motionComicChapters.map((chapter) => (
               <article
                 key={chapter.title}
+                id={
+                  chapter.title === "Motion Comic Book 2"
+                    ? "motion-comic-book-2"
+                    : undefined
+                }
                 className="overflow-hidden rounded-lg border border-cyan-200/20 bg-black shadow-2xl shadow-cyan-950/20"
               >
                 <div className="border-b border-white/10 bg-white/[0.04] px-4 py-3">

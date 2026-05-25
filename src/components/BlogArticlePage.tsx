@@ -11,6 +11,7 @@ type BlogArticlePageProps = {
 
 export default function BlogArticlePage({ post }: BlogArticlePageProps) {
   const showSoulfulSongLink = post.slug === "unveiling-the-essence-of-soulful-music";
+  const isComingOverYesterday = post.slug === "coming-over-yesterday";
   const blogPostingJsonLd = {
     "@type": "BlogPosting",
     headline: post.title,
@@ -29,24 +30,45 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
     articleSection: post.category,
     keywords: post.tags?.join(", "),
   };
+  const musicRecordingJsonLd = isComingOverYesterday
+    ? [
+        {
+          "@type": "MusicRecording",
+          name: "Coming Over Yesterday",
+          url: absoluteUrl(post.canonicalPath),
+          image: absoluteUrl("/coming-over-yesterday-cover.jpg"),
+          audio: absoluteUrl("/audio/coming-over-yesterday.mp3"),
+          duration: "PT3M23S",
+          byArtist: {
+            "@type": "Organization",
+            name: "Terry T Productions",
+          },
+          contributor: {
+            "@type": "Person",
+            name: "Andre Washington",
+          },
+          description: post.description,
+        },
+      ]
+    : [];
+  const faqJsonLd = post.faqs?.length
+    ? [
+        {
+          "@type": "FAQPage",
+          mainEntity: post.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        },
+      ]
+    : [];
   const jsonLd = {
     "@context": "https://schema.org",
-    "@graph": post.faqs?.length
-      ? [
-          blogPostingJsonLd,
-          {
-            "@type": "FAQPage",
-            mainEntity: post.faqs.map((faq) => ({
-              "@type": "Question",
-              name: faq.question,
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: faq.answer,
-              },
-            })),
-          },
-        ]
-      : [blogPostingJsonLd],
+    "@graph": [blogPostingJsonLd, ...musicRecordingJsonLd, ...faqJsonLd],
   };
 
   return (
@@ -181,18 +203,30 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-8 sm:flex-row">
           <RhythmRealmLink
-            href="/do-you-ever-wonder"
+            href={
+              isComingOverYesterday
+                ? "/#coming-over-yesterday-lyrics"
+                : "/do-you-ever-wonder"
+            }
             target="_self"
             className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
           >
-            Listen to Do You Ever Wonder?
+            {isComingOverYesterday
+              ? "Read Coming Over Yesterday Lyrics"
+              : "Listen to Do You Ever Wonder?"}
           </RhythmRealmLink>
           <RhythmRealmLink
-            href="/do-you-ever-wonder#lyrics"
+            href={
+              isComingOverYesterday
+                ? "/#coming-over-yesterday"
+                : "/lyrics/do-you-ever-wonder"
+            }
             target="_self"
             className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
           >
-            Read Lyrics and Story
+            {isComingOverYesterday
+              ? "Listen to Coming Over Yesterday"
+              : "Read Do You Ever Wonder? Lyrics"}
           </RhythmRealmLink>
         </div>
       </article>

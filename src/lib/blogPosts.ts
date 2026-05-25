@@ -24,16 +24,15 @@ export type BlogPost = {
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "coming-over-yesterday",
-    title:
-      "Coming Over Yesterday - A New Single from Terry T Productions featuring Andre Washington",
+    title: "Coming Over Yesterday",
     seoTitle:
-      "Coming Over Yesterday by Terry T Productions featuring Andre Washington | Rhythm Realm",
+      "Coming Over Yesterday – Terry T Productions ft. Andre Washington | Rhythm Realm",
     description:
-      'A brief look behind "Coming Over Yesterday," a new love song about showing up, staying loyal, and being there before the moment even arrives.',
+      "Follow “Coming Over Yesterday,” a Rhythm Realm love song by Terry T Productions featuring Andre Washington. Read lyrics, story notes, and updates on RhythmRealm.net.",
     excerpt:
-      'A brief look behind "Coming Over Yesterday," a new love song about showing up, staying loyal, and being there before the moment even arrives.',
+      "Follow “Coming Over Yesterday,” a Rhythm Realm love song by Terry T Productions featuring Andre Washington. Read lyrics, story notes, and updates on RhythmRealm.net.",
     canonicalPath: "/blog/coming-over-yesterday",
-    category: "Latest Single",
+    category: "Work in Progress",
     tags: [
       "Coming Over Yesterday",
       "Terry T Productions",
@@ -64,6 +63,22 @@ export const BLOG_POSTS: BlogPost[] = [
           "Coming Over Yesterday is a soulful love song about showing up before you\u2019re even asked \u2014 being there with heart, timing, and devotion.",
           "Song length: 3:23.",
         ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What is Coming Over Yesterday?",
+        answer:
+          "Coming Over Yesterday is a Rhythm Realm love song by Terry T Productions featuring Andre Washington.",
+      },
+      {
+        question: "What is the song about?",
+        answer:
+          "The song is about showing up early, making time, and being there for someone before the moment even asks.",
+      },
+      {
+        question: "Where can I read the lyrics?",
+        answer: "The lyrics are available on RhythmRealm.net.",
       },
     ],
     closing: [
