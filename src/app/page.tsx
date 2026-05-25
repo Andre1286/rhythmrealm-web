@@ -13,15 +13,17 @@ import { SITE_DESCRIPTION, SITE_HOME_URL, SITE_TITLE } from "@/lib/seo";
 const featuredSong = "Coming Over Yesterday";
 const featuredCredit = "Terry T Productions featuring Andre Washington";
 const featuredDuration = "3:23";
+const motionComicMediaBaseUrl =
+  "https://media.githubusercontent.com/media/Andre1286/rhythmrealm-web/main/public/comics/rhythm-realm-comic-book-1";
 
 const motionComicChapters = [
   {
     title: "Motion Comic Book 1",
-    src: "/comics/rhythm-realm-comic-book-1/rhythm-realm-motion-comic-book-1.mp4",
+    src: `${motionComicMediaBaseUrl}/rhythm-realm-motion-comic-book-1.mp4`,
   },
   {
     title: "Motion Comic Book 2",
-    src: "/comics/rhythm-realm-comic-book-1/rhythm-realm-motion-comic-book-2.mp4",
+    src: `${motionComicMediaBaseUrl}/rhythm-realm-motion-comic-book-2.mp4`,
   },
 ];
 
