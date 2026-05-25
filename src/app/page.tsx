@@ -14,6 +14,17 @@ const featuredSong = "Coming Over Yesterday";
 const featuredCredit = "Terry T Productions featuring Andre Washington";
 const featuredDuration = "3:23";
 
+const motionComicChapters = [
+  {
+    title: "Motion Comic Book 1",
+    src: "/comics/rhythm-realm-comic-book-1/rhythm-realm-motion-comic-book-1.mp4",
+  },
+  {
+    title: "Motion Comic Book 2",
+    src: "/comics/rhythm-realm-comic-book-1/rhythm-realm-motion-comic-book-2.mp4",
+  },
+];
+
 export const metadata: Metadata = {
   title: {
     absolute: SITE_TITLE,
@@ -303,6 +314,59 @@ export default function Home() {
           imageAlt="Do You Ever Wonder? cover art"
           youtubeUrl="https://www.youtube.com/watch?v=pWQU2ojAZFU"
         />
+      </section>
+
+      <section
+        id="motion-comic-book-1"
+        className="border-y border-white/10 bg-white/[0.035]"
+      >
+        <div className="mx-auto w-full max-w-6xl px-6 py-14">
+          <div className="max-w-3xl">
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Motion Comic
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Rhythm Realm Motion Comic &mdash; Book 1
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-white/68 sm:text-lg">
+              Step inside the visual world of Rhythm Realm. These motion comic
+              chapters bring the music, story, and characters together in a
+              cinematic experience.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            {motionComicChapters.map((chapter) => (
+              <article
+                key={chapter.title}
+                className="overflow-hidden rounded-lg border border-cyan-200/20 bg-black shadow-2xl shadow-cyan-950/20"
+              >
+                <div className="border-b border-white/10 bg-white/[0.04] px-4 py-3">
+                  <h3 className="text-base font-semibold text-white">
+                    {chapter.title}
+                  </h3>
+                </div>
+                <video
+                  className="aspect-video w-full bg-black object-contain"
+                  controls
+                  playsInline
+                  preload="metadata"
+                >
+                  <source src={chapter.src} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </article>
+            ))}
+          </div>
+
+          <RhythmRealmLink
+            href="/music"
+            target="_self"
+            className="mt-8 inline-flex rounded-lg border border-white/18 px-5 py-3 text-sm font-semibold transition hover:bg-white hover:text-black"
+          >
+            Discover more on RhythmRealm.net &mdash; Thank you for listening.
+          </RhythmRealmLink>
+        </div>
       </section>
 
       <section className="border-y border-white/10 bg-white/[0.035]">
