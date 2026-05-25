@@ -11,8 +11,10 @@ import { FAQ_ENTRIES } from "@/lib/faqEntries";
 import { SITE_DESCRIPTION, SITE_HOME_URL, SITE_TITLE } from "@/lib/seo";
 
 const featuredSong = "Coming Over Yesterday";
-const featuredCredit = "Terry T Productions featuring Andre Washington";
+const featuredCredit = "Terry Timberlake featuring Andre Washington";
 const featuredDuration = "3:23";
+const rhythmRealmExplainerVideo =
+  "/videos/rhythm-realm-architecture-of-connection.mp4";
 
 const motionComicChapters = [
   {
@@ -22,6 +24,46 @@ const motionComicChapters = [
   {
     title: "Motion Comic Book 2",
     src: "/comics/rhythm-realm-comic-book-1/rhythm-realm-motion-comic-book-2.mp4",
+  },
+];
+
+const comingOverYesterdayLyrics = [
+  {
+    label: "Intro",
+    lines: [
+      "As I recall",
+      "I\u2019ve been there for you",
+      "For you, I give my all",
+      "There\u2019s nothing I won\u2019t do",
+      "For me, there is no other",
+    ],
+  },
+  {
+    label: "Hook",
+    lines: [
+      "Pick up the phone and call",
+      "FaceTime me whenever you want",
+      "I\u2019m coming over yesterday",
+    ],
+  },
+  {
+    label: "Verse 1",
+    lines: [
+      "All that I need is your love",
+      "It\u2019s the only thing I\u2019m dreaming of",
+      "I\u2019ll be there when you call",
+      "I will make time for you",
+      "You\u2019re the only one I need",
+      "Your love is all I see",
+    ],
+  },
+  {
+    label: "Hook",
+    lines: [
+      "Pick up the phone and call me",
+      "FaceTime me whenever you want",
+      "I\u2019m coming over yesterday",
+    ],
   },
 ];
 
@@ -73,6 +115,13 @@ const featureCards = [
     title: "Do You Ever Wonder? Lyrics",
     text: "Read the lyrics for Andre Washington's featured Rhythm Realm song.",
     target: "home-card-lyrics-do-you-ever-wonder",
+  },
+  {
+    href: "#coming-over-yesterday-lyrics",
+    eyebrow: "Lyrics",
+    title: "Coming Over Yesterday Lyrics",
+    text: "Read the words behind the latest soulful Rhythm Realm release.",
+    target: "home-card-lyrics-coming-over-yesterday",
   },
   {
     href: "/blog",
@@ -211,6 +260,37 @@ export default function Home() {
           </div>
         </div>
 
+        <div
+          id="what-rhythm-realm-is-building"
+          className="grid gap-8 border-b border-white/10 py-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center"
+        >
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Explainer Video
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              What Rhythm Realm Is Building
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-white/68 sm:text-lg">
+              Rhythm Realm is a home for pop music with rhythm and soul &mdash;
+              songs, stories, visuals, and direct-to-listener releases from
+              Andre Washington and collaborators.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-lg border border-cyan-200/20 bg-black shadow-2xl shadow-cyan-950/25">
+            <video
+              className="aspect-video w-full bg-black object-contain"
+              controls
+              playsInline
+              preload="metadata"
+            >
+              <source src={rhythmRealmExplainerVideo} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
@@ -247,7 +327,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-6xl gap-8 px-6 pb-16 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-center">
+      <section
+        id="coming-over-yesterday"
+        className="mx-auto grid w-full max-w-6xl gap-8 px-6 pb-16 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-center"
+      >
         <Image
           src="/coming-over-yesterday-cover.jpg"
           alt="Cover art for Coming Over Yesterday"
@@ -276,13 +359,59 @@ export default function Home() {
             src="/audio/coming-over-yesterday.mp3"
             className="mt-6 w-full max-w-xl"
           />
-          <RhythmRealmLink
-            href="/music"
-            target="_self"
-            className="mt-5 inline-flex max-w-xl rounded-lg border border-white/18 px-5 py-3 text-left text-sm font-semibold leading-snug transition hover:bg-white hover:text-black"
-          >
-            Discover more on RhythmRealm.net &mdash; Thank you for listening.
-          </RhythmRealmLink>
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+            <RhythmRealmLink
+              href="#coming-over-yesterday-lyrics"
+              target="_self"
+              className="inline-flex rounded-lg bg-white px-5 py-3 text-left text-sm font-semibold leading-snug text-black transition hover:bg-cyan-100"
+            >
+              Read the lyrics
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/music"
+              target="_self"
+              className="inline-flex max-w-xl rounded-lg border border-white/18 px-5 py-3 text-left text-sm font-semibold leading-snug transition hover:bg-white hover:text-black"
+            >
+              Discover more on RhythmRealm.net &mdash; Thank you for listening.
+            </RhythmRealmLink>
+          </div>
+        </div>
+
+        <div
+          id="coming-over-yesterday-lyrics"
+          className="border-t border-white/10 pt-8 lg:col-span-2"
+        >
+          <div className="max-w-4xl">
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Lyrics
+            </div>
+            <h3 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Coming Over Yesterday Lyrics
+            </h3>
+            <p className="mt-3 text-sm font-semibold text-white/55">
+              {featuredCredit}
+            </p>
+            <div className="mt-7 grid gap-6 text-base leading-relaxed text-white/78 sm:grid-cols-2">
+              {comingOverYesterdayLyrics.map((section, index) => (
+                <section
+                  key={`${section.label}-${index}`}
+                  className="rounded-lg border border-white/10 bg-white/[0.035] p-5"
+                >
+                  <h4 className="text-lg font-semibold text-white">
+                    [{section.label}]
+                  </h4>
+                  <p className="mt-3">
+                    {section.lines.map((line) => (
+                      <span key={line}>
+                        {line}
+                        <br />
+                      </span>
+                    ))}
+                  </p>
+                </section>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
