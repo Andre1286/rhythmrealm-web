@@ -20,10 +20,16 @@ const featuredDescription =
 const explainerTitle = "Rhythm Realm: The Architecture of Connection";
 const explainerDescription =
   "Watch Rhythm Realm: The Architecture of Connection, a short explainer video about how RhythmRealm.net connects songs, lyrics, stories, videos, and fan updates in one official music hub.";
+const explainerVideo = {
+  title: explainerTitle,
+  description: explainerDescription,
+  src: "/videos/rhythm-realm-architecture-of-connection.mp4",
+  thumbnail: "/rhythm-realm-logo.png",
+  uploadDate: "2026-05-28",
+  duration: "PT3M54S",
+};
 const motionComicDescription =
   "Explore Rhythm Realm motion comic stories connected to the music, visuals, and creative world of RhythmRealm.net.";
-const rhythmRealmExplainerVideo =
-  "/videos/rhythm-realm-architecture-of-connection.mp4";
 
 const motionComicChapters = [
   {
@@ -241,11 +247,13 @@ export default function Home() {
       },
       {
         "@type": "VideoObject",
-        name: explainerTitle,
-        description: explainerDescription,
+        name: explainerVideo.title,
+        description: explainerVideo.description,
         url: absoluteUrl("/#what-rhythm-realm-is-building"),
-        contentUrl: absoluteUrl(rhythmRealmExplainerVideo),
-        thumbnailUrl: absoluteUrl("/rhythm-realm-logo.png"),
+        contentUrl: absoluteUrl(explainerVideo.src),
+        thumbnailUrl: absoluteUrl(explainerVideo.thumbnail),
+        uploadDate: explainerVideo.uploadDate,
+        duration: explainerVideo.duration,
       },
       {
         "@type": "CreativeWork",
@@ -418,7 +426,7 @@ export default function Home() {
               playsInline
               preload="metadata"
             >
-              <source src={rhythmRealmExplainerVideo} type="video/mp4" />
+              <source src={explainerVideo.src} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
