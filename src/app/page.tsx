@@ -25,7 +25,7 @@ const explainerVideo = {
   description: explainerDescription,
   src: "/videos/rhythm-realm-architecture-of-connection.mp4",
   thumbnail: "/rhythm-realm-logo.png",
-  uploadDate: "2026-05-28",
+  uploadDate: "2026-05-28T12:00:00-04:00",
   duration: "PT3M54S",
 };
 const motionComicDescription =
