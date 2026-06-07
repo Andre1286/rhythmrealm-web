@@ -28,6 +28,12 @@ const explainerVideo = {
   uploadDate: "2026-05-28T12:00:00-04:00",
   duration: "PT3M54S",
 };
+const frictionlessUniverseVideo = {
+  title: "Rhythm Realm: The Frictionless Universe",
+  description:
+    "A visual look at how Rhythm Realm connects music, story, technology, and direct-to-fan creativity into one smooth experience.",
+  src: "/videos/rhythm-realm-frictionless-universe.mp4",
+};
 const motionComicDescription =
   "Explore Rhythm Realm motion comic stories connected to the music, visuals, and creative world of RhythmRealm.net.";
 
@@ -419,16 +425,38 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-lg border border-cyan-200/20 bg-black shadow-2xl shadow-cyan-950/25">
-            <video
-              className="aspect-video w-full bg-black object-contain"
-              controls
-              playsInline
-              preload="metadata"
-            >
-              <source src={explainerVideo.src} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+          <div className="grid gap-5">
+            <div className="overflow-hidden rounded-lg border border-cyan-200/20 bg-black shadow-2xl shadow-cyan-950/25">
+              <video
+                className="aspect-video w-full bg-black object-contain"
+                controls
+                playsInline
+                preload="metadata"
+              >
+                <source src={explainerVideo.src} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+
+            <article className="overflow-hidden rounded-lg border border-cyan-200/20 bg-black shadow-2xl shadow-cyan-950/25">
+              <div className="border-b border-white/10 bg-white/[0.04] px-4 py-4">
+                <h3 className="text-base font-semibold text-white">
+                  {frictionlessUniverseVideo.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/68">
+                  {frictionlessUniverseVideo.description}
+                </p>
+              </div>
+              <video
+                className="aspect-video w-full bg-black object-contain"
+                controls
+                playsInline
+                preload="metadata"
+              >
+                <source src={frictionlessUniverseVideo.src} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </article>
           </div>
 
           <div className="grid gap-4 lg:col-span-2 md:grid-cols-2">
