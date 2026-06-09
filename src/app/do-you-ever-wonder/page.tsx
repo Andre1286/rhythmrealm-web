@@ -11,6 +11,7 @@ import { absoluteUrl } from "@/lib/seo";
 const videoWatchUrl = "https://www.youtube.com/watch?v=pWQU2ojAZFU";
 const insideTheSongVideoPath =
   "/do-you-ever-wonder-inside-the-song/do-you-ever-wonder-inside-the-song.mp4";
+const claymationVideoPath = "/videos/do-you-ever-wonder-claymation.mp4";
 const songTitle = "Do You Ever Wonder?";
 const artistName = "Andre Washington";
 
@@ -330,6 +331,37 @@ export default function DoYouEverWonderPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="claymation-version" className="mx-auto w-full max-w-6xl px-6 py-14">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-center">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Claymation Version
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Do You Ever Wonder? &mdash; Claymation Version
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-white/70">
+              Watch the claymation version of &ldquo;Do You Ever Wonder?&rdquo; &mdash; a
+              new visual take on Rhythm Realm&rsquo;s reflective pop song about faith,
+              pressure, and finding a better way forward.
+            </p>
+          </div>
+
+          <div className="mx-auto w-full max-w-[380px] overflow-hidden rounded-lg border border-cyan-200/20 bg-black shadow-2xl shadow-cyan-950/20">
+            <video
+              className="aspect-[9/16] w-full bg-black object-cover"
+              controls
+              playsInline
+              preload="metadata"
+              poster="/do-you-ever-wonder/cover-art.png"
+            >
+              <source src={claymationVideoPath} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </section>
