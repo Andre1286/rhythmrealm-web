@@ -7,20 +7,21 @@ import SiteHeader from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/seo";
 
 const songTitle = "Do You Ever Wonder?";
+const seoTitle = "Do You Ever Wonder Lyrics by Andre Washington | Rhythm Realm";
+const seoDescription =
+  "Read the official Do You Ever Wonder lyrics by Andre Washington, then listen to the song, watch the video, and explore the meaning on RhythmRealm.net.";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Do You Ever Wonder? Lyrics – Andre Washington | Rhythm Realm",
+    absolute: seoTitle,
   },
-  description:
-    "Read the official lyrics to “Do You Ever Wonder?” by Andre Washington. Explore the meaning behind the song and discover more music on RhythmRealm.net.",
+  description: seoDescription,
   alternates: {
     canonical: "/lyrics/do-you-ever-wonder",
   },
   openGraph: {
-    title: "Do You Ever Wonder? Lyrics – Andre Washington | Rhythm Realm",
-    description:
-      "Read the official lyrics to “Do You Ever Wonder?” by Andre Washington. Explore the meaning behind the song and discover more music on RhythmRealm.net.",
+    title: seoTitle,
+    description: seoDescription,
     url: absoluteUrl("/lyrics/do-you-ever-wonder"),
   },
 };
@@ -94,7 +95,7 @@ export default function DoYouEverWonderLyricsPage() {
           "@type": "Person",
           name: "Andre Washington",
         },
-        description: metadata.description,
+        description: seoDescription,
       },
       {
         "@type": "FAQPage",
@@ -118,26 +119,40 @@ export default function DoYouEverWonderLyricsPage() {
       />
       <SiteHeader />
 
-      <section className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[minmax(0,1fr)_360px]">
+      <section className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
         <div>
           <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
-            Lyrics
+            Official Lyrics
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-            {songTitle} Lyrics
+            Do You Ever Wonder Lyrics by Andre Washington
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-lg">
-            Read the lyrics for Andre Washington&apos;s Rhythm Realm song, then
-            return to the song page to listen, watch the video, and explore the
-            story behind the release.
+            Read the official lyrics for Andre Washington&apos;s Rhythm Realm
+            song &ldquo;Do You Ever Wonder?&rdquo; Then listen to the track, watch the
+            video, and explore the meaning behind the release.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <RhythmRealmLink
               href="/do-you-ever-wonder"
               target="_self"
               className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
             >
-              Listen to the Song
+              Listen and Watch
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/music"
+              target="_self"
+              className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
+            >
+              More Music
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/about-andre-washington"
+              target="_self"
+              className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
+            >
+              About Andre
             </RhythmRealmLink>
             <RhythmRealmLink
               href="/"
@@ -156,30 +171,42 @@ export default function DoYouEverWonderLyricsPage() {
           </div>
         </div>
 
-        <aside className="rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-5">
+        <aside className="rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-5 lg:sticky lg:top-6">
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-100/80">
-            Song Notes
+            Quick Answer
           </div>
           <p className="mt-4 text-sm leading-relaxed text-white/72">
-            {songTitle} reflects on division, hope, prayer, and the search for a
-            better way forward.
+            {songTitle} is a reflective pop song by Andre Washington about
+            division, hope, prayer, and the search for a better way forward.
           </p>
           <RhythmRealmLink
-            href="/blog"
+            href="/do-you-ever-wonder#official-video"
             target="_self"
             className="mt-5 inline-flex rounded-lg border border-white/18 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-black"
           >
-            Read the Blog
+            Open Song and Video Page
           </RhythmRealmLink>
         </aside>
       </section>
 
       <section className="border-y border-white/10 bg-white/[0.035]">
         <div className="mx-auto w-full max-w-4xl px-6 py-14">
+          <div className="mb-8 max-w-3xl">
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Lyrics
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+              Official Do You Ever Wonder Lyrics
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-white/68">
+              The words below are the Rhythm Realm lyrics for &ldquo;Do You Ever
+              Wonder?&rdquo; by Andre Washington, including the verses and chorus.
+            </p>
+          </div>
           <div className="space-y-7 text-base leading-relaxed text-white/78">
             {lyricSections.map((section) => (
               <section key={section.label}>
-                <h2 className="text-lg font-semibold text-white">[{section.label}]</h2>
+                <h3 className="text-lg font-semibold text-white">[{section.label}]</h3>
                 <p className="mt-3">
                   {section.lines.map((line) => (
                     <span key={line}>
