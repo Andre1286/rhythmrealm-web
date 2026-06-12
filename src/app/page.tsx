@@ -630,13 +630,22 @@ export default function Home() {
             The first song page brings the release together: cover art, lyrics,
             story, audio, and the official video in one focused place.
           </p>
-          <RhythmRealmLink
-            href="/do-you-ever-wonder"
-            target="_self"
-            className="mt-6 inline-flex rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100"
-          >
-            Visit the Song Page
-          </RhythmRealmLink>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <RhythmRealmLink
+              href="/do-you-ever-wonder"
+              target="_self"
+              className="inline-flex rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100"
+            >
+              Visit the Song Page
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/lyrics/do-you-ever-wonder"
+              target="_self"
+              className="inline-flex rounded-lg border border-amber-100/30 px-5 py-3 text-sm font-semibold text-amber-100 transition hover:bg-amber-100 hover:text-black"
+            >
+              Read the Lyrics
+            </RhythmRealmLink>
+          </div>
         </div>
 
         <YouTubeVideoCard

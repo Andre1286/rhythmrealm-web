@@ -10,6 +10,9 @@ const songTitle = "Do You Ever Wonder?";
 const seoTitle = "Do You Ever Wonder Lyrics by Andre Washington | Rhythm Realm";
 const seoDescription =
   "Read the official Do You Ever Wonder lyrics by Andre Washington, then listen to the song, watch the video, and explore the meaning on RhythmRealm.net.";
+const lyricsPagePath = "/lyrics/do-you-ever-wonder";
+const songPagePath = "/do-you-ever-wonder";
+const coverImagePath = "/do-you-ever-wonder/cover-art.png";
 
 export const metadata: Metadata = {
   title: {
@@ -17,12 +20,26 @@ export const metadata: Metadata = {
   },
   description: seoDescription,
   alternates: {
-    canonical: "/lyrics/do-you-ever-wonder",
+    canonical: lyricsPagePath,
   },
   openGraph: {
     title: seoTitle,
     description: seoDescription,
-    url: absoluteUrl("/lyrics/do-you-ever-wonder"),
+    url: absoluteUrl(lyricsPagePath),
+    images: [
+      {
+        url: coverImagePath,
+        width: 1200,
+        height: 1200,
+        alt: "Do You Ever Wonder by Andre Washington cover art",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: seoTitle,
+    description: seoDescription,
+    images: [coverImagePath],
   },
 };
 
@@ -38,9 +55,9 @@ const faqItems = [
       "The song reflects on division, hope, prayer, and wanting a better way forward.",
   },
   {
-    question: "Where can I listen to Do You Ever Wonder?",
+    question: "Where can I read the Do You Ever Wonder lyrics?",
     answer:
-      "You can listen on RhythmRealm.net, the official music home of Andre Washington.",
+      "You can read the official Do You Ever Wonder lyrics on RhythmRealm.net, then open the song page to listen and watch the video.",
   },
 ];
 
@@ -88,9 +105,31 @@ export default function DoYouEverWonderLyricsPage() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": `${absoluteUrl(lyricsPagePath)}#webpage`,
+        url: absoluteUrl(lyricsPagePath),
+        name: seoTitle,
+        description: seoDescription,
+        inLanguage: "en-US",
+        isPartOf: {
+          "@type": "WebSite",
+          name: "Rhythm Realm",
+          url: absoluteUrl("/"),
+        },
+        about: {
+          "@type": "MusicRecording",
+          name: songTitle,
+          byArtist: {
+            "@type": "Person",
+            name: "Andre Washington",
+          },
+        },
+      },
+      {
         "@type": "MusicRecording",
         name: songTitle,
-        url: absoluteUrl("/do-you-ever-wonder"),
+        url: absoluteUrl(songPagePath),
+        image: absoluteUrl(coverImagePath),
         byArtist: {
           "@type": "Person",
           name: "Andre Washington",
