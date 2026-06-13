@@ -197,6 +197,17 @@ export default function DoYouEverWonderPage() {
             <h2 className="mt-3 text-3xl font-semibold">
               Do You Ever Wonder? Lyrics
             </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62 sm:text-base">
+              For the focused lyrics page, read the official{" "}
+              <RhythmRealmLink
+                href="/lyrics/do-you-ever-wonder"
+                target="_self"
+                className="font-semibold text-cyan-100 underline decoration-cyan-100/40 underline-offset-4 transition hover:text-white"
+              >
+                Do You Ever Wonder lyrics
+              </RhythmRealmLink>{" "}
+              on RhythmRealm.net.
+            </p>
             <div className="mt-6 space-y-5 text-sm leading-relaxed text-white/78 sm:text-base">
               {lyricSections.map((section) => (
                 <section key={section.label}>
