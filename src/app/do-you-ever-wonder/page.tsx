@@ -14,6 +14,14 @@ const insideTheSongVideoPath =
 const claymationVideoPath = "/videos/do-you-ever-wonder-claymation.mp4";
 const songTitle = "Do You Ever Wonder?";
 const artistName = "Andre Washington";
+const songPagePath = "/do-you-ever-wonder";
+const coverImagePath = "/do-you-ever-wonder/cover-art.png";
+const officialVideoDescription =
+  "Watch the official video for Do You Ever Wonder? by Andre Washington from Rhythm Realm.";
+const insideTheSongVideoDescription =
+  "Inside the Song: Do You Ever Wonder? explains the meaning, direct-to-listener purpose, and Rhythm Realm story behind the song.";
+const claymationVideoDescription =
+  "Watch the claymation version of Do You Ever Wonder?, a visual take on Rhythm Realm's reflective pop song about faith, pressure, and finding a better way forward.";
 
 const lyricSections = [
   {
@@ -88,12 +96,19 @@ export const metadata: Metadata = {
     url: absoluteUrl("/do-you-ever-wonder"),
     images: [
       {
-        url: "/do-you-ever-wonder/cover-art.png",
+        url: coverImagePath,
         width: 1200,
         height: 1200,
         alt: "Do You Ever Wonder by Andre Washington cover art",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Do You Ever Wonder? - Andre Washington | Rhythm Realm",
+    description:
+      "Listen to Do You Ever Wonder? by Andre Washington and explore the story, lyrics, video, and meaning behind the song on RhythmRealm.net.",
+    images: [coverImagePath],
   },
 };
 
@@ -104,13 +119,37 @@ export default function DoYouEverWonderPage() {
       {
         "@type": "MusicRecording",
         name: songTitle,
-        url: absoluteUrl("/do-you-ever-wonder"),
-        image: absoluteUrl("/do-you-ever-wonder/cover-art.png"),
+        url: absoluteUrl(songPagePath),
+        image: absoluteUrl(coverImagePath),
         byArtist: {
           "@type": "Person",
           name: artistName,
         },
+        genre: "Pop music with rhythm and soul",
         description: metadata.description,
+      },
+      {
+        "@type": "VideoObject",
+        name: "Do You Ever Wonder? Official Video",
+        description: officialVideoDescription,
+        url: videoWatchUrl,
+        thumbnailUrl: absoluteUrl(coverImagePath),
+      },
+      {
+        "@type": "VideoObject",
+        name: "Inside the Song: Do You Ever Wonder?",
+        description: insideTheSongVideoDescription,
+        url: absoluteUrl(`${songPagePath}#inside-the-song`),
+        contentUrl: absoluteUrl(insideTheSongVideoPath),
+        thumbnailUrl: absoluteUrl(coverImagePath),
+      },
+      {
+        "@type": "VideoObject",
+        name: "Do You Ever Wonder? - Claymation Version",
+        description: claymationVideoDescription,
+        url: absoluteUrl(`${songPagePath}#claymation-version`),
+        contentUrl: absoluteUrl(claymationVideoPath),
+        thumbnailUrl: absoluteUrl(coverImagePath),
       },
       {
         "@type": "FAQPage",

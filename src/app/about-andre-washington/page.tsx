@@ -4,19 +4,101 @@ import Image from "next/image";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { absoluteUrl } from "@/lib/seo";
+
+const aboutTitle = "About Andre Washington | Rhythm Realm";
+const aboutDescription =
+  "Learn about Andre Washington, the independent recording artist, songwriter, and producer behind Rhythm Realm and pop music with rhythm and soul.";
+const aboutImage = "/andre-washington.png";
+
+const aboutFaqItems = [
+  {
+    question: "Who is Andre Washington?",
+    answer:
+      "Andre Washington is an independent recording artist, songwriter, and producer behind Rhythm Realm.",
+  },
+  {
+    question: "What kind of music does Andre Washington make?",
+    answer:
+      "Andre makes pop music with rhythm and soul, blending melody, groove, reflection, and heartfelt storytelling.",
+  },
+  {
+    question: "Why is RhythmRealm.net the main hub?",
+    answer:
+      "RhythmRealm.net keeps the music, lyrics, videos, stories, and fan updates in one official place direct from Andre Washington.",
+  },
+  {
+    question: "How can fans follow or connect?",
+    answer:
+      "Fans can listen on RhythmRealm.net, read the stories behind the songs, join the email list, or use the contact page to reach out.",
+  },
+];
 
 export const metadata: Metadata = {
-  title: "About Andre Washington",
-  description:
-    "Learn about Andre Washington, the independent recording artist behind Rhythm Realm.",
+  title: {
+    absolute: aboutTitle,
+  },
+  description: aboutDescription,
   alternates: {
     canonical: "/about-andre-washington",
+  },
+  openGraph: {
+    title: aboutTitle,
+    description: aboutDescription,
+    url: absoluteUrl("/about-andre-washington"),
+    images: [
+      {
+        url: aboutImage,
+        width: 1200,
+        height: 1200,
+        alt: "Andre Washington",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: aboutTitle,
+    description: aboutDescription,
+    images: [aboutImage],
   },
 };
 
 export default function AboutAndreWashingtonPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        name: "Andre Washington",
+        url: absoluteUrl("/about-andre-washington"),
+        image: absoluteUrl(aboutImage),
+        description: aboutDescription,
+        memberOf: {
+          "@type": "MusicGroup",
+          name: "Rhythm Realm",
+          url: absoluteUrl("/"),
+        },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: aboutFaqItems.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
 
       <section className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
@@ -72,6 +154,34 @@ export default function AboutAndreWashingtonPage() {
           className="w-full rounded-lg border border-white/10 object-cover shadow-2xl"
           priority
         />
+      </section>
+
+      <section className="border-y border-white/10 bg-white/[0.035]">
+        <div className="mx-auto w-full max-w-6xl px-6 py-14">
+          <div className="max-w-3xl">
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Andre Washington FAQ
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              The artist behind Rhythm Realm.
+            </h2>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {aboutFaqItems.map((item) => (
+              <section
+                key={item.question}
+                className="rounded-lg border border-white/10 bg-black/32 p-5"
+              >
+                <h3 className="text-lg font-semibold text-white">
+                  {item.question}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/70">
+                  {item.answer}
+                </p>
+              </section>
+            ))}
+          </div>
+        </div>
       </section>
 
       <SiteFooter />

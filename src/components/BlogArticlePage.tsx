@@ -12,18 +12,20 @@ type BlogArticlePageProps = {
 export default function BlogArticlePage({ post }: BlogArticlePageProps) {
   const showSoulfulSongLink = post.slug === "unveiling-the-essence-of-soulful-music";
   const isComingOverYesterday = post.slug === "coming-over-yesterday";
+  const articleImage = post.image ?? "/rhythm-realm-logo.png";
   const blogPostingJsonLd = {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
     url: absoluteUrl(post.canonicalPath),
     mainEntityOfPage: absoluteUrl(post.canonicalPath),
+    image: absoluteUrl(articleImage),
     author: {
       "@type": "Person",
       name: "Andre Washington",
     },
     publisher: {
-      "@type": "Organization",
+      "@type": "MusicGroup",
       name: SITE_NAME,
       url: absoluteUrl("/"),
     },

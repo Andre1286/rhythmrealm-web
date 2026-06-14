@@ -44,26 +44,49 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const rhythmRealmId = `${SITE_HOME_URL}#rhythm-realm`;
+  const andreWashingtonId = `${SITE_HOME_URL}#andre-washington`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
+        "@type": "MusicGroup",
+        "@id": rhythmRealmId,
         name: SITE_NAME,
         url: SITE_HOME_URL,
         description: SITE_DESCRIPTION,
+        genre: "Pop music with rhythm and soul",
+        member: {
+          "@id": andreWashingtonId,
+        },
+        sameAs: [SITE_HOME_URL],
       },
       {
         "@type": "Person",
+        "@id": andreWashingtonId,
         name: "Andre Washington",
         url: SITE_HOME_URL,
+        description:
+          "Independent recording artist, songwriter, and producer behind Rhythm Realm.",
+        memberOf: {
+          "@id": rhythmRealmId,
+        },
         sameAs: [SITE_HOME_URL],
       },
       {
         "@type": "WebSite",
+        "@id": `${SITE_HOME_URL}#website`,
         name: SITE_NAME,
         url: SITE_HOME_URL,
         description: SITE_DESCRIPTION,
+        about: {
+          "@id": rhythmRealmId,
+        },
+        publisher: {
+          "@id": rhythmRealmId,
+        },
+        inLanguage: "en-US",
       },
     ],
   };

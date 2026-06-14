@@ -134,6 +134,7 @@ export default function DoYouEverWonderLyricsPage() {
           "@type": "Person",
           name: "Andre Washington",
         },
+        genre: "Pop music with rhythm and soul",
         description: seoDescription,
       },
       {

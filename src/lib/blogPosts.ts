@@ -5,6 +5,7 @@ export type BlogPost = {
   description: string;
   excerpt: string;
   canonicalPath: string;
+  image?: string;
   category?: string;
   tags?: string[];
   intro?: string[];
@@ -32,6 +33,7 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt:
       "Follow “Coming Over Yesterday,” a Rhythm Realm love song by Terry T Productions featuring Andre Washington. Read lyrics, story notes, and updates on RhythmRealm.net.",
     canonicalPath: "/blog/coming-over-yesterday",
+    image: "/coming-over-yesterday-cover.jpg",
     category: "Work in Progress",
     tags: [
       "Coming Over Yesterday",
@@ -96,6 +98,7 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt:
       'A behind-the-song look at life, division, faith, hope, and the search for a better way forward.',
     canonicalPath: "/blog/story-behind-do-you-ever-wonder",
+    image: "/do-you-ever-wonder/cover-art.png",
     category: "Behind the Song",
     tags: [
       "Andre Washington",
@@ -241,6 +244,7 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt:
       "A simple Rhythm Realm note on honest emotion, rhythm, melody, and music that connects directly.",
     canonicalPath: "/post/unveiling-the-essence-of-soulful-music",
+    image: "/rhythm-realm-logo.png",
     sections: [
       {
         heading: "Soul starts with feeling",
@@ -275,6 +279,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "A short reflection on pop songs, memory, time slipping away, and why that feeling stays with listeners.",
     canonicalPath:
       "/post/where-did-the-time-go-pop-songs-that-capture-the-feeling-of-time-slipping-away",
+    image: "/rhythm-realm-logo.png",
     sections: [
       {
         heading: "Time is one of pop music's strongest feelings",

@@ -6,20 +6,37 @@ import SiteHeader from "@/components/SiteHeader";
 import { BLOG_POSTS } from "@/lib/blogPosts";
 import { absoluteUrl } from "@/lib/seo";
 
+const blogTitle = "Rhythm Realm Blog | Music Stories by Andre Washington";
+const blogDescription =
+  "Read simple Rhythm Realm stories about Andre Washington's songs, lyrics, soulful pop music, and the ideas behind each release.";
+const blogImage = "/rhythm-realm-logo.png";
+
 export const metadata: Metadata = {
   title: {
-    absolute: "Rhythm Realm Blog | Music Stories by Andre Washington",
+    absolute: blogTitle,
   },
-  description:
-    "Read simple Rhythm Realm stories about Andre Washington's songs, lyrics, soulful pop music, and the ideas behind each release.",
+  description: blogDescription,
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
-    title: "Rhythm Realm Blog | Music Stories by Andre Washington",
-    description:
-      "Read Rhythm Realm stories about Andre Washington's songs, lyrics, and the ideas behind each release.",
+    title: blogTitle,
+    description: blogDescription,
     url: absoluteUrl("/blog"),
+    images: [
+      {
+        url: blogImage,
+        width: 1200,
+        height: 1200,
+        alt: "Rhythm Realm logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: blogTitle,
+    description: blogDescription,
+    images: [blogImage],
   },
 };
 

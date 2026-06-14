@@ -4,6 +4,12 @@ import Image from "next/image";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { absoluteUrl } from "@/lib/seo";
+
+const musicTitle = "Music by Andre Washington | Rhythm Realm";
+const musicDescription =
+  "Listen to Rhythm Realm songs by Andre Washington, including pop music with rhythm and soul, story notes, lyrics, and direct fan updates on RhythmRealm.net.";
+const musicImage = "/coming-over-yesterday-cover.jpg";
 
 const tracks = [
   {
@@ -38,18 +44,96 @@ const tracks = [
   },
 ];
 
+const musicFaqItems = [
+  {
+    question: "What is Rhythm Realm?",
+    answer:
+      "Rhythm Realm is the official music hub for Andre Washington, built around songs, lyrics, videos, stories, and direct fan updates.",
+  },
+  {
+    question: "What kind of music does Andre Washington make?",
+    answer:
+      "Andre Washington makes pop music with rhythm and soul: melodic songs with groove, feeling, and clear emotional storytelling.",
+  },
+  {
+    question: 'What does "pop music with rhythm and soul" mean?',
+    answer:
+      "It means the music is easy to feel and remember, with modern pop structure, a strong pulse, and a soulful human center.",
+  },
+  {
+    question: "Where can fans listen and follow?",
+    answer:
+      "Fans can listen on RhythmRealm.net, read the stories behind the songs, and join the email list for new music and updates.",
+  },
+];
+
 export const metadata: Metadata = {
-  title: "Music",
-  description:
-    "Listen to Coming Over Yesterday, Do You Ever Wonder?, and more direct-to-listener releases from Rhythm Realm.",
+  title: {
+    absolute: musicTitle,
+  },
+  description: musicDescription,
   alternates: {
     canonical: "/music",
+  },
+  openGraph: {
+    title: musicTitle,
+    description: musicDescription,
+    url: absoluteUrl("/music"),
+    images: [
+      {
+        url: musicImage,
+        width: 1200,
+        height: 1200,
+        alt: "Coming Over Yesterday cover art",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: musicTitle,
+    description: musicDescription,
+    images: [musicImage],
   },
 };
 
 export default function MusicPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      ...tracks.map((track) => ({
+        "@type": "MusicRecording",
+        name: track.title,
+        url: absoluteUrl(track.href === "/contact" ? "/music" : track.href),
+        image: absoluteUrl(track.cover),
+        audio: absoluteUrl(track.audio),
+        byArtist: {
+          "@type":
+            track.artist === "Andre Washington" ? "Person" : "Organization",
+          name: track.artist,
+        },
+        duration: track.duration ? `PT${track.duration.replace(":", "M")}S` : undefined,
+        description: track.description,
+      })),
+      {
+        "@type": "FAQPage",
+        mainEntity: musicFaqItems.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
 
       <section className="mx-auto w-full max-w-6xl px-6 py-16">
@@ -112,6 +196,34 @@ export default function MusicPage() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-white/[0.035]">
+        <div className="mx-auto w-full max-w-6xl px-6 py-14">
+          <div className="max-w-3xl">
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+              Music FAQ
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Clear answers for listeners.
+            </h2>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {musicFaqItems.map((item) => (
+              <section
+                key={item.question}
+                className="rounded-lg border border-white/10 bg-black/32 p-5"
+              >
+                <h3 className="text-lg font-semibold text-white">
+                  {item.question}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/70">
+                  {item.answer}
+                </p>
+              </section>
+            ))}
+          </div>
         </div>
       </section>
 

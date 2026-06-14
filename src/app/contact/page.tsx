@@ -4,13 +4,39 @@ import EmailSignupForm from "@/components/EmailSignupForm";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { absoluteUrl } from "@/lib/seo";
+
+const contactTitle = "Contact Andre Washington | Rhythm Realm";
+const contactDescription =
+  "Contact Andre Washington, join the Rhythm Realm email list, and follow updates from the official music hub on RhythmRealm.net.";
+const contactImage = "/rhythm-realm-logo.png";
 
 export const metadata: Metadata = {
-  title: "Contact and Email Signup",
-  description:
-    "Contact Andre Washington and join the Rhythm Realm email list for music updates.",
+  title: {
+    absolute: contactTitle,
+  },
+  description: contactDescription,
   alternates: {
     canonical: "/contact",
+  },
+  openGraph: {
+    title: contactTitle,
+    description: contactDescription,
+    url: absoluteUrl("/contact"),
+    images: [
+      {
+        url: contactImage,
+        width: 1200,
+        height: 1200,
+        alt: "Rhythm Realm logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: contactTitle,
+    description: contactDescription,
+    images: [contactImage],
   },
 };
 

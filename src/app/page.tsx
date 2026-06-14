@@ -8,11 +8,18 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import YouTubeVideoCard from "@/components/YouTubeVideoCard";
 import { FAQ_ENTRIES } from "@/lib/faqEntries";
-import { absoluteUrl, SITE_DESCRIPTION, SITE_HOME_URL, SITE_TITLE } from "@/lib/seo";
+import {
+  absoluteUrl,
+  SITE_DESCRIPTION,
+  SITE_HOME_URL,
+  SITE_NAME,
+  SITE_TITLE,
+} from "@/lib/seo";
 
 const featuredSong = "Coming Over Yesterday";
 const featuredCredit = "Terry T Productions featuring Andre Washington";
 const featuredDuration = "3:23";
+const homepageImage = "/coming-over-yesterday-cover.jpg";
 const motionComicMediaBaseUrl =
   "https://media.githubusercontent.com/media/Andre1286/rhythmrealm-web/main/public/comics/rhythm-realm-comic-book-1";
 const featuredDescription =
@@ -129,12 +136,23 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    type: "website",
     url: SITE_HOME_URL,
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: homepageImage,
+        width: 1200,
+        height: 1200,
+        alt: "Coming Over Yesterday cover art",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    images: [homepageImage],
   },
 };
 
@@ -226,6 +244,10 @@ const featureCards = [
 ];
 
 export default function Home() {
+  const rhythmRealmId = `${SITE_HOME_URL}#rhythm-realm`;
+  const andreWashingtonId = `${SITE_HOME_URL}#andre-washington`;
+  const websiteId = `${SITE_HOME_URL}#website`;
+  const homepageId = `${SITE_HOME_URL}#webpage`;
   const homepageFaqItems = [
     ...comingOverYesterdayFaqItems,
     ...explainerFaqItems,
@@ -235,15 +257,33 @@ export default function Home() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": homepageId,
+        url: SITE_HOME_URL,
+        name: SITE_TITLE,
+        description: SITE_DESCRIPTION,
+        inLanguage: "en-US",
+        isPartOf: {
+          "@id": websiteId,
+        },
+        about: {
+          "@id": rhythmRealmId,
+        },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: absoluteUrl(homepageImage),
+        },
+      },
+      {
         "@type": "MusicRecording",
+        "@id": `${SITE_HOME_URL}#coming-over-yesterday-recording`,
         name: featuredSong,
         byArtist: {
           "@type": "Organization",
           name: "Terry T Productions",
         },
         contributor: {
-          "@type": "Person",
-          name: "Andre Washington",
+          "@id": andreWashingtonId,
         },
         url: absoluteUrl("/blog/coming-over-yesterday"),
         image: absoluteUrl("/coming-over-yesterday-cover.jpg"),
@@ -253,6 +293,7 @@ export default function Home() {
       },
       {
         "@type": "VideoObject",
+        "@id": `${SITE_HOME_URL}#architecture-of-connection-video`,
         name: explainerVideo.title,
         description: explainerVideo.description,
         url: absoluteUrl("/#what-rhythm-realm-is-building"),
@@ -262,19 +303,31 @@ export default function Home() {
         duration: explainerVideo.duration,
       },
       {
+        "@type": "VideoObject",
+        "@id": `${SITE_HOME_URL}#frictionless-universe-video`,
+        name: frictionlessUniverseVideo.title,
+        description: frictionlessUniverseVideo.description,
+        url: absoluteUrl("/#what-rhythm-realm-is-building"),
+        contentUrl: absoluteUrl(frictionlessUniverseVideo.src),
+        thumbnailUrl: absoluteUrl("/rhythm-realm-logo.png"),
+      },
+      {
         "@type": "CreativeWork",
+        "@id": `${SITE_HOME_URL}#motion-comic-book-1`,
         name: "Motion Comic Book 1",
         description: motionComicDescription,
         url: absoluteUrl("/#motion-comic-book-1"),
       },
       {
         "@type": "CreativeWork",
+        "@id": `${SITE_HOME_URL}#motion-comic-book-2`,
         name: "Motion Comic Book 2",
         description: motionComicDescription,
         url: absoluteUrl("/#motion-comic-book-2"),
       },
       {
         "@type": "FAQPage",
+        "@id": `${SITE_HOME_URL}#homepage-faq`,
         mainEntity: homepageFaqItems.map((faq) => ({
           "@type": "Question",
           name: faq.question,

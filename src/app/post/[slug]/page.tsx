@@ -30,6 +30,8 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     return {};
   }
 
+  const socialImage = post.image ?? "/rhythm-realm-logo.png";
+
   return {
     title: {
       absolute: post.seoTitle,
@@ -46,6 +48,20 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       url: absoluteUrl(post.canonicalPath),
       authors: ["Andre Washington"],
       tags: post.tags,
+      images: [
+        {
+          url: socialImage,
+          width: 1200,
+          height: 1200,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.seoTitle,
+      description: post.description,
+      images: [socialImage],
     },
   };
 }
