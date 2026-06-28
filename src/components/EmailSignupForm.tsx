@@ -9,9 +9,9 @@ type EmailSignupFormProps = {
 };
 
 export default function EmailSignupForm({
-  title = "Join the Rhythm Realm list",
-  description = "Get music updates, release notes, and direct messages from Andre Washington.",
-  buttonLabel = "Join the List",
+  title = "Join the Rhythm Realm Insider List",
+  description = "Join the Rhythm Realm Insider List and get new music, behind-the-song stories, videos, lyrics, and exclusive updates from Andre Washington.",
+  buttonLabel = "Get Rhythm Realm updates first",
 }: EmailSignupFormProps) {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
@@ -66,7 +66,7 @@ export default function EmailSignupForm({
       }
 
       setStatus("success");
-      setMessage("Thanks for joining. You are on the Rhythm Realm list.");
+      setMessage("Thanks for joining the Rhythm Realm Insider List.");
       setEmail("");
       setWebsite("");
     } catch {

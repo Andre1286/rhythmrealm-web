@@ -217,10 +217,10 @@ const featureCards = [
     target: "home-card-blog",
   },
   {
-    href: "/contact",
+    href: "#signup",
     eyebrow: "Connect",
-    title: "Contact / Email Signup",
-    text: "Reach Andre directly and join the email list for music updates.",
+    title: "Join the Insider List",
+    text: "Get new music, lyrics, videos, behind-the-song stories, and exclusive updates first.",
     target: "home-card-contact",
   },
 ];
@@ -317,18 +317,18 @@ export default function Home() {
               Listen Now
             </RhythmRealmLink>
             <RhythmRealmLink
+              href="#signup"
+              target="_self"
+              className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
+            >
+              Join the Insider List
+            </RhythmRealmLink>
+            <RhythmRealmLink
               href="#coming-over-yesterday"
               target="_self"
               className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
             >
               Follow Coming Over Yesterday
-            </RhythmRealmLink>
-            <RhythmRealmLink
-              href="#signup"
-              target="_self"
-              className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
-            >
-              Join Updates
             </RhythmRealmLink>
           </div>
         </div>
@@ -764,11 +764,7 @@ export default function Home() {
 
       <section className="border-t border-white/10 bg-cyan-200/[0.055]">
         <div className="mx-auto w-full max-w-6xl px-6 py-14">
-          <EmailSignupForm
-            title="Join the Rhythm Realm list"
-            description="Join the Rhythm Realm list and get new songs, behind-the-music stories, and direct updates from Andre Washington."
-            buttonLabel="Join the List"
-          />
+          <EmailSignupForm />
         </div>
       </section>
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import EmailSignupForm from "@/components/EmailSignupForm";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
+import SongNextSteps from "@/components/SongNextSteps";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/seo";
@@ -205,7 +206,7 @@ export default function DoYouEverWonderLyricsPage() {
               target="_self"
               className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
             >
-              Join Updates
+              Join the Insider List
             </RhythmRealmLink>
           </div>
         </div>
@@ -284,12 +285,15 @@ export default function DoYouEverWonderLyricsPage() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-6 py-14">
-        <EmailSignupForm
-          title="Get Rhythm Realm updates"
-          description="Join the list for song stories, release updates, and new music from Andre Washington."
-          buttonLabel="Join Updates"
+      <div className="mx-auto w-full max-w-6xl px-6 pt-14">
+        <SongNextSteps
+          lyricsHref="/lyrics/do-you-ever-wonder"
+          signupHref="#signup"
         />
+      </div>
+
+      <section className="mx-auto w-full max-w-6xl px-6 py-14">
+        <EmailSignupForm />
       </section>
 
       <SiteFooter />
