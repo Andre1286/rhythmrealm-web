@@ -2,6 +2,7 @@ import type { BlogPost } from "@/lib/blogPosts";
 import { absoluteUrl, SITE_NAME } from "@/lib/seo";
 
 import RhythmRealmLink from "./RhythmRealmLink";
+import SongNextSteps from "./SongNextSteps";
 import SiteFooter from "./SiteFooter";
 import SiteHeader from "./SiteHeader";
 
@@ -12,6 +13,8 @@ type BlogArticlePageProps = {
 export default function BlogArticlePage({ post }: BlogArticlePageProps) {
   const showSoulfulSongLink = post.slug === "unveiling-the-essence-of-soulful-music";
   const isComingOverYesterday = post.slug === "coming-over-yesterday";
+  const isSongStory =
+    isComingOverYesterday || post.slug === "story-behind-do-you-ever-wonder";
   const blogPostingJsonLd = {
     "@type": "BlogPosting",
     headline: post.title,
@@ -201,34 +204,33 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
           </div>
         ) : null}
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-8 sm:flex-row">
-          <RhythmRealmLink
-            href={
+        {isSongStory ? (
+          <SongNextSteps
+            lyricsHref={
               isComingOverYesterday
                 ? "/#coming-over-yesterday-lyrics"
-                : "/do-you-ever-wonder"
-            }
-            target="_self"
-            className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
-          >
-            {isComingOverYesterday
-              ? "Read Coming Over Yesterday Lyrics"
-              : "Listen to Do You Ever Wonder?"}
-          </RhythmRealmLink>
-          <RhythmRealmLink
-            href={
-              isComingOverYesterday
-                ? "/#coming-over-yesterday"
                 : "/lyrics/do-you-ever-wonder"
             }
-            target="_self"
-            className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
-          >
-            {isComingOverYesterday
-              ? "Listen to Coming Over Yesterday"
-              : "Read Do You Ever Wonder? Lyrics"}
-          </RhythmRealmLink>
-        </div>
+            className="mt-12"
+          />
+        ) : (
+          <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-8 sm:flex-row">
+            <RhythmRealmLink
+              href="/do-you-ever-wonder"
+              target="_self"
+              className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
+            >
+              Listen to Do You Ever Wonder?
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/lyrics/do-you-ever-wonder"
+              target="_self"
+              className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
+            >
+              Read Do You Ever Wonder? Lyrics
+            </RhythmRealmLink>
+          </div>
+        )}
       </article>
 
       <SiteFooter />

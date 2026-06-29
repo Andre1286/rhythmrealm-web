@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import EmailSignupForm from "@/components/EmailSignupForm";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
+import SongNextSteps from "@/components/SongNextSteps";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import YouTubeVideoCard from "@/components/YouTubeVideoCard";
@@ -431,35 +432,12 @@ export default function DoYouEverWonderPage() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-6 py-14">
-        <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
-            More Music
-          </div>
-          <h2 className="mt-3 text-3xl font-semibold">More Rhythm Realm Music</h2>
-          <p className="mt-5 text-base leading-relaxed text-white/70">
-            Keep exploring Rhythm Realm for more songs from Andre Washington,
-            including new releases, music stories, videos, and updates for fans
-            of pop music with rhythm and soul.
-          </p>
-        </div>
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-          <RhythmRealmLink
-            href="/music"
-            target="_self"
-            className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
-          >
-            Explore Music
-          </RhythmRealmLink>
-          <RhythmRealmLink
-            href="/blog/story-behind-do-you-ever-wonder"
-            target="_self"
-            className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
-          >
-            Read More Stories
-          </RhythmRealmLink>
-        </div>
-      </section>
+      <div className="mx-auto w-full max-w-6xl px-6 py-14">
+        <SongNextSteps
+          lyricsHref="/lyrics/do-you-ever-wonder"
+          signupHref="#signup"
+        />
+      </div>
 
       <section className="border-y border-white/10 bg-white/[0.035]">
         <div className="mx-auto w-full max-w-6xl px-6 py-14">
@@ -486,11 +464,7 @@ export default function DoYouEverWonderPage() {
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-6 py-14">
-        <EmailSignupForm
-          title="Get Rhythm Realm updates"
-          description="Join the list for song stories, release updates, and new music from Andre Washington."
-          buttonLabel="Join Updates"
-        />
+        <EmailSignupForm />
       </section>
 
       <SiteFooter />
