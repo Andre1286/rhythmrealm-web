@@ -674,6 +674,28 @@ export default function Home() {
             </p>
           </div>
 
+          <RhythmRealmLink
+            href="/comics/the-artist-nobody-heard/issue-1"
+            target="_self"
+            className="mt-8 block rounded-lg border border-cyan-200/20 bg-cyan-200/[0.055] p-5 transition hover:border-cyan-200/45 hover:bg-cyan-200/[0.09]"
+          >
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200/80">
+              New Comic Issue
+            </div>
+            <h3 className="mt-3 text-2xl font-semibold text-white">
+              The Artist Nobody Heard
+            </h3>
+            <p className="mt-2 text-sm font-semibold text-cyan-100">
+              Issue #1: Heard in the Noise
+            </p>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/68 sm:text-base">
+              Read the first Rhythm Realm comic issue about Julian, an
+              independent artist trying to be heard in a noisy digital world.
+            </p>
+            <span className="mt-5 inline-flex rounded-lg border border-cyan-200/30 px-4 py-2 text-sm font-semibold text-cyan-100">
+              Read Issue #1
+            </span>
+          </RhythmRealmLink>
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
             {motionComicChapters.map((chapter) => (
               <article
