@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/", priority: 1 },
     { path: "/do-you-ever-wonder", priority: 0.95 },
     { path: "/lyrics/do-you-ever-wonder", priority: 0.9 },
+    { path: "/comics/the-artist-nobody-heard/issue-1", priority: 0.9 },
     { path: "/blog", priority: 0.85 },
     { path: "/music", priority: 0.8 },
     { path: "/behind-the-music", priority: 0.7 },
