@@ -32,7 +32,7 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt:
       "Follow “Coming Over Yesterday,” a Rhythm Realm love song by Terry T Productions featuring Andre Washington. Read lyrics, story notes, and updates on RhythmRealm.net.",
     canonicalPath: "/blog/coming-over-yesterday",
-    category: "Work in Progress",
+    category: "Featured Song",
     tags: [
       "Coming Over Yesterday",
       "Terry T Productions",
@@ -45,9 +45,9 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sections: [
       {
-        heading: "A New Single from Terry T Productions",
+        heading: "A Featured Song from Terry T Productions",
         body: [
-          '"Coming Over Yesterday" is a new single from Terry T Productions featuring Andre Washington.',
+          '"Coming Over Yesterday" is a featured song from Terry T Productions featuring Andre Washington.',
           "Written with Terry Timberlake \u2014 known as Terry T \u2014 the song carries the feeling of love, loyalty, and being ready to show up when someone needs you. Terry T is a keyboard player, producer, and former member of IROC, International Rhythm of Composers.",
         ],
       },

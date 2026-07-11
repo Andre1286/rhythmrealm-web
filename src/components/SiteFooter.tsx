@@ -1,26 +1,20 @@
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 
 const footerLinks = [
-  { href: "/", label: "Home", target: "footer-home" },
-  { href: "/music", label: "Music", target: "footer-music" },
-  {
-    href: "/about-andre-washington",
-    label: "About Andre Washington",
-    target: "footer-about-andre-washington",
-  },
-  {
-    href: "/behind-the-music",
-    label: "Behind the Music",
-    target: "footer-behind-the-music",
-  },
-  { href: "/blog", label: "Blog", target: "footer-blog" },
-  { href: "/contact", label: "Contact", target: "footer-contact" },
+  { href: "/", label: "Home" },
+  { href: "/music", label: "Music" },
+  { href: "/comics/the-artist-nobody-heard/issue-1", label: "Comic" },
+  { href: "/blog", label: "Stories" },
+  { href: "/about-andre-washington", label: "About Andre" },
+  { href: "/#signup", label: "Join" },
+  { href: "/behind-the-music", label: "Behind the Music" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function SiteFooter() {
   return (
     <footer className="border-t border-white/10 bg-black text-white">
-      <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-10 md:grid-cols-[minmax(0,1fr)_auto]">
+      <div className="mx-auto grid w-full max-w-6xl gap-8 px-5 py-10 sm:px-6 md:grid-cols-[minmax(0,1fr)_auto]">
         <div>
           <div className="text-sm font-semibold uppercase tracking-[0.18em]">
             Rhythm Realm
@@ -41,11 +35,7 @@ export default function SiteFooter() {
           <ul className="grid gap-2 text-sm text-white/68 sm:grid-cols-2 md:text-right">
             {footerLinks.map((link) => (
               <li key={link.href}>
-                <RhythmRealmLink
-                  href={link.href}
-                  target="_self"
-                  className="hover:text-white"
-                >
+                <RhythmRealmLink href={link.href} target="_self" className="hover:text-white">
                   {link.label}
                 </RhythmRealmLink>
               </li>
