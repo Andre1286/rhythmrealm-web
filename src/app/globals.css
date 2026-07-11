@@ -29,6 +29,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 2px solid #a5f3fc;
+  outline-offset: 3px;
+}
+
 ::selection {
   background: rgba(165, 243, 252, 0.28);
   color: #ffffff;
@@ -44,14 +52,26 @@ audio {
   right: 0.75rem;
   bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
   z-index: 90;
-  backdrop-filter: blur(8px);
+  max-height: calc(100vh - 1.5rem);
+  overflow-y: auto;
+  backdrop-filter: blur(14px);
+}
+
+.player-safe-page {
+  padding-bottom: 14rem;
 }
 
 @media (min-width: 768px) {
   .sticky-audio-player {
-    left: 1.5rem;
-    right: 1.5rem;
+    left: 50%;
+    right: auto;
     bottom: 1rem;
+    width: min(calc(100% - 3rem), 72rem);
+    transform: translateX(-50%);
+  }
+
+  .player-safe-page {
+    padding-bottom: 9rem;
   }
 }
 

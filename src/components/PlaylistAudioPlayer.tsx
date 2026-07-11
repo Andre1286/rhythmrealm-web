@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type Track = {
   id: string;
@@ -11,9 +11,21 @@ type Track = {
 
 const FALLBACK_TRACKS: Track[] = [
   {
-    id: "fallback-track-1",
+    id: "coming-over-yesterday",
+    title: "Coming Over Yesterday",
+    src: "/audio/coming-over-yesterday.mp3",
+    artist: "Terry T Productions featuring Andre Washington",
+  },
+  {
+    id: "track-1",
     title: "Do You Ever Wonder?",
     src: "/audio/do-you-ever-wonder.mp3",
+    artist: "Andre Washington",
+  },
+  {
+    id: "track-2",
+    title: "If Only for the Love",
+    src: "/audio/if only for the love. By Andre Washington.mp3",
     artist: "Andre Washington",
   },
 ];
@@ -25,10 +37,6 @@ export default function PlaylistAudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    // Owner workflow:
-    // 1) Put MP3 files in /public/audio
-    // 2) Update /public/tracks.json with root-relative src paths
-    // 3) Deploy
     const loadTracks = async () => {
       try {
         const response = await fetch("/tracks.json", { cache: "no-store" });
@@ -45,10 +53,9 @@ export default function PlaylistAudioPlayer() {
                 typeof track?.src === "string",
             )
           : [];
-
         setTracks(sanitizedTracks.length > 0 ? sanitizedTracks : FALLBACK_TRACKS);
+        setCurrentIndex(0);
       } catch {
-        // Keep UI resilient if manifest is unavailable.
         setTracks(FALLBACK_TRACKS);
       }
     };
@@ -60,9 +67,7 @@ export default function PlaylistAudioPlayer() {
 
   const playCurrent = async () => {
     const audio = audioRef.current;
-    if (!audio || !currentTrack) {
-      return;
-    }
+    if (!audio || !currentTrack) return;
     try {
       await audio.play();
       setIsPlaying(true);
@@ -73,125 +78,128 @@ export default function PlaylistAudioPlayer() {
 
   const pauseCurrent = () => {
     const audio = audioRef.current;
-    if (!audio) {
-      return;
-    }
+    if (!audio) return;
     audio.pause();
     setIsPlaying(false);
   };
 
-  const switchTrack = async (nextIndex: number, shouldPlay: boolean) => {
-    if (!tracks.length) {
-      return;
-    }
-    const wrappedIndex = (nextIndex + tracks.length) % tracks.length;
-    const audio = audioRef.current;
+  const switchTrack = useCallback(
+    async (nextIndex: number, shouldPlay: boolean) => {
+      if (!tracks.length) return;
+      const wrappedIndex = (nextIndex + tracks.length) % tracks.length;
+      const audio = audioRef.current;
 
-    if (audio) {
-      audio.pause();
-    }
+      audio?.pause();
+      setCurrentIndex(wrappedIndex);
+      setIsPlaying(false);
+      if (!audio) return;
 
-    setCurrentIndex(wrappedIndex);
-    setIsPlaying(false);
-
-    if (!audio) {
-      return;
-    }
-
-    const nextTrack = tracks[wrappedIndex];
-    audio.src = nextTrack.src;
-    audio.load();
-
-    if (shouldPlay) {
-      try {
-        await audio.play();
-        setIsPlaying(true);
-      } catch {
-        setIsPlaying(false);
+      audio.src = tracks[wrappedIndex].src;
+      audio.load();
+      if (shouldPlay) {
+        try {
+          await audio.play();
+          setIsPlaying(true);
+        } catch {
+          setIsPlaying(false);
+        }
       }
-    }
-  };
+    },
+    [tracks],
+  );
 
-  const handleSelectTrack = (index: number) => {
-    void switchTrack(index, isPlaying);
-  };
+  useEffect(() => {
+    const handleHomepagePlay = (event: MouseEvent) => {
+      const target = event.target instanceof Element ? event.target : null;
+      const trigger = target?.closest<HTMLElement>("[data-rhythm-realm-track]");
+      const trackId = trigger?.dataset.rhythmRealmTrack;
+      if (!trackId) return;
 
-  const handleNext = () => {
-    void switchTrack(currentIndex + 1, isPlaying);
-  };
+      const requestedIndex = tracks.findIndex((track) => track.id === trackId);
+      if (requestedIndex >= 0) void switchTrack(requestedIndex, true);
+    };
 
-  const handlePrev = () => {
-    void switchTrack(currentIndex - 1, isPlaying);
-  };
+    document.addEventListener("click", handleHomepagePlay);
+    return () => document.removeEventListener("click", handleHomepagePlay);
+  }, [switchTrack, tracks]);
 
-  const handleEnded = () => {
-    void switchTrack(currentIndex + 1, true);
-  };
+  const handleSelectTrack = (index: number) => void switchTrack(index, isPlaying);
+  const handleNext = () => void switchTrack(currentIndex + 1, isPlaying);
+  const handlePrev = () => void switchTrack(currentIndex - 1, isPlaying);
+  const handleEnded = () => void switchTrack(currentIndex + 1, true);
 
   return (
-    <div className="sticky-audio-player mt-4 rounded-2xl border border-white/10 bg-black/30 p-4">
+    <section
+      id="rhythm-realm-player"
+      aria-label="Rhythm Realm music player"
+      className="sticky-audio-player rounded-2xl border border-cyan-200/20 bg-black/92 p-3 shadow-2xl shadow-black/70"
+    >
       {currentTrack ? (
         <>
-          <audio
-            ref={audioRef}
-            controls
-            src={currentTrack.src}
-            controlsList="nodownload noplaybackrate"
-            onContextMenu={(event) => event.preventDefault()}
-            onEnded={handleEnded}
-            className="w-full"
-          />
-          <div className="mt-3 flex gap-2">
-            <button
-              type="button"
-              aria-label="Previous track"
-              onClick={handlePrev}
-              className="rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              Prev
-            </button>
-            <button
-              type="button"
-              aria-label={isPlaying ? "Pause current track" : "Play current track"}
-              onClick={isPlaying ? pauseCurrent : () => void playCurrent()}
-              className="rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              {isPlaying ? "Pause" : "Play"}
-            </button>
-            <button
-              type="button"
-              aria-label="Next track"
-              onClick={handleNext}
-              className="rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              Next
-            </button>
+          <div className="grid gap-3 md:grid-cols-[minmax(0,220px)_minmax(260px,1fr)_auto] md:items-center">
+            <div className="min-w-0" aria-live="polite">
+              <div className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-cyan-200/75">
+                Now Playing
+              </div>
+              <div className="truncate text-sm font-semibold">{currentTrack.title}</div>
+              <div className="truncate text-xs text-white/55">
+                {currentTrack.artist ?? "Rhythm Realm"}
+              </div>
+            </div>
+            <audio
+              ref={audioRef}
+              controls
+              src={currentTrack.src}
+              controlsList="nodownload noplaybackrate"
+              aria-label={`${currentTrack.title} audio controls`}
+              onContextMenu={(event) => event.preventDefault()}
+              onEnded={handleEnded}
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              className="w-full min-w-0"
+            />
+            <div className="flex gap-2">
+              <button type="button" aria-label="Previous track" onClick={handlePrev} className="min-h-10 rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold hover:bg-white hover:text-black">
+                Prev
+              </button>
+              <button type="button" aria-label={isPlaying ? "Pause current track" : "Play current track"} onClick={isPlaying ? pauseCurrent : () => void playCurrent()} className="min-h-10 rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold hover:bg-white hover:text-black">
+                {isPlaying ? "Pause" : "Play"}
+              </button>
+              <button type="button" aria-label="Next track" onClick={handleNext} className="min-h-10 rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold hover:bg-white hover:text-black">
+                Next
+              </button>
+            </div>
           </div>
-          <ul className="mt-3 max-h-40 space-y-2 overflow-y-auto pr-1">
-            {tracks.map((track, index) => {
-              const isSelected = index === currentIndex;
-              return (
-                <li key={track.id}>
-                  <button
-                    type="button"
-                    onClick={() => handleSelectTrack(index)}
-                    className={`w-full rounded-lg border px-3 py-2 text-left text-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                      isSelected
-                        ? "border-cyan-300/60 bg-cyan-300/10"
-                        : "border-white/10 bg-white/5 hover:border-white/30"
-                    }`}
-                  >
-                    <div className="font-semibold">{track.title}</div>
-                    {track.artist ? (
-                      <div className="text-xs text-white/60">{track.artist}</div>
-                    ) : null}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+          <details className="mt-2 border-t border-white/10 pt-2">
+            <summary className="w-fit cursor-pointer rounded text-xs font-semibold text-cyan-100/80 hover:text-cyan-100">
+              Choose a track
+            </summary>
+            <ul className="mt-2 grid max-h-36 gap-2 overflow-y-auto pr-1 sm:grid-cols-3">
+              {tracks.map((track, index) => {
+                const isSelected = index === currentIndex;
+                return (
+                  <li key={track.id}>
+                    <button
+                      type="button"
+                      aria-pressed={isSelected}
+                      aria-label={`Select ${track.title}`}
+                      onClick={() => handleSelectTrack(index)}
+                      className={`h-full w-full rounded-lg border px-3 py-2 text-left text-sm transition ${
+                        isSelected
+                          ? "border-cyan-300/60 bg-cyan-300/10"
+                          : "border-white/10 bg-white/5 hover:border-white/30"
+                      }`}
+                    >
+                      <div className="font-semibold">{track.title}</div>
+                      {track.artist ? <div className="text-xs text-white/60">{track.artist}</div> : null}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </details>
         </>
       ) : null}
-    </div>
+    </section>
   );
 }
