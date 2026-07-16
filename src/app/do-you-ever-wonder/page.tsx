@@ -75,7 +75,7 @@ const faqItems = [
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Do You Ever Wonder? – Andre Washington | Rhythm Realm",
+    absolute: "Do You Ever Wonder by Andre Washington | Listen & Song Story",
   },
   description:
     "Listen to “Do You Ever Wonder?” by Andre Washington and explore the story, lyrics, and meaning behind the song on RhythmRealm.net.",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     canonical: "/do-you-ever-wonder",
   },
   openGraph: {
-    title: "Do You Ever Wonder? – Andre Washington | Rhythm Realm",
+    title: "Do You Ever Wonder by Andre Washington | Listen & Song Story",
     description:
       "Listen to “Do You Ever Wonder?” by Andre Washington and explore the story, lyrics, and meaning behind the song on RhythmRealm.net.",
     url: absoluteUrl("/do-you-ever-wonder"),
@@ -95,6 +95,13 @@ export const metadata: Metadata = {
         alt: "Do You Ever Wonder by Andre Washington cover art",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Do You Ever Wonder by Andre Washington | Listen & Song Story",
+    description:
+      "Listen to “Do You Ever Wonder?” by Andre Washington and explore the story, lyrics, and meaning behind the song on RhythmRealm.net.",
+    images: ["/do-you-ever-wonder/cover-art.png"],
   },
 };
 
