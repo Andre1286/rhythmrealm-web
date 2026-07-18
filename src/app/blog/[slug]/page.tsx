@@ -32,6 +32,17 @@ export async function generateMetadata({
     return {};
   }
 
+  const socialTitle = post.socialTitle ?? post.seoTitle;
+  const socialDescription = post.socialDescription ?? post.description;
+  const socialImage = post.image
+    ? {
+        url: absoluteUrl(post.image.src),
+        width: post.image.width,
+        height: post.image.height,
+        alt: post.image.alt,
+      }
+    : undefined;
+
   return {
     title: {
       absolute: post.seoTitle,
@@ -43,11 +54,20 @@ export async function generateMetadata({
     },
     openGraph: {
       type: "article",
-      title: post.seoTitle,
-      description: post.description,
+      title: socialTitle,
+      description: socialDescription,
       url: absoluteUrl(post.canonicalPath),
       authors: ["Andre Washington"],
       tags: post.tags,
+      ...(socialImage ? { images: [socialImage] } : {}),
+    },
+    twitter: {
+      card: socialImage ? "summary_large_image" : "summary",
+      title: socialTitle,
+      description: socialDescription,
+      ...(socialImage
+        ? { images: [{ url: socialImage.url, alt: socialImage.alt }] }
+        : {}),
     },
   };
 }

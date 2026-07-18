@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
@@ -48,6 +49,16 @@ export default function BlogPage() {
               key={post.slug}
               className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
             >
+              {post.image ? (
+                <Image
+                  src={post.image.src}
+                  alt={post.image.alt}
+                  width={post.image.width}
+                  height={post.image.height}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="mb-5 aspect-[1200/630] w-full rounded-lg border border-white/10 object-cover object-center"
+                />
+              ) : null}
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">
                 {post.category ?? "Rhythm Realm Notes"}
               </div>

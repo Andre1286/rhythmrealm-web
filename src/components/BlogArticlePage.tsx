@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import type { BlogPost } from "@/lib/blogPosts";
 import { absoluteUrl, SITE_NAME } from "@/lib/seo";
 
@@ -13,6 +15,7 @@ type BlogArticlePageProps = {
 export default function BlogArticlePage({ post }: BlogArticlePageProps) {
   const showSoulfulSongLink = post.slug === "unveiling-the-essence-of-soulful-music";
   const isComingOverYesterday = post.slug === "coming-over-yesterday";
+  const isUpcomingSong = post.releaseStatus === "upcoming";
   const isSongStory =
     isComingOverYesterday || post.slug === "story-behind-do-you-ever-wonder";
   const blogPostingJsonLd = {
@@ -30,6 +33,7 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
       name: SITE_NAME,
       url: absoluteUrl("/"),
     },
+    ...(post.image ? { image: absoluteUrl(post.image.src) } : {}),
     articleSection: post.category,
     keywords: post.tags?.join(", "),
   };
@@ -97,8 +101,24 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
         <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
           {post.title}
         </h1>
+        {post.byline ? (
+          <p className="mt-4 text-sm font-semibold text-cyan-100/80">
+            {post.byline}
+          </p>
+        ) : null}
+        {post.image ? (
+          <Image
+            src={post.image.src}
+            alt={post.image.alt}
+            width={post.image.width}
+            height={post.image.height}
+            priority
+            sizes="(max-width: 896px) 100vw, 896px"
+            className="mt-8 aspect-[1200/630] w-full rounded-xl border border-white/10 object-cover object-center shadow-2xl"
+          />
+        ) : null}
         <p className="mt-5 text-base leading-relaxed text-white/68 sm:text-lg">
-          {post.description}
+          {post.dek ?? post.description}
         </p>
 
         {post.tags?.length ? (
@@ -147,6 +167,13 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
                   </p>
                 ))}
               </div>
+              {section.pullQuote ? (
+                <blockquote className="mt-6 border-l-2 border-cyan-200/60 pl-5 text-xl font-medium leading-relaxed text-cyan-50">
+                  <p>
+                    &ldquo;{section.pullQuote}&rdquo;
+                  </p>
+                </blockquote>
+              ) : null}
             </section>
           ))}
         </div>
@@ -204,7 +231,34 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
           </div>
         ) : null}
 
-        {isSongStory ? (
+        {isUpcomingSong ? (
+          <nav
+            aria-label="Continue exploring Rhythm Realm"
+            className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-8 sm:flex-row sm:flex-wrap"
+          >
+            <RhythmRealmLink
+              href="/music"
+              target="_self"
+              className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
+            >
+              Explore More Music
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/blog"
+              target="_self"
+              className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
+            >
+              More Behind the Music
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/#signup"
+              target="_self"
+              className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
+            >
+              Join the Rhythm Realm Insider List
+            </RhythmRealmLink>
+          </nav>
+        ) : isSongStory ? (
           <SongNextSteps
             lyricsHref={
               isComingOverYesterday
