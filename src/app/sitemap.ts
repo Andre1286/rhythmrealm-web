@@ -8,7 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     { path: "/", priority: 1 },
     { path: "/do-you-ever-wonder", priority: 0.95 },
+    { path: "/trying-to-let-you-go", priority: 0.95 },
     { path: "/lyrics/do-you-ever-wonder", priority: 0.9 },
+    { path: "/lyrics/trying-to-let-you-go", priority: 0.9 },
     { path: "/comics/the-artist-nobody-heard/issue-1", priority: 0.9 },
     { path: "/blog", priority: 0.85 },
     { path: "/music", priority: 0.8 },

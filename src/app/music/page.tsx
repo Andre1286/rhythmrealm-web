@@ -19,6 +19,16 @@ const tracks = [
     buttonLabel: "Read the Story",
   },
   {
+    title: "Trying to Let You Go",
+    artist: "Andre Washington",
+    href: "/trying-to-let-you-go",
+    audio: "/audio/trying-to-let-you-go-andre-washington.mp3",
+    cover: "/trying-to-let-you-go-cover.png",
+    description:
+      "A reflective song about the quiet reminders that remain when someone is gone and the difficult work of learning to move forward.",
+    buttonLabel: "Open Song Page",
+  },
+  {
     title: "Do You Ever Wonder?",
     artist: "Andre Washington",
     href: "/do-you-ever-wonder",
