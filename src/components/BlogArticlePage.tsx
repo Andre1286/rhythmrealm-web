@@ -15,6 +15,8 @@ type BlogArticlePageProps = {
 export default function BlogArticlePage({ post }: BlogArticlePageProps) {
   const showSoulfulSongLink = post.slug === "unveiling-the-essence-of-soulful-music";
   const isComingOverYesterday = post.slug === "coming-over-yesterday";
+  const isTryingToLetYouGo =
+    post.slug === "trying-to-let-you-go-behind-the-song";
   const isUpcomingSong = post.releaseStatus === "upcoming";
   const isSongStory =
     isComingOverYesterday || post.slug === "story-behind-do-you-ever-wonder";
@@ -256,6 +258,33 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
               className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
             >
               Join the Rhythm Realm Insider List
+            </RhythmRealmLink>
+          </nav>
+        ) : isTryingToLetYouGo ? (
+          <nav
+            aria-label="Continue exploring Trying to Let You Go"
+            className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-8 sm:flex-row sm:flex-wrap"
+          >
+            <RhythmRealmLink
+              href="/trying-to-let-you-go"
+              target="_self"
+              className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
+            >
+              Listen to Trying to Let You Go
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/lyrics/trying-to-let-you-go"
+              target="_self"
+              className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
+            >
+              Read the Official Lyrics
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/music"
+              target="_self"
+              className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
+            >
+              Explore More Music
             </RhythmRealmLink>
           </nav>
         ) : isSongStory ? (

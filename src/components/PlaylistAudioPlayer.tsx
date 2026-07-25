@@ -17,6 +17,12 @@ const FALLBACK_TRACKS: Track[] = [
     artist: "Terry T Productions featuring Andre Washington",
   },
   {
+    id: "trying-to-let-you-go",
+    title: "Trying to Let You Go",
+    src: "/audio/trying-to-let-you-go-andre-washington.mp3",
+    artist: "Andre Washington",
+  },
+  {
     id: "track-1",
     title: "Do You Ever Wonder?",
     src: "/audio/do-you-ever-wonder.mp3",

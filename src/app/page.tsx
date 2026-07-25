@@ -20,6 +20,18 @@ const featuredSong = {
 
 const secondarySongs = [
   {
+    id: "trying-to-let-you-go",
+    title: "Trying to Let You Go",
+    artist: "Andre Washington",
+    cover: "/trying-to-let-you-go-cover.png",
+    description:
+      "A reflective song about absence, memory, and the difficult process of trying to move forward.",
+    primaryHref: "/trying-to-let-you-go",
+    primaryLabel: "Open Song Page",
+    secondaryHref: "/blog/trying-to-let-you-go-behind-the-song",
+    secondaryLabel: "Read Story",
+  },
+  {
     id: "track-1",
     title: "Do You Ever Wonder?",
     artist: "Andre Washington",
@@ -150,7 +162,7 @@ export default function Home() {
               Featured Music
             </div>
             <h2 id="featured-music-heading" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Three songs. One direct place to listen.
+              Four songs. One direct place to listen.
             </h2>
           </div>
           <article className="mt-9 grid gap-7 rounded-2xl border border-cyan-200/20 bg-cyan-200/[0.055] p-5 sm:p-7 lg:grid-cols-[minmax(230px,0.75fr)_minmax(0,1.25fr)] lg:items-center">

@@ -36,20 +36,20 @@ export type BlogPost = {
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "trying-to-let-you-go-behind-the-song",
-    title: "Trying to Let You Go: Inside an Upcoming Acoustic Pop-Soul Song",
-    seoTitle: "Trying to Let You Go: Behind the Upcoming Song",
+    title: "Trying to Let You Go: Inside an Acoustic Pop-Soul Song",
+    seoTitle: "Trying to Let You Go: Behind the Song",
     description:
-      "Andre Washington shares the meaning and studio process behind \u201cTrying to Let You Go,\u201d an upcoming acoustic pop-soul ballad from Rhythm Realm, now in progress.",
+      "Andre Washington shares the meaning and studio process behind \u201cTrying to Let You Go,\u201d an acoustic pop-soul ballad now available on RhythmRealm.net.",
     excerpt:
-      "Andre Washington shares the emotional world and evolving studio sound behind \u201cTrying to Let You Go,\u201d an upcoming acoustic pop-soul ballad about caring for someone while learning to move forward.",
+      "Andre Washington shares the emotional world and studio sound behind \u201cTrying to Let You Go,\u201d an acoustic pop-soul ballad about caring for someone while learning to move forward.",
     dek:
-      "Andre Washington shares the emotional world and evolving studio sound behind \u201cTrying to Let You Go,\u201d an upcoming acoustic pop-soul ballad about caring for someone while learning to move forward.",
+      "Andre Washington shares the emotional world and studio sound behind \u201cTrying to Let You Go,\u201d an acoustic pop-soul ballad about caring for someone while learning to move forward.",
     byline: "By Andre Washington  |  Rhythm Realm",
     socialTitle:
-      "Inside \u201cTrying to Let You Go\u201d \u2014 An Upcoming Song by Andre Washington",
+      "Inside \u201cTrying to Let You Go\u201d \u2014 A Song by Andre Washington",
     socialDescription:
-      "Step inside the meaning and evolving studio sound of Andre Washington\u2019s upcoming acoustic pop-soul ballad about caring, memory, and the quiet work of moving forward.",
-    releaseStatus: "upcoming",
+      "Step inside the meaning and studio sound of Andre Washington\u2019s acoustic pop-soul ballad about caring, memory, and the quiet work of moving forward.",
+    releaseStatus: "released",
     image: {
       src: "/trying-to-let-you-go-behind-the-song-andre-washington.jpg",
       alt: "Andre Washington sits alone in a dim blue-and-amber room beside an empty chair and acoustic guitar, with a distant fading silhouette suggesting memory and separation.",
@@ -60,7 +60,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Behind the Song",
     tags: [
       "Trying to Let You Go Andre Washington",
-      "Upcoming Acoustic Pop Song",
+      "Acoustic Pop Song",
       "Pop-Soul Ballad",
       "Behind the Song",
       "Andre Washington Music",
@@ -73,7 +73,7 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "When the Heart Has Not Caught Up Yet",
         body: [
           "Sometimes the hardest part of letting go is not the decision itself. It is waking up after the decision and realizing that the smallest parts of your day still expect someone to be there. A room can feel different. A familiar silence can feel louder. Even when your mind understands that a relationship has changed, your heart may continue reaching toward what used to be.",
-          "That emotional space is where my upcoming song \u201cTrying to Let You Go\u201d lives. It is an intimate acoustic pop and pop-soul ballad about still caring for someone while slowly accepting that moving forward may be necessary. The song is not built around anger, blame, or a dramatic ending. It focuses on the quieter struggle: what happens when the love, habits, and memories do not disappear just because life has taken a different direction.",
+          "That emotional space is where my song \u201cTrying to Let You Go\u201d lives. It is an intimate acoustic pop and pop-soul ballad about still caring for someone while slowly accepting that moving forward may be necessary. The song is not built around anger, blame, or a dramatic ending. It focuses on the quieter struggle: what happens when the love, habits, and memories do not disappear just because life has taken a different direction.",
           "I wanted to write about that conflict honestly. Letting go can be the right choice and still feel painful. You can recognize that something has changed without pretending it never mattered. You can miss someone and still understand that holding on forever is not the same as honoring what you shared.",
         ],
         pullQuote:
@@ -91,30 +91,30 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "Why the Music Needs Room to Breathe",
         body: [
           "The arrangement begins with acoustic guitar because the song needs a foundation that feels human and close. At 78 beats per minute, the pace is unhurried. It gives each phrase time to settle and gives the listener room to notice what is being left unsaid. The song is in C major and moves in 4/4 time, but the emotional color is reflective rather than bright. That contrast helps the music feel tender without becoming heavy-handed.",
-          "Drums and bass are being shaped to support the song instead of pushing it forward too aggressively. Their role is to give the emotion a pulse and a sense of movement, as if the narrator is taking small steps toward acceptance. A clean electric guitar may sit quietly beneath the acoustic arrangement in parts of the song, adding depth without pulling attention away from the core performance.",
-          "Most importantly, the vocal needs to stay present and understandable. I want it to feel close to the listener, as though the song is being shared in the same room rather than projected from far away. Reverb and delay are being used to create a spacious, soulful atmosphere, but the words must remain clear. The space around the voice should deepen the feeling of memory and distance\u2014not cover it.",
+          "Drums and bass support the song without pushing it forward too aggressively. Their role is to give the emotion a pulse and a sense of movement, as if the narrator is taking small steps toward acceptance. The arrangement leaves room around its acoustic foundation so the core performance remains at the center.",
+          "Most importantly, the vocal stays present and understandable. I wanted it to feel close to the listener, as though the song is being shared in the same room rather than projected from far away. Reverb and delay create a spacious, soulful atmosphere while the words remain clear. The space around the voice deepens the feeling of memory and distance\u2014it does not cover it.",
         ],
       },
       {
-        heading: "Still Taking Shape in the Studio",
+        heading: "How the Song Took Shape in the Studio",
         body: [
-          "\u201cTrying to Let You Go\u201d is still being recorded, edited, mixed, and prepared for release. That means some production choices are still evolving. Right now, the work is about balance: deciding when the arrangement should remain exposed, when the rhythm section should add weight, and how much atmosphere the vocal needs before intimacy starts turning into distance.",
-          "This stage of making a song often involves small adjustments that can completely change how the emotion reaches the listener. A guitar part may need to move back. A vocal phrase may need more space around it. A delay may need to be felt more than clearly heard. None of those details exist simply to make the track sound polished. They have to serve the story.",
-          "I am also listening for restraint. A song like this can lose its honesty if every empty space is filled. The goal is not to prove how many sounds can fit into the arrangement. The goal is to make every sound earn its place, then leave enough room for the listener\u2019s own memories to enter.",
+          "\u201cTrying to Let You Go\u201d moved through recording, editing, mixing, and preparation before reaching the finished version now available on RhythmRealm.net. The production work centered on balance: deciding when the arrangement should remain exposed, when the rhythm section should add weight, and how much atmosphere the vocal needed before intimacy started turning into distance.",
+          "Small adjustments can completely change how the emotion reaches the listener. Throughout the process, every guitar part, vocal phrase, and atmospheric detail was considered for how it served the story rather than simply making the track sound polished.",
+          "Restraint remained important through the final mix. A song like this can lose its honesty if every empty space is filled. The goal was not to prove how many sounds could fit into the arrangement. It was to make every sound earn its place, then leave enough room for the listener\u2019s own memories to enter.",
         ],
       },
       {
         heading: "What I Hope Listeners Hear in Their Own Story",
         body: [
-          "When \u201cTrying to Let You Go\u201d is finished, I hope listeners recognize something true in it: moving forward is rarely a clean break. Acceptance can arrive slowly. The heart may revisit the same memory many times before it understands that remembering is different from returning.",
+          "In the finished song, I hope listeners recognize something true: moving forward is rarely a clean break. Acceptance can arrive slowly. The heart may revisit the same memory many times before it understands that remembering is different from returning.",
           "I also hope the song offers a little relief to anyone who has questioned why they still care. Caring does not mean you have failed to move on. Missing someone does not erase the progress you have made. Sometimes healing begins when we stop judging ourselves for the feelings that remain and start deciding how we want to carry them.",
           "That is the emotional destination of the song\u2014not forgetting, and not pretending the past meant nothing. It is a quieter kind of release: acknowledging what was real, accepting what has changed, and taking the next step even when part of you is still looking back.",
         ],
       },
       {
-        heading: "Follow the Song as It Moves Toward Release",
+        heading: "Listen to Trying to Let You Go on RhythmRealm.net",
         body: [
-          "\u201cTrying to Let You Go\u201d is still in development, and I look forward to sharing more of its journey as the recording and mix take shape. Follow the making of \u201cTrying to Let You Go\u201d and explore more songs, videos, lyrics, and behind-the-music stories at https://RhythmRealm.net.",
+          "\u201cTrying to Let You Go\u201d is now available to listen to on RhythmRealm.net. Hear the finished song, read the official lyrics, and explore more songs, videos, lyrics, and behind-the-music stories at https://RhythmRealm.net.",
         ],
       },
     ],
