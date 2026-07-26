@@ -3,7 +3,7 @@ import RhythmRealmLink from "@/components/RhythmRealmLink";
 const footerLinks = [
   { href: "/", label: "Home" },
   { href: "/music", label: "Music" },
-  { href: "/comics/the-artist-nobody-heard/issue-1", label: "Comic" },
+  { href: "/comics/the-artist-nobody-heard", label: "Comic" },
   { href: "/blog", label: "Stories" },
   { href: "/about-andre-washington", label: "About Andre" },
   { href: "/#signup", label: "Join" },

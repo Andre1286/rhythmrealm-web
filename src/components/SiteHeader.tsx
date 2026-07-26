@@ -4,7 +4,7 @@ import RhythmRealmLink from "@/components/RhythmRealmLink";
 
 const navLinks = [
   { href: "/music", label: "Music" },
-  { href: "/comics/the-artist-nobody-heard/issue-1", label: "Comic" },
+  { href: "/comics/the-artist-nobody-heard", label: "Comic" },
   { href: "/blog", label: "Stories" },
   { href: "/about-andre-washington", label: "About" },
   { href: "/#signup", label: "Join" },
