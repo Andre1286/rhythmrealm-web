@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 
 type Track = {
   id: string;
@@ -31,7 +32,7 @@ const FALLBACK_TRACKS: Track[] = [
   {
     id: "track-2",
     title: "If Only for the Love",
-    src: "/audio/if only for the love. By Andre Washington.mp3",
+    src: "/audio/if-only-for-the-love-remastered.mp3",
     artist: "Andre Washington",
   },
 ];
@@ -96,11 +97,10 @@ export default function PlaylistAudioPlayer() {
       const audio = audioRef.current;
 
       audio?.pause();
-      setCurrentIndex(wrappedIndex);
+      flushSync(() => setCurrentIndex(wrappedIndex));
       setIsPlaying(false);
       if (!audio) return;
 
-      audio.src = tracks[wrappedIndex].src;
       audio.load();
       if (shouldPlay) {
         try {
