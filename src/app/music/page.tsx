@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 
+import MusicTrackCard from "@/components/MusicTrackCard";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
-const tracks = [
+const featuredTracks = [
   {
-    title: "Coming Over Yesterday",
-    artist: "Terry T Productions featuring Andre Washington",
+    id: "coming-over-yesterday",
     duration: "3:23",
     href: "/blog/coming-over-yesterday",
-    audio: "/audio/coming-over-yesterday.mp3",
     cover: "/coming-over-yesterday-cover.jpg",
     description:
       "Coming Over Yesterday is a soulful love song about showing up before you\u2019re even asked \u2014 being there with heart, timing, and devotion.",
@@ -19,32 +17,19 @@ const tracks = [
     buttonLabel: "Read the Story",
   },
   {
-    title: "Trying to Let You Go",
-    artist: "Andre Washington",
+    id: "trying-to-let-you-go",
     href: "/trying-to-let-you-go",
-    audio: "/audio/trying-to-let-you-go-andre-washington.mp3",
     cover: "/trying-to-let-you-go-cover.png",
     description:
       "A reflective song about the quiet reminders that remain when someone is gone and the difficult work of learning to move forward.",
     buttonLabel: "Open Song Page",
   },
   {
-    title: "Do You Ever Wonder?",
-    artist: "Andre Washington",
+    id: "track-1",
     href: "/do-you-ever-wonder",
-    audio: "/audio/do-you-ever-wonder.mp3",
     cover: "/do-you-ever-wonder.png",
     description:
       "A reflective pop single about searching for a better way forward when the world feels divided.",
-  },
-  {
-    title: "If Only for the Love",
-    artist: "Andre Washington",
-    href: "/contact",
-    audio: "/audio/if-only-for-the-love-remastered.mp3",
-    cover: "/rhythm-realm-logo.png",
-    description:
-      "A Rhythm Realm track from Andre Washington with heart, melody, and direct-to-listener energy.",
   },
 ];
 
@@ -77,51 +62,19 @@ export default function MusicPage() {
         </div>
 
         <div className="mt-12 grid gap-5">
-          {tracks.map((track) => (
-            <article
-              key={track.title}
-              className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.04] p-5 md:grid-cols-[144px_minmax(0,1fr)] md:items-center"
-            >
-              <Image
-                src={track.cover}
-                alt={`${track.title} artwork`}
-                width={240}
-                height={240}
-                className="aspect-square w-full max-w-36 rounded-lg border border-white/10 object-cover"
-              />
-              <div>
-                <div className="text-sm font-semibold text-white/55">
-                  {track.artist}
-                  {track.duration ? ` | ${track.duration}` : ""}
-                </div>
-                <h2 className="mt-2 text-2xl font-semibold">{track.title}</h2>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/68 sm:text-base">
-                  {track.description}
-                </p>
-                {track.cta ? (
-                  <p className="mt-4 text-sm font-semibold text-cyan-100">{track.cta}</p>
-                ) : null}
-                <audio
-                  controls
-                  controlsList="nodownload noplaybackrate"
-                  src={track.audio}
-                  className="mt-5 w-full max-w-xl"
-                />
-                <div className="mt-5">
-                  <RhythmRealmLink
-                    href={track.href}
-                    target="_self"
-                    className="inline-flex rounded-lg border border-white/18 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-black"
-                  >
-                    {track.buttonLabel ??
-                      (track.href === "/do-you-ever-wonder"
-                        ? "Open Song Page"
-                        : "Ask for Updates")}
-                  </RhythmRealmLink>
-                </div>
-              </div>
-            </article>
+          {featuredTracks.map((track) => (
+            <MusicTrackCard key={track.id} {...track} />
           ))}
+        </div>
+
+        <div className="mt-8">
+          <RhythmRealmLink
+            href="/music/more"
+            target="_self"
+            className="inline-flex rounded-lg bg-cyan-100 px-5 py-3 text-sm font-semibold text-black transition hover:bg-white"
+          >
+            Explore More Music
+          </RhythmRealmLink>
         </div>
       </section>
 
