@@ -20,8 +20,9 @@ export default function SiteFooter() {
             Rhythm Realm
           </div>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/62">
-            RhythmRealm.net is the official music home of Andre Washington,
-            created for pop music with rhythm, soul, and real emotion.
+            RhythmRealm.net is the official music home of independent recording
+            artist Andre Washington — original pop music with rhythm, soul, story,
+            and human connection.
           </p>
           <RhythmRealmLink
             href="/"

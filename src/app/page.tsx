@@ -15,7 +15,7 @@ const featuredSong = {
   duration: "3:23",
   cover: "/coming-over-yesterday-cover.jpg",
   description:
-    "“Coming Over Yesterday” is a soulful love song by Terry T Productions featuring Andre Washington, built around devotion, timing, and being there before the moment even asks.",
+    "“Coming Over Yesterday” is a soulful pop love song by Terry T Productions featuring Andre Washington, built around devotion, timing, and being there before the moment even asks.",
 };
 
 const secondarySongs = [
@@ -39,7 +39,7 @@ const secondarySongs = [
     description:
       "A reflective pop song about life, division, faith, hope, and finding a better way forward.",
     primaryHref: "/do-you-ever-wonder",
-    primaryLabel: "Open Song Page",
+    primaryLabel: "Explore Song & Lyrics",
     secondaryHref: "/blog/story-behind-do-you-ever-wonder",
     secondaryLabel: "Read Story",
   },
@@ -117,14 +117,15 @@ export default function Home() {
         <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-5 py-14 sm:px-6 sm:py-18 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-center lg:py-20">
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
-              Official Music Home
+              The Official Music Home of Andre Washington
             </div>
             <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
               Pop Music With Rhythm and Soul.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-              Rhythm Realm is Andre Washington&apos;s direct home for music with
-              feeling, story, and a human connection at its center.
+              Rhythm Realm is the official music home of independent recording
+              artist Andre Washington — original pop music with rhythm, soul,
+              story, and human connection.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <RhythmRealmLink href="#music" target="_self" className={playButtonClass}>
@@ -259,7 +260,7 @@ export default function Home() {
         <div className="grid gap-7 rounded-2xl border border-white/10 bg-white/[0.035] p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-100/80">Latest Story</div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">The story and lyrics behind “Coming Over Yesterday.”</h2>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">The Story and Lyrics Behind “Coming Over Yesterday”</h2>
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/68">
               Go deeper into the featured song&apos;s modern love story, creative notes, credits, and complete lyrics.
             </p>
@@ -284,8 +285,8 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Music built from the inside out.</h2>
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/70">
               Andre Washington is an independent recording artist creating pop
-              music with rhythm and soul. Rhythm Realm is his direct home for
-              songs, stories, visuals, and the human connection behind the music.
+              music with rhythm and soul. Rhythm Realm is his official music home
+              for songs, stories, visuals, and the human connection behind the music.
             </p>
             <RhythmRealmLink href="/about-andre-washington" target="_self" className={`${outlineButtonClass} mt-7`}>
               About Andre
