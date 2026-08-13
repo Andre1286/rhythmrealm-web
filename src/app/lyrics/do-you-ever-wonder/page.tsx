@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 
 import EmailSignupForm from "@/components/EmailSignupForm";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
-import SongNextSteps from "@/components/SongNextSteps";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/seo";
 
 const songTitle = "Do You Ever Wonder?";
-const seoTitle = "Do You Ever Wonder Lyrics by Andre Washington | Rhythm Realm";
+const artistName = "Andre Washington";
+const seoTitle = "Do You Ever Wonder Lyrics — Andre Washington | Rhythm Realm";
 const seoDescription =
-  "Read the official Do You Ever Wonder lyrics by Andre Washington, then listen to the song, watch the video, and explore the meaning on RhythmRealm.net.";
+  "Read the official “Do You Ever Wonder” lyrics by Andre Washington, including every verse and chorus, on RhythmRealm.net.";
 const lyricsPagePath = "/lyrics/do-you-ever-wonder";
 const songPagePath = "/do-you-ever-wonder";
 const coverImagePath = "/do-you-ever-wonder/cover-art.png";
@@ -51,9 +51,9 @@ const faqItems = [
       "Do You Ever Wonder? is an original song by Andre Washington for Rhythm Realm.",
   },
   {
-    question: "What is Do You Ever Wonder about?",
+    question: "Are these the official Do You Ever Wonder lyrics?",
     answer:
-      "The song reflects on division, hope, prayer, and wanting a better way forward.",
+      "Yes. These are the official lyrics published by Andre Washington on RhythmRealm.net.",
   },
   {
     question: "Where can I read the Do You Ever Wonder lyrics?",
@@ -122,7 +122,7 @@ export default function DoYouEverWonderLyricsPage() {
           name: songTitle,
           byArtist: {
             "@type": "Person",
-            name: "Andre Washington",
+            name: artistName,
           },
         },
       },
@@ -131,11 +131,13 @@ export default function DoYouEverWonderLyricsPage() {
         name: songTitle,
         url: absoluteUrl(songPagePath),
         image: absoluteUrl(coverImagePath),
+        audio: absoluteUrl("/audio/do-you-ever-wonder.mp3"),
         byArtist: {
           "@type": "Person",
-          name: "Andre Washington",
+          name: artistName,
         },
-        description: seoDescription,
+        description:
+          "A reflective pop song by Andre Washington about division, hope, prayer, and finding a better way forward.",
       },
       {
         "@type": "FAQPage",
@@ -165,12 +167,12 @@ export default function DoYouEverWonderLyricsPage() {
             Official Lyrics
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-            Do You Ever Wonder Lyrics by Andre Washington
+            Do You Ever Wonder Lyrics &mdash; Andre Washington
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-lg">
-            Read the official lyrics for Andre Washington&apos;s Rhythm Realm
-            song &ldquo;Do You Ever Wonder?&rdquo; Then listen to the track, watch the
-            video, and explore the meaning behind the release.
+            Read the official lyrics for &ldquo;Do You Ever Wonder?&rdquo; by Andre
+            Washington, including every verse and chorus. To hear the track and
+            watch the videos, open the official song page.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <RhythmRealmLink
@@ -178,7 +180,7 @@ export default function DoYouEverWonderLyricsPage() {
               target="_self"
               className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
             >
-              Listen and Watch
+              Listen to &ldquo;Do You Ever Wonder&rdquo; by Andre Washington
             </RhythmRealmLink>
             <RhythmRealmLink
               href="/music"
@@ -216,8 +218,8 @@ export default function DoYouEverWonderLyricsPage() {
             Quick Answer
           </div>
           <p className="mt-4 text-sm leading-relaxed text-white/72">
-            {songTitle} is a reflective pop song by Andre Washington about
-            division, hope, prayer, and the search for a better way forward.
+            These are the official {songTitle} lyrics published by {artistName}
+            on RhythmRealm.net.
           </p>
           <RhythmRealmLink
             href="/do-you-ever-wonder#official-video"
@@ -285,12 +287,27 @@ export default function DoYouEverWonderLyricsPage() {
         </div>
       </section>
 
-      <div className="mx-auto w-full max-w-6xl px-6 pt-14">
-        <SongNextSteps
-          lyricsHref="/lyrics/do-you-ever-wonder"
-          signupHref="#signup"
-        />
-      </div>
+      <section className="mx-auto w-full max-w-6xl px-6 pt-14">
+        <div className="rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-6 sm:p-8">
+          <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
+            Hear the Song
+          </div>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
+            Listen to Do You Ever Wonder
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/68 sm:text-base">
+            Open the official song page to listen, watch the videos, and explore
+            the story behind the music.
+          </p>
+          <RhythmRealmLink
+            href={songPagePath}
+            target="_self"
+            className="mt-6 inline-flex rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
+          >
+            Listen to &ldquo;Do You Ever Wonder&rdquo; by Andre Washington
+          </RhythmRealmLink>
+        </div>
+      </section>
 
       <section className="mx-auto w-full max-w-6xl px-6 py-14">
         <EmailSignupForm />

@@ -15,45 +15,13 @@ const insideTheSongVideoPath =
 const claymationVideoPath = "/videos/do-you-ever-wonder-claymation.mp4";
 const songTitle = "Do You Ever Wonder?";
 const artistName = "Andre Washington";
-
-const lyricSections = [
-  {
-    label: "Verse 1",
-    lines: [
-      "Do you ever wonder why we're here in this life?",
-      "They make it very clear.",
-      "You're either on the right or on the left.",
-      "Any way you wind up out of breath.",
-    ],
-  },
-  {
-    label: "Chorus",
-    lines: [
-      "The way things go, it's all so cold,",
-      "and there's no love anymore.",
-      "We've got to find a better way",
-      "for us to see a brighter day.",
-    ],
-  },
-  {
-    label: "Verse 2",
-    lines: [
-      "If you have the time, I'd like to say,",
-      "the way to solve our problems is to pray.",
-      "This world we live in is in disarray.",
-      "Sit back, relax, and just press play.",
-    ],
-  },
-  {
-    label: "Verse 3",
-    lines: [
-      "Do you ever wonder why we're here?",
-      "In this life, they make it very clear.",
-      "You're either on the right or on the left.",
-      "Anyway, you wind up out of breath.",
-    ],
-  },
-];
+const songPagePath = "/do-you-ever-wonder";
+const lyricsPagePath = "/lyrics/do-you-ever-wonder";
+const coverImagePath = "/do-you-ever-wonder/cover-art.png";
+const seoTitle =
+  "Do You Ever Wonder — Andre Washington | Song, Story & Video";
+const seoDescription =
+  "Listen to “Do You Ever Wonder?” by Andre Washington, discover the story behind the reflective pop song, and watch the official videos on RhythmRealm.net.";
 
 const faqItems = [
   {
@@ -75,21 +43,19 @@ const faqItems = [
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Do You Ever Wonder by Andre Washington | Listen & Song Story",
+    absolute: seoTitle,
   },
-  description:
-    "Listen to “Do You Ever Wonder?” by Andre Washington and explore the story, lyrics, and meaning behind the song on RhythmRealm.net.",
+  description: seoDescription,
   alternates: {
-    canonical: "/do-you-ever-wonder",
+    canonical: songPagePath,
   },
   openGraph: {
-    title: "Do You Ever Wonder by Andre Washington | Listen & Song Story",
-    description:
-      "Listen to “Do You Ever Wonder?” by Andre Washington and explore the story, lyrics, and meaning behind the song on RhythmRealm.net.",
-    url: absoluteUrl("/do-you-ever-wonder"),
+    title: seoTitle,
+    description: seoDescription,
+    url: absoluteUrl(songPagePath),
     images: [
       {
-        url: "/do-you-ever-wonder/cover-art.png",
+        url: coverImagePath,
         width: 1200,
         height: 1200,
         alt: "Do You Ever Wonder by Andre Washington cover art",
@@ -98,10 +64,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Do You Ever Wonder by Andre Washington | Listen & Song Story",
-    description:
-      "Listen to “Do You Ever Wonder?” by Andre Washington and explore the story, lyrics, and meaning behind the song on RhythmRealm.net.",
-    images: ["/do-you-ever-wonder/cover-art.png"],
+    title: seoTitle,
+    description: seoDescription,
+    images: [coverImagePath],
   },
 };
 
@@ -112,13 +77,14 @@ export default function DoYouEverWonderPage() {
       {
         "@type": "MusicRecording",
         name: songTitle,
-        url: absoluteUrl("/do-you-ever-wonder"),
-        image: absoluteUrl("/do-you-ever-wonder/cover-art.png"),
+        url: absoluteUrl(songPagePath),
+        image: absoluteUrl(coverImagePath),
+        audio: absoluteUrl("/audio/do-you-ever-wonder.mp3"),
         byArtist: {
           "@type": "Person",
           name: artistName,
         },
-        description: metadata.description,
+        description: seoDescription,
       },
       {
         "@type": "FAQPage",
@@ -144,7 +110,7 @@ export default function DoYouEverWonderPage() {
 
       <section className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[360px_minmax(0,1fr)] lg:items-center">
         <Image
-          src="/do-you-ever-wonder/cover-art.png"
+          src={coverImagePath}
           alt="Do You Ever Wonder by Andre Washington cover art"
           width={720}
           height={720}
@@ -156,13 +122,13 @@ export default function DoYouEverWonderPage() {
             Official Single
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-            Do You Ever Wonder? by Andre Washington
+            Do You Ever Wonder? &mdash; Andre Washington
           </h1>
           <p className="mt-2 text-lg text-white/72">{artistName}</p>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-lg">
-            Listen to &ldquo;Do You Ever Wonder?&rdquo; by Andre Washington and
-            explore the story, lyrics, and meaning behind the song on
-            RhythmRealm.net.
+            Listen to &ldquo;Do You Ever Wonder?&rdquo; by Andre Washington, discover
+            the story behind this reflective pop song, and watch its official
+            videos on RhythmRealm.net.
           </p>
           <audio
             controls
@@ -172,11 +138,11 @@ export default function DoYouEverWonderPage() {
           />
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <RhythmRealmLink
-              href="/lyrics/do-you-ever-wonder"
+              href={lyricsPagePath}
               target="_self"
               className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
             >
-              Read Do You Ever Wonder? Lyrics
+              Read the Full &ldquo;Do You Ever Wonder&rdquo; Lyrics
             </RhythmRealmLink>
             <RhythmRealmLink
               href="#story-behind-the-song"
@@ -197,40 +163,25 @@ export default function DoYouEverWonderPage() {
       </section>
 
       <section id="lyrics" className="border-y border-white/10 bg-white/[0.035]">
-        <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-14 lg:grid-cols-[minmax(0,1fr)_360px]">
-          <div>
+        <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-14 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-center">
+          <div className="max-w-3xl">
             <div className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">
               Lyrics
             </div>
             <h2 className="mt-3 text-3xl font-semibold">
-              Do You Ever Wonder? Lyrics
+              Read the Full Do You Ever Wonder Lyrics
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62 sm:text-base">
-              For the focused lyrics page, read the official{" "}
-              <RhythmRealmLink
-                href="/lyrics/do-you-ever-wonder"
-                target="_self"
-                className="font-semibold text-cyan-100 underline decoration-cyan-100/40 underline-offset-4 transition hover:text-white"
-              >
-                Do You Ever Wonder lyrics
-              </RhythmRealmLink>{" "}
-              on RhythmRealm.net.
+            <p className="mt-4 text-base leading-relaxed text-white/68">
+              Follow every verse and chorus on the dedicated official lyrics
+              page for &ldquo;Do You Ever Wonder?&rdquo; by Andre Washington.
             </p>
-            <div className="mt-6 space-y-5 text-sm leading-relaxed text-white/78 sm:text-base">
-              {lyricSections.map((section) => (
-                <section key={section.label}>
-                  <h3 className="font-semibold text-white">[{section.label}]</h3>
-                  <p className="mt-2">
-                    {section.lines.map((line) => (
-                      <span key={line}>
-                        {line}
-                        <br />
-                      </span>
-                    ))}
-                  </p>
-                </section>
-              ))}
-            </div>
+            <RhythmRealmLink
+              href={lyricsPagePath}
+              target="_self"
+              className="mt-6 inline-flex rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100"
+            >
+              Read the Full Lyrics
+            </RhythmRealmLink>
           </div>
 
           <aside className="rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-5">
@@ -441,7 +392,7 @@ export default function DoYouEverWonderPage() {
 
       <div className="mx-auto w-full max-w-6xl px-6 py-14">
         <SongNextSteps
-          lyricsHref="/lyrics/do-you-ever-wonder"
+          lyricsHref={lyricsPagePath}
           signupHref="#signup"
         />
       </div>
