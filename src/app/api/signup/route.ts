@@ -29,14 +29,23 @@ export async function POST(request: Request) {
   } catch (error) {
     const providerError = error as {
       provider?: unknown;
+      category?: unknown;
       status?: unknown;
       requestId?: unknown;
+      configKey?: unknown;
+      validationFields?: unknown;
+      transportCode?: unknown;
+      transportType?: unknown;
     };
     console.error("Signup submission failed", {
       provider:
         typeof providerError.provider === "string"
           ? providerError.provider
           : "unknown",
+      category:
+        typeof providerError.category === "string"
+          ? providerError.category
+          : undefined,
       status:
         typeof providerError.status === "number"
           ? providerError.status
@@ -44,6 +53,25 @@ export async function POST(request: Request) {
       requestId:
         typeof providerError.requestId === "string"
           ? providerError.requestId
+          : undefined,
+      configKey:
+        typeof providerError.configKey === "string"
+          ? providerError.configKey
+          : undefined,
+      validationFields:
+        Array.isArray(providerError.validationFields) &&
+        providerError.validationFields.every(
+          (field) => typeof field === "string",
+        )
+          ? providerError.validationFields
+          : undefined,
+      transportCode:
+        typeof providerError.transportCode === "string"
+          ? providerError.transportCode
+          : undefined,
+      transportType:
+        typeof providerError.transportType === "string"
+          ? providerError.transportType
           : undefined,
     });
     return NextResponse.json(
