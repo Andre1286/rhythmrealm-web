@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Email signup configuration
+
+The `/api/signup` route writes new signups to MailerLite first and Airtable second.
+Configure these server-only environment variables in each deployed environment:
+
+- `MAILERLITE_API_KEY`
+- `MAILERLITE_GROUP_ID`
+- `AIRTABLE_API_KEY`
+- `AIRTABLE_BASE_ID`
+- `AIRTABLE_TABLE_NAME`
+
+Never prefix these values with `NEXT_PUBLIC_`; signup provider credentials must not
+be included in browser bundles.
+
 ## Getting Started
 
 First, run the development server:

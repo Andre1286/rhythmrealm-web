@@ -1,19 +1,11 @@
 import { NextResponse } from "next/server";
 
 import { createSignupRecord } from "@/lib/server/airtable";
-
-const MIN_ELAPSED_MS = 1200;
-
-type SignupRequestBody = {
-  email?: string;
-  website?: string;
-  startedAt?: number | string;
-  sourceUrl?: string;
-  utm?: Record<string, string | undefined | null>;
-};
-
-const isValidEmail = (value: string): boolean =>
-  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+import { upsertMailerLiteSubscriber } from "@/lib/server/mailerlite";
+import {
+  readAndValidateSignupRequest,
+  submitSignup,
+} from "@/lib/server/signup";
 
 const validationError = (message: string) =>
   NextResponse.json(
@@ -22,49 +14,44 @@ const validationError = (message: string) =>
   );
 
 export async function POST(request: Request) {
-  let payload: SignupRequestBody | null = null;
-
-  try {
-    payload = (await request.json()) as SignupRequestBody;
-  } catch {
-    return validationError("Invalid request payload.");
-  }
-
-  const email = payload?.email?.trim().toLowerCase() ?? "";
-  const website = payload?.website?.trim() ?? "";
-  const startedAtValue = payload?.startedAt;
-  const startedAt =
-    typeof startedAtValue === "string"
-      ? Number.parseInt(startedAtValue, 10)
-      : startedAtValue;
-
-  if (!email || !isValidEmail(email)) {
-    return validationError("Please enter a valid email address.");
-  }
-
-  if (website) {
-    return validationError("Invalid submission.");
-  }
-
-  if (!Number.isFinite(startedAt)) {
-    return validationError("Invalid submission.");
-  }
-
-  const elapsedMs = Date.now() - Number(startedAt);
-  if (elapsedMs < MIN_ELAPSED_MS) {
-    return validationError("Invalid submission.");
+  const validation = await readAndValidateSignupRequest(request);
+  if (!validation.ok) {
+    return validationError(validation.message);
   }
 
   try {
-    await createSignupRecord({
-      email,
+    await submitSignup(validation.signup, {
+      addToMailerLite: upsertMailerLiteSubscriber,
+      saveToAirtable: createSignupRecord,
     });
 
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (error) {
-    console.error("Signup submission failed", error);
+    const providerError = error as {
+      provider?: unknown;
+      status?: unknown;
+      requestId?: unknown;
+    };
+    console.error("Signup submission failed", {
+      provider:
+        typeof providerError.provider === "string"
+          ? providerError.provider
+          : "unknown",
+      status:
+        typeof providerError.status === "number"
+          ? providerError.status
+          : undefined,
+      requestId:
+        typeof providerError.requestId === "string"
+          ? providerError.requestId
+          : undefined,
+    });
     return NextResponse.json(
-      { ok: false, error: "SERVER_ERROR", message: "Unable to save signup." },
+      {
+        ok: false,
+        error: "SERVER_ERROR",
+        message: "Unable to sign up right now. Please try again.",
+      },
       { status: 500 },
     );
   }
