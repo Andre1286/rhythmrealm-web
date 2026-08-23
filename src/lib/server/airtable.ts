@@ -1,12 +1,29 @@
 import "server-only";
 
 const requireEnv = (name: string): string => {
-  const value = process.env[name];
+  const value = process.env[name]?.trim();
   if (!value) {
-    throw new Error(`Missing required env var: ${name}`);
+    throw new AirtableError(`Missing required env var: ${name}`);
   }
   return value;
 };
+
+export class AirtableError extends Error {
+  readonly provider = "airtable";
+  readonly status?: number;
+  readonly requestId?: string;
+
+  constructor(
+    message: string,
+    status?: number,
+    requestId?: string,
+  ) {
+    super(message);
+    this.name = "AirtableError";
+    this.status = status;
+    this.requestId = requestId;
+  }
+}
 
 export type SignupRecordInput = {
   email: string;
@@ -23,24 +40,30 @@ export const createSignupRecord = async (
     Email: input.email,
   };
 
-  const response = await fetch(
-    `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
+  let response: Response;
+  try {
+    response = await fetch(
+      `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          records: [{ fields }],
+        }),
       },
-      body: JSON.stringify({
-        records: [{ fields }],
-      }),
-    },
-  );
+    );
+  } catch {
+    throw new AirtableError("Airtable signup record creation failed");
+  }
 
   if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(
-      `Airtable request failed: ${response.status} ${errorText}`,
+    throw new AirtableError(
+      "Airtable signup record creation failed",
+      response.status,
+      response.headers.get("x-request-id") ?? undefined,
     );
   }
 };
