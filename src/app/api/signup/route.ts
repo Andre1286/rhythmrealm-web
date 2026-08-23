@@ -14,15 +14,6 @@ const validationError = (message: string) =>
   );
 
 export async function POST(request: Request) {
-  console.info({
-    MAILERLITE_API_KEY_PRESENT: Boolean(
-      process.env.MAILERLITE_API_KEY?.trim(),
-    ),
-    MAILERLITE_GROUP_ID_PRESENT: Boolean(
-      process.env.MAILERLITE_GROUP_ID?.trim(),
-    ),
-  });
-
   const validation = await readAndValidateSignupRequest(request);
   if (!validation.ok) {
     return validationError(validation.message);
