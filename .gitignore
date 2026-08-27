@@ -33,6 +33,10 @@ yarn-error.log*
 dev-server.log
 dev-server.err
 
+# local recovered comic source bundles (production assets are normalized below)
+/public/comics/Issue_3_Corrected_Pages_5_to_8_v2/
+/public/comics/The_Artist_Nobody_Heard_Issue_3_The_Price_of_Attention_WEBSITE_READY/
+
 # env files (can opt-in for committing if needed)
 .env*
 

@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/comics/the-artist-nobody-heard", priority: 0.9 },
     { path: "/comics/the-artist-nobody-heard/issue-1", priority: 0.9 },
     { path: "/comics/the-artist-nobody-heard/issue-2", priority: 0.9 },
+    { path: "/comics/the-artist-nobody-heard/issue-3", priority: 0.9 },
     { path: "/blog", priority: 0.85 },
     { path: "/music", priority: 0.8 },
     { path: "/music/more", priority: 0.75 },
