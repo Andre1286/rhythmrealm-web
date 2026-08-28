@@ -33,6 +33,18 @@ const issues = [
     width: 941,
     height: 1672,
   },
+  {
+    href: "/comics/the-artist-nobody-heard/issue-3",
+    issue: "Issue #3",
+    title: "The Price of Attention",
+    description:
+      "Julian finally gets the attention he wanted, but new opportunities force him to confront what visibility, ownership, and independence may cost.",
+    image:
+      "/comics/the-artist-nobody-heard/issue-3/issue-3-page-01.png",
+    alt: "The Artist Nobody Heard Issue #3 cover artwork showing Julian watching his music spread online.",
+    width: 1055,
+    height: 1491,
+  },
 ];
 
 export const metadata: Metadata = {
@@ -52,10 +64,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: issues[1].image,
-        width: issues[1].width,
-        height: issues[1].height,
-        alt: issues[1].alt,
+        url: issues[2].image,
+        width: issues[2].width,
+        height: issues[2].height,
+        alt: issues[2].alt,
       },
     ],
   },

@@ -6,81 +6,83 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/seo";
 
-const issuePath = "/comics/the-artist-nobody-heard/issue-2";
+const issuePath = "/comics/the-artist-nobody-heard/issue-3";
 
 const comicPages = [
   {
-    src: "/comics/the-artist-nobody-heard/issue-2/page-01-the-message-returns.png",
-    title: "The Message Returns",
-    alt: "Comic page 1, The Message Returns: Julian receives the mysterious Unknown Source signal again.",
-    width: 941,
-    height: 1672,
-  },
-  {
-    src: "/comics/the-artist-nobody-heard/issue-2/page-02-the-door-opens.png",
-    title: "The Door Opens",
-    alt: "Comic page 2, The Door Opens: A digital doorway opens and SYPHER begins to appear.",
-    width: 1024,
-    height: 1536,
-  },
-  {
-    src: "/comics/the-artist-nobody-heard/issue-2/page-03-sypher.png",
-    title: "SYPHER",
-    alt: "Comic page 3, SYPHER: SYPHER reveals that success cost him his artistic voice.",
-    width: 1024,
-    height: 1536,
-  },
-  {
-    src: "/comics/the-artist-nobody-heard/issue-2/page-04-heard-the-wrong-way.png",
-    title: "Heard the Wrong Way",
-    alt: "Comic page 4, Heard the Wrong Way: SYPHER shows Julian how the industry reshaped his identity and music.",
-    width: 941,
-    height: 1672,
-  },
-  {
-    src: "/comics/the-artist-nobody-heard/issue-2/page-05-clara-calls-again.png",
-    title: "Clara Calls Again",
-    alt: "Comic page 5, Clara Calls Again: Clara calls Julian and gives him a deadline on the artist-development offer.",
-    width: 941,
-    height: 1672,
-  },
-  {
-    src: "/comics/the-artist-nobody-heard/issue-2/page-06-mayas-warning.png",
-    title: "Maya's Warning",
-    alt: "Comic page 6, Maya's Warning: Maya reminds Julian that visibility is not worth being erased.",
+    src: "/comics/the-artist-nobody-heard/issue-3/issue-3-page-01.png",
+    title: "The Signal Spreads",
+    alt: "Comic page 1, The Signal Spreads: Julian watches his music begin spreading online as new listeners discover the signal.",
     width: 1055,
     height: 1491,
   },
   {
-    src: "/comics/the-artist-nobody-heard/issue-2/page-07-the-third-choice.png",
-    title: "The Third Choice",
-    alt: "Comic page 7, The Third Choice: Julian begins building his own direct-to-fan music home.",
-    width: 1055,
-    height: 1491,
+    src: "/comics/the-artist-nobody-heard/issue-3/issue-3-page-02.png",
+    title: "The Spike",
+    alt: "Comic page 2, The Spike: Julian sees plays and engagement rise rapidly as unexpected attention begins arriving.",
+    width: 1023,
+    height: 1537,
   },
   {
-    src: "/comics/the-artist-nobody-heard/issue-2/page-08-first-listener.png",
-    title: "First Listener",
-    alt: "Comic page 8, First Listener: Julian receives a meaningful message from his first real listener.",
-    width: 941,
-    height: 1672,
+    src: "/comics/the-artist-nobody-heard/issue-3/issue-3-page-03.png",
+    title: "The Offer",
+    alt: "Comic page 3, The Offer: Clara presents Julian with a larger music-industry opportunity as his audience grows.",
+    width: 1023,
+    height: 1537,
+  },
+  {
+    src: "/comics/the-artist-nobody-heard/issue-3/issue-3-page-04.png",
+    title: "The Fine Print",
+    alt: "Comic page 4, The Fine Print: Julian examines the opportunity's terms and considers what success may cost.",
+    width: 948,
+    height: 1659,
+  },
+  {
+    src: "/comics/the-artist-nobody-heard/issue-3/issue-3-page-05.png",
+    title: "What Happened to SYPHER",
+    alt: "Comic page 5, What Happened to SYPHER: SYPHER's past shows how industry success cost him control of his music and identity.",
+    width: 1110,
+    height: 2247,
+  },
+  {
+    src: "/comics/the-artist-nobody-heard/issue-3/issue-3-page-06.png",
+    title: "Maya's Test",
+    alt: "Comic page 6, Maya's Test: Maya challenges Julian to choose lasting listener connection over chasing numbers.",
+    width: 876,
+    height: 1795,
+  },
+  {
+    src: "/comics/the-artist-nobody-heard/issue-3/issue-3-page-07.png",
+    title: "Julian's Move",
+    alt: "Comic page 7, Julian's Move: Julian builds a direct relationship with his audience through Rhythm Realm.",
+    width: 1101,
+    height: 2247,
+  },
+  {
+    src: "/comics/the-artist-nobody-heard/issue-3/issue-3-page-08.png",
+    title: "Someone Notices",
+    alt: "Comic page 8, Someone Notices: Industry executives notice Julian's independent growth and prepare to approach him.",
+    width: 1119,
+    height: 2247,
   },
 ];
 
+const metadataTitle =
+  "The Artist Nobody Heard Issue #3 — The Price of Attention | Rhythm Realm";
+const metadataDescription =
+  "Julian finally gets the attention he wanted, but new opportunities force him to confront what visibility, ownership, and independence may cost.";
+
 export const metadata: Metadata = {
   title: {
-    absolute:
-      "The Artist Nobody Heard Issue #2: Unknown Source | Rhythm Realm",
+    absolute: metadataTitle,
   },
-  description:
-    "Read The Artist Nobody Heard Issue #2: Unknown Source, a Rhythm Realm comic about artistic ownership, industry pressure, and one artist choosing direct connection over empty attention.",
+  description: metadataDescription,
   alternates: {
     canonical: issuePath,
   },
   openGraph: {
-    title: "The Artist Nobody Heard Issue #2: Unknown Source | Rhythm Realm",
-    description:
-      "Read The Artist Nobody Heard Issue #2: Unknown Source, a Rhythm Realm comic about artistic ownership, industry pressure, and one artist choosing direct connection over empty attention.",
+    title: metadataTitle,
+    description: metadataDescription,
     url: absoluteUrl(issuePath),
     type: "article",
     images: [
@@ -97,7 +99,7 @@ export const metadata: Metadata = {
 const navigationLinkClass =
   "inline-flex justify-center rounded-lg border border-white/18 px-4 py-3 text-center text-sm font-semibold text-white/82 transition hover:border-cyan-200/40 hover:bg-cyan-100 hover:text-black";
 
-export default function TheArtistNobodyHeardIssueTwoPage() {
+export default function TheArtistNobodyHeardIssueThreePage() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-black text-white">
       <SiteHeader />
@@ -111,33 +113,24 @@ export default function TheArtistNobodyHeardIssueTwoPage() {
             The Artist Nobody Heard
           </h1>
           <p className="mt-4 text-xl font-semibold text-cyan-100 sm:text-2xl">
-            Issue #2: Unknown Source
+            Issue #3: The Price of Attention
           </p>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/68 sm:text-lg">
-            After receiving a mysterious signal, Julian meets SYPHER &mdash; a
-            former artist who knows what visibility can cost. With Clara&apos;s
-            offer still waiting, Julian must choose between being shaped by the
-            industry and building a direct connection with the people his music
-            was meant to reach.
+            Julian finally gets the attention he wanted, but new opportunities
+            force him to confront what visibility, ownership, and independence
+            may cost.
           </p>
 
           <nav
             aria-label="Issue navigation"
-            className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
           >
             <RhythmRealmLink
-              href="/comics/the-artist-nobody-heard/issue-1"
+              href="/comics/the-artist-nobody-heard/issue-2"
               target="_self"
               className={navigationLinkClass}
             >
-              Previous Issue: Issue #1 &mdash; Heard in the Noise
-            </RhythmRealmLink>
-            <RhythmRealmLink
-              href="/comics/the-artist-nobody-heard/issue-3"
-              target="_self"
-              className={navigationLinkClass}
-            >
-              Next Issue: Issue #3 &mdash; The Price of Attention
+              Previous Issue: Issue #2 &mdash; Unknown Source
             </RhythmRealmLink>
             <RhythmRealmLink
               href="/comics/the-artist-nobody-heard"
@@ -158,7 +151,7 @@ export default function TheArtistNobodyHeardIssueTwoPage() {
       </section>
 
       <section
-        aria-label="The Artist Nobody Heard, Issue #2 comic pages"
+        aria-label="The Artist Nobody Heard, Issue #3 comic pages"
         className="mx-auto w-full max-w-5xl px-3 py-10 sm:px-6 sm:py-14"
       >
         <ol className="grid gap-8 sm:gap-12">
