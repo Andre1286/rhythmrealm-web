@@ -67,7 +67,7 @@ export default function MusicPage() {
           ))}
         </div>
 
-        <div className="mt-8">
+        <nav aria-label="Explore music and stories" className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
           <RhythmRealmLink
             href="/music/more"
             target="_self"
@@ -75,7 +75,13 @@ export default function MusicPage() {
           >
             Explore More Music
           </RhythmRealmLink>
-        </div>
+          <RhythmRealmLink href="/behind-the-music" target="_self" className="text-sm text-cyan-100 underline underline-offset-4 hover:text-white">
+            Behind the Music
+          </RhythmRealmLink>
+          <RhythmRealmLink href="/#signup" target="_self" className="text-sm text-cyan-100 underline underline-offset-4 hover:text-white">
+            Join the Insider List
+          </RhythmRealmLink>
+        </nav>
       </section>
 
       <SiteFooter />

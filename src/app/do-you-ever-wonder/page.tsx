@@ -227,6 +227,12 @@ export default function DoYouEverWonderPage() {
               That is the heart of Rhythm Realm: music that lets real emotion
               breathe while keeping rhythm and melody at the center.
             </p>
+            <p>
+              Explore the song&rsquo;s themes in {" "}
+              <RhythmRealmLink href="/blog/story-behind-do-you-ever-wonder" target="_self" className="text-cyan-100 underline underline-offset-4 hover:text-white">
+                the full Behind the Song story
+              </RhythmRealmLink>.
+            </p>
           </div>
         </div>
       </section>
@@ -259,12 +265,18 @@ export default function DoYouEverWonderPage() {
                 music.
               </p>
               <p>
-                Join the email list and receive an MP3 download of &ldquo;Do You Ever
-                Wonder?&rdquo; or other songs featured on the website.
+                <RhythmRealmLink href="#signup" target="_self" className="text-cyan-100 underline underline-offset-4 hover:text-white">
+                  Join the Rhythm Realm Insider List
+                </RhythmRealmLink>{" "}
+                for new music, comic releases, and behind-the-song updates.
               </p>
               <p>
-                Rhythm Realm is also working on new music, including &ldquo;Coming
-                Over Yesterday,&rdquo; a collaboration with Terry T Productions.
+                Also listen to &ldquo;Coming Over Yesterday,&rdquo; by Terry T
+                Productions featuring Andre Washington, now featured on Rhythm
+                Realm. Explore its {" "}
+                <RhythmRealmLink href="/blog/coming-over-yesterday" target="_self" className="text-cyan-100 underline underline-offset-4 hover:text-white">
+                  story and lyrics
+                </RhythmRealmLink>.
               </p>
             </div>
 
@@ -288,12 +300,13 @@ export default function DoYouEverWonderPage() {
                   lyrics, and updates.
                 </p>
                 <p>
-                  Visit https://RhythmRealm.net, join the email list, and get an
-                  MP3 download.
+                  Listen here on RhythmRealm.net and explore the lyrics and
+                  stories behind the music.
                 </p>
                 <p>
-                  Also stay connected for upcoming music, including &ldquo;Coming Over
-                  Yesterday,&rdquo; a collaboration with Terry T Productions.
+                  &ldquo;Coming Over Yesterday,&rdquo; by Terry T Productions
+                  featuring Andre Washington, is also available to listen to on
+                  Rhythm Realm.
                 </p>
                 <p>
                   Discover more on RhythmRealm.net &mdash; Thank you for

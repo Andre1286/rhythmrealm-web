@@ -218,7 +218,7 @@ export default function DoYouEverWonderLyricsPage() {
             Quick Answer
           </div>
           <p className="mt-4 text-sm leading-relaxed text-white/72">
-            These are the official {songTitle} lyrics published by {artistName}
+            These are the official {songTitle} lyrics published by {artistName}{" "}
             on RhythmRealm.net.
           </p>
           <RhythmRealmLink
@@ -306,6 +306,12 @@ export default function DoYouEverWonderLyricsPage() {
           >
             Listen to &ldquo;Do You Ever Wonder&rdquo; by Andre Washington
           </RhythmRealmLink>
+          <p className="mt-4 text-sm leading-relaxed text-white/68">
+            For a closer look at the song&rsquo;s meaning, {" "}
+            <RhythmRealmLink href="/blog/story-behind-do-you-ever-wonder" target="_self" className="text-cyan-100 underline underline-offset-4 hover:text-white">
+              read Behind the Song
+            </RhythmRealmLink>.
+          </p>
         </div>
       </section>
 
