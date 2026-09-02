@@ -98,8 +98,8 @@ export default function Home() {
       })),
       {
         "@type": "ComicStory",
-        name: "The Artist Nobody Heard — Issue #1: Heard in the Noise",
-        url: absoluteUrl("/comics/the-artist-nobody-heard/issue-1"),
+        name: "The Artist Nobody Heard — Issue #3: The Price of Attention",
+        url: absoluteUrl("/comics/the-artist-nobody-heard/issue-3"),
       },
     ],
   };
@@ -233,25 +233,42 @@ export default function Home() {
       <section className="border-y border-white/10 bg-white/[0.035]">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-5 py-14 sm:px-6 sm:py-18 lg:grid-cols-[minmax(260px,0.8fr)_minmax(0,1.2fr)] lg:items-center">
           <Image
-            src="/comics/the-artist-nobody-heard/issue-1/page-01-the-endless-scroll.png"
-            alt="The Artist Nobody Heard Issue 1 artwork showing Julian facing an endless social media scroll"
-            width={941}
-            height={1672}
+            src="/comics/the-artist-nobody-heard/issue-3/issue-3-page-01.png"
+            alt="The Artist Nobody Heard Issue #3 artwork showing Julian watching his music spread online"
+            width={1055}
+            height={1491}
             sizes="(max-width: 1024px) 100vw, 420px"
             className="mx-auto h-auto w-full max-w-md rounded-xl border border-white/10 object-contain shadow-2xl"
           />
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">Comic Spotlight</div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">The Artist Nobody Heard</h2>
-            <p className="mt-3 text-lg font-semibold text-cyan-100">Issue #1: Heard in the Noise</p>
+            <p className="mt-3 text-lg font-semibold text-cyan-100">Issue #3: The Price of Attention</p>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-              Julian is an independent artist trying to be heard in a world of
-              endless scrolling, low numbers, and outside pressure. When the
-              silence gets too loud, he begins building a home for his art beyond the feed.
+              Julian finally gets the attention he wanted, but new opportunities
+              force him to confront what visibility, ownership, and independence
+              may cost.
             </p>
-            <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-1" target="_self" className={`${playButtonClass} mt-7`}>
-              Read Issue #1
-            </RhythmRealmLink>
+            <nav aria-label="Comic spotlight navigation" className="mt-7">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-3" target="_self" className={playButtonClass}>
+                  Read Issue #3
+                </RhythmRealmLink>
+                <RhythmRealmLink href="/comics/the-artist-nobody-heard" target="_self" className={outlineButtonClass}>
+                  Explore the Series
+                </RhythmRealmLink>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-white/70">
+                Catch up: {" "}
+                <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-1" target="_self" className="text-cyan-100 underline underline-offset-4 hover:text-white">
+                  Start with Issue #1
+                </RhythmRealmLink>
+                {" · "}
+                <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-2" target="_self" className="text-cyan-100 underline underline-offset-4 hover:text-white">
+                  Read Issue #2
+                </RhythmRealmLink>
+              </p>
+            </nav>
           </div>
         </div>
       </section>

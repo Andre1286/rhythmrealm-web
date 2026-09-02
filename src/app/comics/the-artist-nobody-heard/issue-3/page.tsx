@@ -185,8 +185,24 @@ export default function TheArtistNobodyHeardIssueThreePage() {
             Keep exploring the Rhythm Realm.
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-            Discover more on RhythmRealm.net &mdash; Thank you for listening.
+            Revisit the series, listen to Rhythm Realm music, or explore the
+            stories behind the songs. Join the Insider List for new music and
+            comic updates.
           </p>
+          <nav aria-label="After the comic" className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <RhythmRealmLink href="/comics/the-artist-nobody-heard" target="_self" className={navigationLinkClass}>
+              Explore All Three Issues
+            </RhythmRealmLink>
+            <RhythmRealmLink href="/music" target="_self" className={navigationLinkClass}>
+              Listen to Rhythm Realm Music
+            </RhythmRealmLink>
+            <RhythmRealmLink href="/behind-the-music" target="_self" className={navigationLinkClass}>
+              Behind the Music
+            </RhythmRealmLink>
+            <RhythmRealmLink href="/#signup" target="_self" className={navigationLinkClass}>
+              Join the Insider List
+            </RhythmRealmLink>
+          </nav>
         </div>
       </section>
 
