@@ -44,6 +44,14 @@ export default function ContactPage() {
               andredee1217@gmail.com
             </RhythmRealmLink>
           </div>
+          <section id="licensing" aria-labelledby="licensing-heading" className="mt-8 scroll-mt-6">
+            <h2 id="licensing-heading" className="text-2xl font-semibold">Licensing inquiries</h2>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/68">
+              To inquire about using a Rhythm Realm song in your project, email
+              Andre at the address above. Include the song, project, intended use,
+              territory, and timing.
+            </p>
+          </section>
         </div>
 
         <div className="rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-6">
