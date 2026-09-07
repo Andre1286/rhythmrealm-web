@@ -123,6 +123,27 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
           {post.dek ?? post.description}
         </p>
 
+        {isComingOverYesterday ? (
+          <section aria-label="Listen to Coming Over Yesterday" className="mt-7">
+            <audio
+              controls
+              controlsList="nodownload noplaybackrate"
+              preload="metadata"
+              src="/audio/coming-over-yesterday.mp3"
+              aria-label="Coming Over Yesterday by Terry T Productions featuring Andre Washington"
+              className="w-full"
+            />
+            <nav aria-label="Coming Over Yesterday page sections" className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <RhythmRealmLink href="#coming-over-yesterday-lyrics" target="_self" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100">
+                Read the Complete Lyrics
+              </RhythmRealmLink>
+              <RhythmRealmLink href="#coming-over-yesterday-story" target="_self" className="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/18 px-5 py-3 text-sm font-semibold transition hover:bg-white hover:text-black">
+                Read the Story
+              </RhythmRealmLink>
+            </nav>
+          </section>
+        ) : null}
+
         {post.tags?.length ? (
           <div className="mt-6 flex flex-wrap gap-2" aria-label="Post tags">
             {post.tags.map((tag) => (
@@ -153,7 +174,10 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
           </section>
         ) : null}
 
-        <div className="mt-12 space-y-10 border-t border-white/10 pt-10">
+        <div
+          id={isComingOverYesterday ? "coming-over-yesterday-story" : undefined}
+          className="mt-12 scroll-mt-6 space-y-10 border-t border-white/10 pt-10"
+        >
           {post.sections.map((section) => (
             <section key={section.heading}>
               <h2 className="text-2xl font-semibold">{section.heading}</h2>
@@ -179,6 +203,22 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
             </section>
           ))}
         </div>
+
+        {post.lyrics ? (
+          <section id={post.lyrics.id} aria-labelledby={post.lyrics.id + "-heading"} className="mt-12 scroll-mt-6 border-t border-white/10 pt-10">
+            <h2 id={post.lyrics.id + "-heading"} className="text-2xl font-semibold">
+              Complete {post.title} Lyrics
+            </h2>
+            <div className="mt-7 space-y-7 text-base leading-relaxed text-white/78">
+              {post.lyrics.sections.map((section, index) => (
+                <section key={index}>
+                  <h3 className="text-lg font-semibold text-white">{section.label}</h3>
+                  <p className="mt-3 whitespace-pre-line">{section.lines.join("\n")}</p>
+                </section>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         {showSoulfulSongLink ? (
           <section className="mt-12 border-t border-white/10 pt-10">
@@ -291,7 +331,7 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
           <SongNextSteps
             lyricsHref={
               isComingOverYesterday
-                ? "/#coming-over-yesterday-lyrics"
+                ? "#coming-over-yesterday-lyrics"
                 : "/lyrics/do-you-ever-wonder"
             }
             className="mt-12"
@@ -314,6 +354,15 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
             </RhythmRealmLink>
           </div>
         )}
+        {isComingOverYesterday ? (
+          <p className="mt-6 text-sm leading-relaxed text-white/68">
+            For film, TV, or other projects:{" "}
+            <RhythmRealmLink href="/contact#licensing" target="_self" className="inline-flex min-h-11 items-center text-cyan-100 underline underline-offset-4 hover:text-white">
+              Licensing inquiries
+            </RhythmRealmLink>
+            .
+          </p>
+        ) : null}
       </article>
 
       <SiteFooter />

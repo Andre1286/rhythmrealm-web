@@ -31,6 +31,10 @@ export type BlogPost = {
     answer: string;
   }[];
   closing?: string[];
+  lyrics?: {
+    id: string;
+    sections: { label: string; lines: string[] }[];
+  };
 };
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -126,6 +130,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "coming-over-yesterday",
     title: "Coming Over Yesterday",
+    byline: "Terry T Productions featuring Andre Washington",
     seoTitle:
       "Coming Over Yesterday – Terry T Productions ft. Andre Washington | Rhythm Realm",
     description:
@@ -133,6 +138,48 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt:
       "Follow “Coming Over Yesterday,” a Rhythm Realm love song by Terry T Productions featuring Andre Washington. Read lyrics, story notes, and updates on RhythmRealm.net.",
     canonicalPath: "/blog/coming-over-yesterday",
+    lyrics: {
+      id: "coming-over-yesterday-lyrics",
+      sections: [
+        {
+          label: "Intro",
+          lines: [
+            "As I recall",
+            "I’ve been there for you",
+            "For you, I give my all",
+            "There’s nothing I won’t do",
+            "For me, there is no other",
+          ],
+        },
+        {
+          label: "Hook",
+          lines: [
+            "Pick up the phone and call",
+            "FaceTime me whenever you want",
+            "I’m coming over yesterday",
+          ],
+        },
+        {
+          label: "Verse 1",
+          lines: [
+            "All that I need is your love",
+            "It’s the only thing I’m dreaming of",
+            "I’ll be there when you call",
+            "I will make time for you",
+            "You’re the only one I need",
+            "Your love is all I see",
+          ],
+        },
+        {
+          label: "Hook",
+          lines: [
+            "Pick up the phone and call me",
+            "FaceTime me whenever you want",
+            "I’m coming over yesterday",
+          ],
+        },
+      ],
+    },
     category: "Featured Song",
     tags: [
       "Coming Over Yesterday",
@@ -179,7 +226,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         question: "Where can I read the lyrics?",
-        answer: "The lyrics are available on RhythmRealm.net.",
+        answer: "The complete lyrics are in the lyrics section of this page, below the story.",
       },
     ],
     closing: [

@@ -86,8 +86,8 @@ export default function Home() {
         "@type": "MusicRecording",
         name: featuredSong.title,
         duration: "PT3M23S",
-        byArtist: { "@type": "Person", name: "Andre Washington" },
-        contributor: { "@type": "Organization", name: "Terry T Productions" },
+        byArtist: { "@type": "Organization", name: "Terry T Productions" },
+        contributor: { "@type": "Person", name: "Andre Washington" },
         url: absoluteUrl("/blog/coming-over-yesterday"),
       },
       ...secondarySongs.map((song) => ({
