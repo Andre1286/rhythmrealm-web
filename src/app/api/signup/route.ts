@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 
-import { createSignupRecord } from "@/lib/server/airtable";
 import { upsertMailerLiteSubscriber } from "@/lib/server/mailerlite";
 import {
   readAndValidateSignupRequest,
@@ -22,7 +21,6 @@ export async function POST(request: Request) {
   try {
     await submitSignup(validation.signup, {
       addToMailerLite: upsertMailerLiteSubscriber,
-      saveToAirtable: createSignupRecord,
     });
 
     return NextResponse.json({ ok: true }, { status: 200 });

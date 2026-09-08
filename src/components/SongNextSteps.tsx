@@ -27,7 +27,7 @@ export default function SongNextSteps({
       </h2>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/68 sm:text-base">
         Keep the music going, spend a little more time with the words, or get new
-        Rhythm Realm releases and stories first.
+        email updates about Rhythm Realm releases and stories.
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <RhythmRealmLink

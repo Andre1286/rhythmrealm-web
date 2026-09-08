@@ -7,6 +7,15 @@ import {
   sendMailerLiteSubscriberUpsert,
 } from "../src/lib/server/mailerlite-api.ts";
 
+test("MailerLite accepts both newly created and existing subscriber responses", async () => {
+  for (const status of [200, 201]) {
+    await assert.doesNotReject(sendMailerLiteSubscriberUpsert({ email: "listener@example.com" }, {
+      apiKey: "test-key", groupId: "test-group",
+      fetchImplementation: async () => new Response(JSON.stringify({ data: { id: "ignored-id" } }), { status }),
+    }));
+  }
+});
+
 test("missing preview configuration is identified without exposing values", () => {
   assert.throws(
     () => readMailerLiteConfiguration({ MAILERLITE_GROUP_ID: "group-id" }),
