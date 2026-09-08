@@ -19,7 +19,6 @@ export type SignupValidationResult =
 
 export type SignupServices = {
   addToMailerLite: (signup: ValidatedSignup) => Promise<void>;
-  saveToAirtable: (signup: ValidatedSignup) => Promise<void>;
 };
 
 const isValidEmail = (value: string): boolean =>
@@ -95,5 +94,4 @@ export const submitSignup = async (
   services: SignupServices,
 ): Promise<void> => {
   await services.addToMailerLite(signup);
-  await services.saveToAirtable(signup);
 };

@@ -2,17 +2,26 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Email signup configuration
 
-The `/api/signup` route writes new signups to MailerLite first and Airtable second.
+The `/api/signup` route validates each submission and upserts the email into the
+configured MailerLite group. MailerLite is the sole subscriber destination;
+its acceptance is sufficient for a successful response, including existing subscribers.
 Configure these server-only environment variables in each deployed environment:
 
 - `MAILERLITE_API_KEY`
 - `MAILERLITE_GROUP_ID`
-- `AIRTABLE_API_KEY`
-- `AIRTABLE_BASE_ID`
-- `AIRTABLE_TABLE_NAME`
 
 Never prefix these values with `NEXT_PUBLIC_`; signup provider credentials must not
 be included in browser bundles.
+
+The former `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, and `AIRTABLE_TABLE_NAME`
+variables are no longer read by this application. Removing them and retiring old
+test records are separate Captain-reviewed account cleanup tasks.
+
+The form measures accepted submissions with `insiders_signup_completed`, using
+only recognized page labels and a sanitized event URL. It does not measure unique
+or confirmed subscribers, and analytics availability never determines signup success.
+Persistent subscriber-level campaign attribution is a possible future improvement;
+no custom fields or raw URL/UTM storage are configured by this mission.
 
 ## Getting Started
 

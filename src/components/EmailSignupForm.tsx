@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useId, useRef, useState, type FormEvent } from "react";
+import { track } from "@vercel/analytics";
+import {
+  reportSignupCompletion,
+  SIGNUP_ERROR_MESSAGE,
+  SIGNUP_SUCCESS_MESSAGE,
+} from "@/lib/signup-feedback";
 
 type EmailSignupFormProps = {
   title?: string;
@@ -10,8 +16,8 @@ type EmailSignupFormProps = {
 
 export default function EmailSignupForm({
   title = "Join the Rhythm Realm Insider List",
-  description = "Join the Rhythm Realm Insider List and get new music, behind-the-song stories, videos, lyrics, and exclusive updates from Andre Washington.",
-  buttonLabel = "Get Rhythm Realm updates first",
+  description = "Sign up for email updates from Andre Washington about Rhythm Realm music and the stories behind it.",
+  buttonLabel = "Join the Insider List",
 }: EmailSignupFormProps) {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
@@ -20,24 +26,21 @@ export default function EmailSignupForm({
   );
   const [message, setMessage] = useState("");
   const [startedAt] = useState(() => Date.now());
+  const inputId = useId();
+  const submitting = useRef(false);
+  const [invalidEmail, setInvalidEmail] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (status === "loading") {
+    if (submitting.current) {
       return;
     }
 
+    submitting.current = true;
     setStatus("loading");
+    setInvalidEmail(false);
     setMessage("");
-
-    const urlSearchParams =
-      typeof window === "undefined"
-        ? new URLSearchParams()
-        : new URLSearchParams(window.location.search);
-    const utm = Object.fromEntries(
-      Array.from(urlSearchParams.entries()).filter(([key]) => key.startsWith("utm_")),
-    );
 
     try {
       const response = await fetch("/api/signup", {
@@ -49,29 +52,29 @@ export default function EmailSignupForm({
           email,
           website,
           startedAt,
-          sourceUrl: typeof window === "undefined" ? "" : window.location.href,
-          utm,
         }),
       });
 
-      const payload = (await response.json()) as {
-        ok?: boolean;
-        message?: string;
-      };
+      const payload = (await response.json()) as { ok?: boolean; message?: unknown } | null;
 
-      if (!response.ok || !payload.ok) {
+      if (!response.ok || payload?.ok !== true) {
         setStatus("error");
-        setMessage(payload.message ?? "Unable to sign up right now. Please try again.");
+        const emailError = payload?.message === "Please enter a valid email address.";
+        setInvalidEmail(emailError);
+        setMessage(emailError ? "Please enter a valid email address." : SIGNUP_ERROR_MESSAGE);
         return;
       }
 
       setStatus("success");
-      setMessage("Thanks for joining the Rhythm Realm Insider List.");
+      setMessage(SIGNUP_SUCCESS_MESSAGE);
       setEmail("");
       setWebsite("");
+      void reportSignupCompletion(track, window.location.href, document.referrer);
     } catch {
       setStatus("error");
-      setMessage("Unable to sign up right now. Please try again.");
+      setMessage(SIGNUP_ERROR_MESSAGE);
+    } finally {
+      submitting.current = false;
     }
   };
 
@@ -86,18 +89,32 @@ export default function EmailSignupForm({
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/68 sm:text-base">
         {description}
       </p>
-      <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <label htmlFor="email-signup-address" className="sr-only">
+      <form onSubmit={handleSubmit} aria-busy={status === "loading"} className="mt-6 flex flex-col gap-3 sm:flex-row">
+        <label htmlFor={inputId} className="sr-only">
           Email address
         </label>
         <input
-          id="email-signup-address"
+          id={inputId}
           name="email"
           type="email"
           required
           autoComplete="email"
+          aria-invalid={invalidEmail || undefined}
+          aria-describedby={`${inputId}-privacy${status === "error" ? ` ${inputId}-error` : ""}`}
+          onInvalid={() => {
+            setInvalidEmail(true);
+            setStatus("error");
+            setMessage("Please enter a valid email address.");
+          }}
           value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(event) => {
+            setEmail(event.target.value);
+            if (status !== "loading") {
+              setInvalidEmail(false);
+              setStatus("idle");
+              setMessage("");
+            }
+          }}
           placeholder="Enter your email"
           className="min-h-12 w-full rounded-lg border border-white/18 bg-black/45 px-4 py-3 text-sm text-white placeholder:text-white/45 outline-none transition focus:border-cyan-200 focus:ring-2 focus:ring-cyan-200/25 sm:flex-1"
         />
@@ -119,16 +136,15 @@ export default function EmailSignupForm({
           {status === "loading" ? "Submitting..." : buttonLabel}
         </button>
       </form>
-      {message ? (
-        <p
-          className={`mt-3 text-sm ${
-            status === "success" ? "text-cyan-200" : "text-red-300"
-          }`}
-        >
-          {message}
-        </p>
-      ) : null}
-      <p className="mt-3 text-xs text-white/45">No spam. Unsubscribe anytime.</p>
+      <p role="status" aria-atomic="true" className="mt-3 text-sm text-cyan-200">
+        {status === "loading" ? "Submitting your signup…" : status === "success" ? message : ""}
+      </p>
+      <p id={`${inputId}-error`} role="alert" aria-atomic="true" className="mt-3 text-sm text-red-300">
+        {status === "error" ? message : ""}
+      </p>
+      <p id={`${inputId}-privacy`} className="mt-3 text-xs text-white/65">
+        By joining, you’re asking to receive Rhythm Realm emails. Unsubscribe anytime.
+      </p>
     </div>
   );
 }

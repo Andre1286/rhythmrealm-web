@@ -315,7 +315,7 @@ export default function Home() {
       <section className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 sm:py-18">
         <div className="rounded-2xl border border-cyan-200/20 bg-cyan-200/[0.055] p-6 sm:p-8">
           <EmailSignupForm
-            description="Get new music, comic issue drops, behind-the-song stories, and exclusive Rhythm Realm updates."
+            description="Sign up for email updates about Rhythm Realm music, comics, and behind-the-song stories."
             buttonLabel="Join the Insider List"
           />
         </div>
