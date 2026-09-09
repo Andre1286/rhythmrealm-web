@@ -9,6 +9,9 @@ import {
   SITE_TITLE,
 } from "@/lib/seo";
 
+const ANDRE_PROFILE_URL = "https://www.rhythmrealm.net/about-andre-washington";
+const ANDRE_LINKEDIN_URL = "https://www.linkedin.com/in/andre-washington-423335191";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_HOME_URL),
   title: {
@@ -49,21 +52,53 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
+        "@id": `${SITE_HOME_URL}#organization`,
         name: SITE_NAME,
         url: SITE_HOME_URL,
         description: SITE_DESCRIPTION,
+        founder: {
+          "@id": `${SITE_HOME_URL}#andre-washington`,
+        },
       },
       {
         "@type": "Person",
+        "@id": `${SITE_HOME_URL}#andre-washington`,
         name: "Andre Washington",
-        url: SITE_HOME_URL,
-        sameAs: [SITE_HOME_URL],
+        url: ANDRE_PROFILE_URL,
+        mainEntityOfPage: ANDRE_PROFILE_URL,
+        description:
+          "Andre Washington is an independent recording artist, songwriter, producer, and music entrepreneur behind Rhythm Realm, creating pop music with rhythm and soul.",
+        jobTitle: [
+          "Independent Recording Artist",
+          "Songwriter",
+          "Producer",
+          "Music Entrepreneur",
+        ],
+        knowsAbout: [
+          "Pop music",
+          "Songwriting",
+          "Music production",
+          "Recording",
+          "Mixing",
+          "Sync licensing",
+        ],
+        sameAs: [ANDRE_LINKEDIN_URL],
+        affiliation: {
+          "@id": `${SITE_HOME_URL}#organization`,
+        },
       },
       {
         "@type": "WebSite",
+        "@id": `${SITE_HOME_URL}#website`,
         name: SITE_NAME,
         url: SITE_HOME_URL,
         description: SITE_DESCRIPTION,
+        publisher: {
+          "@id": `${SITE_HOME_URL}#organization`,
+        },
+        about: {
+          "@id": `${SITE_HOME_URL}#andre-washington`,
+        },
       },
     ],
   };
