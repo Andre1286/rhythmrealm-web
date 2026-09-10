@@ -42,6 +42,15 @@ export default function PlaylistAudioPlayer() {
   const [tracks, setTracks] = useState<Track[]>(FALLBACK_TRACKS);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const expandRef = useRef<HTMLButtonElement | null>(null);
+  const hasInteracted = useRef(false);
+
+  const collapsePlayer = () => {
+    setIsExpanded(false);
+    expandRef.current?.focus();
+  };
 
   useEffect(() => {
     const loadTracks = async () => {
@@ -60,6 +69,7 @@ export default function PlaylistAudioPlayer() {
                 typeof track?.src === "string",
             )
           : [];
+        if (hasInteracted.current) return;
         setTracks(sanitizedTracks.length > 0 ? sanitizedTracks : FALLBACK_TRACKS);
         setCurrentIndex(0);
       } catch {
@@ -96,6 +106,8 @@ export default function PlaylistAudioPlayer() {
       const wrappedIndex = (nextIndex + tracks.length) % tracks.length;
       const audio = audioRef.current;
 
+      hasInteracted.current = true;
+      if (shouldPlay) setHasStarted(true);
       audio?.pause();
       flushSync(() => setCurrentIndex(wrappedIndex));
       setIsPlaying(false);
@@ -138,72 +150,81 @@ export default function PlaylistAudioPlayer() {
     <section
       id="rhythm-realm-player"
       aria-label="Rhythm Realm music player"
-      className="sticky-audio-player rounded-2xl border border-cyan-200/20 bg-black/92 p-3 shadow-2xl shadow-black/70"
+      hidden={!hasStarted}
+      data-expanded={isExpanded}
+      className="sticky-audio-player"
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && isExpanded) {
+          event.preventDefault();
+          collapsePlayer();
+        }
+      }}
     >
       {currentTrack ? (
         <>
-          <div className="grid gap-3 md:grid-cols-[minmax(0,220px)_minmax(260px,1fr)_auto] md:items-center">
-            <div className="min-w-0" aria-live="polite">
-              <div className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-cyan-200/75">
-                Now Playing
-              </div>
-              <div className="truncate text-sm font-semibold">{currentTrack.title}</div>
-              <div className="truncate text-xs text-white/55">
-                {currentTrack.artist ?? "Rhythm Realm"}
-              </div>
+          <div className="player-heading">
+            <div className="player-track" aria-live="polite" aria-atomic="true">
+              <span className="player-state">{isPlaying ? "Now playing" : "Paused"}</span>
+              <span className="player-title" title={currentTrack.title}>{currentTrack.title}</span>
+              <span className="player-artist">{currentTrack.artist ?? "Rhythm Realm"}</span>
             </div>
+            <button
+              type="button"
+              aria-label={isPlaying ? "Pause current track" : "Play current track"}
+              onClick={isPlaying ? pauseCurrent : () => void playCurrent()}
+            >
+              {isPlaying ? "Pause" : "Play"}
+            </button>
+            <button
+              ref={expandRef}
+              type="button"
+              aria-label={isExpanded ? "Collapse player" : "Expand player controls"}
+              aria-expanded={isExpanded}
+              aria-controls="player-controls"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? "Collapse" : "More"}
+            </button>
+          </div>
+          <div id="player-controls" className="player-controls">
+            <p className="player-full-credit">
+              {currentTrack.title} — {currentTrack.artist ?? "Rhythm Realm"}
+            </p>
             <audio
               ref={audioRef}
               controls
+              preload="none"
               src={currentTrack.src}
               controlsList="nodownload noplaybackrate"
               aria-label={`${currentTrack.title} audio controls`}
               onContextMenu={(event) => event.preventDefault()}
               onEnded={handleEnded}
-              onPlay={() => setIsPlaying(true)}
+              onPlay={() => { setHasStarted(true); setIsPlaying(true); }}
               onPause={() => setIsPlaying(false)}
-              className="w-full min-w-0"
             />
-            <div className="flex gap-2">
-              <button type="button" aria-label="Previous track" onClick={handlePrev} className="min-h-10 rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold hover:bg-white hover:text-black">
-                Prev
-              </button>
-              <button type="button" aria-label={isPlaying ? "Pause current track" : "Play current track"} onClick={isPlaying ? pauseCurrent : () => void playCurrent()} className="min-h-10 rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold hover:bg-white hover:text-black">
-                {isPlaying ? "Pause" : "Play"}
-              </button>
-              <button type="button" aria-label="Next track" onClick={handleNext} className="min-h-10 rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold hover:bg-white hover:text-black">
-                Next
-              </button>
+            <div className="player-skip">
+              <button type="button" aria-label="Previous track" onClick={handlePrev}>Prev</button>
+              <button type="button" aria-label="Next track" onClick={handleNext}>Next</button>
             </div>
-          </div>
-          <details className="mt-2 border-t border-white/10 pt-2">
-            <summary className="w-fit cursor-pointer rounded text-xs font-semibold text-cyan-100/80 hover:text-cyan-100">
-              Choose a track
-            </summary>
-            <ul className="mt-2 grid max-h-36 gap-2 overflow-y-auto pr-1 sm:grid-cols-3">
-              {tracks.map((track, index) => {
-                const isSelected = index === currentIndex;
-                return (
+            <div className="player-selection">
+              <h2>Choose a track</h2>
+              <ul>
+                {tracks.map((track, index) => (
                   <li key={track.id}>
                     <button
                       type="button"
-                      aria-pressed={isSelected}
+                      aria-pressed={index === currentIndex}
                       aria-label={`Select ${track.title}`}
                       onClick={() => handleSelectTrack(index)}
-                      className={`h-full w-full rounded-lg border px-3 py-2 text-left text-sm transition ${
-                        isSelected
-                          ? "border-cyan-300/60 bg-cyan-300/10"
-                          : "border-white/10 bg-white/5 hover:border-white/30"
-                      }`}
                     >
-                      <div className="font-semibold">{track.title}</div>
-                      {track.artist ? <div className="text-xs text-white/60">{track.artist}</div> : null}
+                      <span>{track.title}</span>
+                      {track.artist ? <small>{track.artist}</small> : null}
                     </button>
                   </li>
-                );
-              })}
-            </ul>
-          </details>
+                ))}
+              </ul>
+            </div>
+          </div>
         </>
       ) : null}
     </section>

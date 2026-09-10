@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import styles from "./home.module.css";
 
 import EmailSignupForm from "@/components/EmailSignupForm";
 import PlaylistAudioPlayer from "@/components/PlaylistAudioPlayer";
@@ -67,10 +68,8 @@ export const metadata: Metadata = {
   },
 };
 
-const playButtonClass =
-  "inline-flex min-h-11 items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-100";
-const outlineButtonClass =
-  "inline-flex min-h-11 items-center justify-center rounded-lg border border-white/20 px-5 py-3 text-center text-sm font-semibold text-white transition hover:border-cyan-100/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-100";
+const playButtonClass = styles.primaryButton;
+const outlineButtonClass = styles.textLink;
 
 export default function Home() {
   const jsonLd = {
@@ -105,224 +104,188 @@ export default function Home() {
   };
 
   return (
-    <main className="player-safe-page min-h-screen overflow-x-hidden bg-black text-white">
+    <div className={`player-safe-page ${styles.page}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <div className={styles.pageScroll}>
+      <a href="#home-content" className={styles.skipLink}>Skip to content</a>
       <SiteHeader />
 
-      <section className="relative border-b border-white/10">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_32%,rgba(34,211,238,0.12),transparent_36%)]" />
-        <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-5 py-14 sm:px-6 sm:py-18 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-center lg:py-20">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
-              The Official Music Home of Andre Washington
-            </div>
-            <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-              Pop Music With Rhythm and Soul.
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-              Rhythm Realm is the official music home of independent recording
-              artist Andre Washington — original pop music with rhythm, soul,
-              story, and human connection.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <RhythmRealmLink href="#music" target="_self" className={playButtonClass}>
-                Listen Now
-              </RhythmRealmLink>
-              <RhythmRealmLink href="#signup" target="_self" className={outlineButtonClass}>
-                Join the Insider List
-              </RhythmRealmLink>
-            </div>
+      <main id="home-content" tabIndex={-1}>
+        <section className={`${styles.wrap} ${styles.opening}`} aria-labelledby="home-heading">
+          <div className={styles.openingCopy}>
+            <p className={styles.eyebrow}>Enter Rhythm Realm</p>
+            <h1 id="home-heading" className={styles.heroTitle}>Pop Music With Rhythm and Soul.</h1>
+            <p className={styles.intro}>Original music. Human stories.<br />The official music home of Andre Washington.</p>
+            <button type="button" data-rhythm-realm-track={featuredSong.id} className={playButtonClass} aria-label="Listen Now — play Coming Over Yesterday">
+              Listen Now <span aria-hidden="true">↗</span>
+            </button>
+            <RhythmRealmLink href="#music" target="_self" className={styles.releaseLink}>
+              Discover the featured song <span aria-hidden="true">↓</span>
+            </RhythmRealmLink>
           </div>
-          <article className="rounded-2xl border border-white/10 bg-white/[0.045] p-5 shadow-2xl shadow-cyan-950/25">
+          <figure className={styles.coverScene}>
             <Image
               src={featuredSong.cover}
               alt="Coming Over Yesterday cover artwork"
-              width={780}
-              height={780}
+              width={1254}
+              height={1254}
+              sizes="(max-width: 599px) 280px, (max-width: 899px) 440px, (max-width: 1280px) 46vw, 570px"
               priority
-              className="aspect-square w-full rounded-xl border border-white/10 object-cover"
+              className={styles.cover}
             />
-            <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200/80">
-              Featured Song
-            </div>
-            <h2 className="mt-2 text-2xl font-semibold">{featuredSong.title}</h2>
-            <p className="mt-2 text-sm font-semibold text-cyan-100/75">
-              {featuredSong.artist} · {featuredSong.duration}
-            </p>
-          </article>
-        </div>
-      </section>
+            <figcaption className={styles.coverCaption}>The sound of showing up.</figcaption>
+          </figure>
+        </section>
 
-      <section id="music" aria-labelledby="featured-music-heading" className="scroll-mt-24">
-        <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 sm:py-18">
-          <div className="max-w-3xl">
-            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
-              Featured Music
-            </div>
-            <h2 id="featured-music-heading" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Four songs. One direct place to listen.
-            </h2>
+        <section id="music" aria-labelledby="featured-music-heading" className={`${styles.wrap} ${styles.featured}`}>
+          <div>
+            <p className={styles.eyebrow}>01 / Feel the song</p>
+            <h2 id="featured-music-heading" className={styles.songTitle}>{featuredSong.title}</h2>
+            <p className={styles.credit}>Terry T Productions <span>featuring Andre Washington</span></p>
           </div>
-          <article className="mt-9 grid gap-7 rounded-2xl border border-cyan-200/20 bg-cyan-200/[0.055] p-5 sm:p-7 lg:grid-cols-[minmax(230px,0.75fr)_minmax(0,1.25fr)] lg:items-center">
-            <Image
-              src={featuredSong.cover}
-              alt="Cover artwork for Coming Over Yesterday"
-              width={720}
-              height={720}
-              sizes="(max-width: 1024px) 100vw, 420px"
-              className="aspect-square w-full rounded-xl border border-white/10 object-cover shadow-2xl"
-            />
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200/80">Featured Song</div>
-              <h3 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">{featuredSong.title}</h3>
-              <p className="mt-3 text-sm font-semibold text-cyan-100/75">
-                {featuredSong.artist} · {featuredSong.duration}
-              </p>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/72">{featuredSong.description}</p>
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <button type="button" data-rhythm-realm-track={featuredSong.id} className={playButtonClass} aria-label={`Play ${featuredSong.title}`}>
-                  Play
-                </button>
-                <RhythmRealmLink href="/blog/coming-over-yesterday" target="_self" className={outlineButtonClass}>
-                  Read Story &amp; Lyrics
-                </RhythmRealmLink>
-                <RhythmRealmLink href="/music" target="_self" className={outlineButtonClass}>
-                  Open Music Page
-                </RhythmRealmLink>
-              </div>
+          <div className={styles.featuredAction}>
+            <p className={styles.bodyCopy}>A soulful pop love song about devotion, timing, and being there before the moment even asks.</p>
+            <div className={styles.actions}>
+              <button type="button" data-rhythm-realm-track={featuredSong.id} className={playButtonClass} aria-label={`Play ${featuredSong.title}`}>
+                Play the song <span className={styles.duration}>{featuredSong.duration}</span>
+              </button>
+              <RhythmRealmLink href="/music" target="_self" className={outlineButtonClass}>Open Music Page</RhythmRealmLink>
             </div>
-          </article>
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
+          </div>
+        </section>
+
+        <section aria-labelledby="story-heading" className={`${styles.wrap} ${styles.story}`}>
+          <div className={styles.storyCopy}>
+            <p className={styles.eyebrow}>02 / Behind the music</p>
+            <h2 id="story-heading" className={styles.sceneTitle}>A song begins<br />with a feeling.</h2>
+            <p className={styles.bodyCopy}>Go inside the modern love story behind “Coming Over Yesterday” — the creative notes, the people who made it, and the words at its heart.</p>
+            <div className={styles.actions}>
+              <RhythmRealmLink href="/blog/coming-over-yesterday" target="_self" className={outlineButtonClass}>Read the Story <span aria-hidden="true">↗</span></RhythmRealmLink>
+              <RhythmRealmLink href="/blog/coming-over-yesterday#coming-over-yesterday-lyrics" target="_self" className={outlineButtonClass}>Read the lyrics</RhythmRealmLink>
+            </div>
+          </div>
+          <aside className={styles.artist} aria-labelledby="artist-heading">
+            <Image src="/andre-washington.png" alt="Andre Washington, the artist behind Rhythm Realm" width={720} height={720} sizes="(max-width: 599px) 112px, (max-width: 899px) 160px, 190px" className={styles.artistPortrait} />
+            <div>
+              <p className={styles.eyebrow}>The artist behind the Realm</p>
+              <h3 id="artist-heading">Andre Washington</h3>
+            </div>
+            <div className={styles.artistDetails}>
+              <p className={styles.bodyCopy}>An independent recording artist creating pop music with rhythm, soul, and human connection.</p>
+              <RhythmRealmLink href="/about-andre-washington" target="_self" className={styles.artistLink}>About Andre <span aria-hidden="true">↗</span></RhythmRealmLink>
+            </div>
+          </aside>
+        </section>
+
+        <section aria-labelledby="comic-heading" className={styles.comicScene}>
+          <div className={`${styles.wrap} ${styles.comicLayout}`}>
+            <div className={styles.comicCopy}>
+              <p className={styles.eyebrow}>03 / Another chapter</p>
+              <p className={styles.bridge}>Music connects us.<br />Some stories ask what it takes to be heard.</p>
+              <h2 id="comic-heading" className={styles.comicTitle}>The Artist<br />Nobody Heard</h2>
+              <p className={styles.issue}>Issue #3: The Price of Attention</p>
+              <p className={styles.bodyCopy}>Julian finally gets the attention he wanted, but new opportunities force him to confront what visibility, ownership, and independence may cost.</p>
+              <nav aria-label="Comic spotlight navigation">
+                <div className={styles.actions}>
+                  <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-3" target="_self" className={playButtonClass}>Read Issue #3 <span aria-hidden="true">↗</span></RhythmRealmLink>
+                  <RhythmRealmLink href="/comics/the-artist-nobody-heard" target="_self" className={outlineButtonClass}>Explore the Series</RhythmRealmLink>
+                </div>
+                <div className={styles.catchUp}>
+                  <span>Catch up</span>
+                  <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-1" target="_self" className={outlineButtonClass}>Start with Issue #1</RhythmRealmLink>
+                  <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-2" target="_self" className={outlineButtonClass}>Read Issue #2</RhythmRealmLink>
+                </div>
+              </nav>
+            </div>
+            <figure className={styles.comicArtwork}>
+              <Image
+                src="/comics/the-artist-nobody-heard/issue-3/issue-3-page-01.png"
+                alt="The Artist Nobody Heard Issue #3 artwork showing Julian watching his music spread online"
+                width={1055}
+                height={1491}
+                loading="eager"
+                sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 899px) 480px, (max-width: 1280px) 42vw, 520px"
+                className={styles.comicPage}
+              />
+              <figcaption className={styles.comicCaption}>The Artist Nobody Heard / Issue 03 / Opening page</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section aria-label="Rhythm Realm Insiders invitation" className={`${styles.wrap} ${styles.insiders}`}>
+          <div className={styles.invitation}>
+            <p className={styles.eyebrow}>04 / Stay connected</p>
+            <p className={styles.invitationTitle}>The story<br />keeps going.</p>
+            <p className={styles.bodyCopy}>Stay connected to the world you just discovered.</p>
+          </div>
+          <div className={styles.signupPresentation}>
+            <EmailSignupForm
+              description="Sign up for email updates about Rhythm Realm music, comics, and behind-the-song stories."
+              buttonLabel="Join the Insider List"
+            />
+          </div>
+        </section>
+
+        <section id="explore" aria-labelledby="explore-heading" className={`${styles.wrap} ${styles.explore}`}>
+          <div className={styles.exploreHeading}>
+            <div>
+              <p className={styles.eyebrow}>05 / Choose your next chapter</p>
+              <h2 id="explore-heading" className={styles.sceneTitle}>Explore the Realm.</h2>
+            </div>
+            <p className={styles.bodyCopy}>Another song. A different perspective.<br />There’s more to discover.</p>
+          </div>
+          <div className={styles.secondarySongs}>
             {secondarySongs.map((song) => (
-              <article key={song.id} className="grid gap-5 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:grid-cols-[128px_minmax(0,1fr)] sm:items-start">
-                <Image
-                  src={song.cover}
-                  alt={`${song.title} artwork`}
-                  width={320}
-                  height={320}
-                  className="aspect-square w-full max-w-40 rounded-xl border border-white/10 object-cover sm:max-w-none"
-                />
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">Rhythm Realm Song</div>
-                  <h3 className="mt-2 text-2xl font-semibold">{song.title}</h3>
-                  <p className="mt-2 text-sm font-semibold text-cyan-100/70">{song.artist}</p>
-                  <p className="mt-4 text-sm leading-relaxed text-white/68">{song.description}</p>
-                  <div className="mt-5 flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:flex-wrap">
-                    <button type="button" data-rhythm-realm-track={song.id} className={playButtonClass} aria-label={`Play ${song.title}`}>
-                      Play
-                    </button>
-                    <RhythmRealmLink href={song.primaryHref} target="_self" className={outlineButtonClass}>
-                      {song.primaryLabel}
-                    </RhythmRealmLink>
-                    {song.secondaryHref ? (
-                      <RhythmRealmLink href={song.secondaryHref} target="_self" className={outlineButtonClass}>
-                        {song.secondaryLabel}
-                      </RhythmRealmLink>
-                    ) : null}
-                  </div>
+              <article key={song.id} className={styles.trackRow}>
+                <Image src={song.cover} alt={`${song.title} artwork`} width={160} height={160} sizes="(max-width: 599px) 64px, 80px" className={styles.trackCover} />
+                <div className={styles.trackInfo}>
+                  <h3>{song.title}</h3>
+                  <p>{song.artist}</p>
+                </div>
+                <div className={styles.trackActions}>
+                  <button type="button" data-rhythm-realm-track={song.id} className={styles.smallPlay} aria-label={`Play ${song.title}`}>Play</button>
+                  <RhythmRealmLink href={song.primaryHref} target="_self" className={outlineButtonClass}>{song.primaryLabel}</RhythmRealmLink>
+                  {song.secondaryHref ? <RhythmRealmLink href={song.secondaryHref} target="_self" className={outlineButtonClass}>{song.secondaryLabel}</RhythmRealmLink> : null}
                 </div>
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-white/[0.035]">
-        <div className="mx-auto grid w-full max-w-6xl gap-8 px-5 py-14 sm:px-6 sm:py-18 lg:grid-cols-[minmax(260px,0.8fr)_minmax(0,1.2fr)] lg:items-center">
-          <Image
-            src="/comics/the-artist-nobody-heard/issue-3/issue-3-page-01.png"
-            alt="The Artist Nobody Heard Issue #3 artwork showing Julian watching his music spread online"
-            width={1055}
-            height={1491}
-            sizes="(max-width: 1024px) 100vw, 420px"
-            className="mx-auto h-auto w-full max-w-md rounded-xl border border-white/10 object-contain shadow-2xl"
-          />
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">Comic Spotlight</div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">The Artist Nobody Heard</h2>
-            <p className="mt-3 text-lg font-semibold text-cyan-100">Issue #3: The Price of Attention</p>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-              Julian finally gets the attention he wanted, but new opportunities
-              force him to confront what visibility, ownership, and independence
-              may cost.
-            </p>
-            <nav aria-label="Comic spotlight navigation" className="mt-7">
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-3" target="_self" className={playButtonClass}>
-                  Read Issue #3
-                </RhythmRealmLink>
-                <RhythmRealmLink href="/comics/the-artist-nobody-heard" target="_self" className={outlineButtonClass}>
-                  Explore the Series
-                </RhythmRealmLink>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-white/70">
-                Catch up: {" "}
-                <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-1" target="_self" className="text-cyan-100 underline underline-offset-4 hover:text-white">
-                  Start with Issue #1
-                </RhythmRealmLink>
-                {" · "}
-                <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-2" target="_self" className="text-cyan-100 underline underline-offset-4 hover:text-white">
-                  Read Issue #2
-                </RhythmRealmLink>
-              </p>
+          <nav aria-label="Explore the Realm" className={styles.destinations}>
+            {[
+              { href: "/music", title: "Music", detail: "Find your next song" },
+              { href: "/blog", title: "Stories", detail: "Go beyond the song" },
+              { href: "/comics/the-artist-nobody-heard", title: "The Artist Nobody Heard", detail: "Explore all three issues" },
+            ].map((destination) => (
+              <RhythmRealmLink key={destination.title} href={destination.href} target="_self" className={styles.destination}>
+                <span className={styles.destinationTitle}>{destination.title}<span aria-hidden="true">↗</span></span>
+                <span className={styles.destinationDetail}>{destination.detail}</span>
+              </RhythmRealmLink>
+            ))}
+          </nav>
+          <nav aria-label="More ways to discover" className={styles.morePaths}>
+            <RhythmRealmLink href="/do-you-ever-wonder#official-video" target="_self" className={outlineButtonClass}>Videos</RhythmRealmLink>
+            <RhythmRealmLink href="/lyrics/do-you-ever-wonder" target="_self" className={outlineButtonClass}>Lyrics</RhythmRealmLink>
+            <RhythmRealmLink href="/behind-the-music" target="_self" className={outlineButtonClass}>Behind the Music</RhythmRealmLink>
+            <RhythmRealmLink href="https://www.youtube.com/watch?v=pWQU2ojAZFU" className={outlineButtonClass}>Watch “Do You Ever Wonder?” on YouTube <span className={styles.newTab}>(new tab)</span></RhythmRealmLink>
+          </nav>
+          <div className={styles.closing}>
+            <div>
+              <h3>The next chapter is yours.</h3>
+              <RhythmRealmLink href="#signup" target="_self" className={outlineButtonClass}>Stay connected with Rhythm Realm Insiders <span aria-hidden="true">↗</span></RhythmRealmLink>
+            </div>
+            <nav aria-label="Connect with Andre" className={styles.contactPaths}>
+              <RhythmRealmLink href="/contact#licensing" target="_self" className={outlineButtonClass}>Licensing inquiries</RhythmRealmLink>
+              <RhythmRealmLink href="/contact" target="_self" className={outlineButtonClass}>Contact</RhythmRealmLink>
             </nav>
           </div>
-        </div>
-      </section>
-
-      <section className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 sm:py-18">
-        <div className="grid gap-7 rounded-2xl border border-white/10 bg-white/[0.035] p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-100/80">Latest Story</div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">The Story and Lyrics Behind “Coming Over Yesterday”</h2>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/68">
-              Go deeper into the featured song&apos;s modern love story, creative notes, credits, and complete lyrics.
-            </p>
-          </div>
-          <RhythmRealmLink href="/blog/coming-over-yesterday" target="_self" className={outlineButtonClass}>
-            Read the Story
-          </RhythmRealmLink>
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-white/[0.025]">
-        <div className="mx-auto grid w-full max-w-6xl gap-8 px-5 py-14 sm:px-6 sm:py-18 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-center">
-          <Image
-            src="/andre-washington.png"
-            alt="Andre Washington, the artist behind Rhythm Realm"
-            width={720}
-            height={720}
-            className="aspect-square w-full max-w-[220px] rounded-xl border border-white/10 object-cover shadow-2xl"
-          />
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">About Andre</div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Music built from the inside out.</h2>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/70">
-              Andre Washington is an independent recording artist creating pop
-              music with rhythm and soul. Rhythm Realm is his official music home
-              for songs, stories, visuals, and the human connection behind the music.
-            </p>
-            <RhythmRealmLink href="/about-andre-washington" target="_self" className={`${outlineButtonClass} mt-7`}>
-              About Andre
-            </RhythmRealmLink>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 sm:py-18">
-        <div className="rounded-2xl border border-cyan-200/20 bg-cyan-200/[0.055] p-6 sm:p-8">
-          <EmailSignupForm
-            description="Sign up for email updates about Rhythm Realm music, comics, and behind-the-song stories."
-            buttonLabel="Join the Insider List"
-          />
-        </div>
-      </section>
-
+        </section>
+      </main>
       <SiteFooter />
+      </div>
       <PlaylistAudioPlayer />
-    </main>
+    </div>
   );
 }
