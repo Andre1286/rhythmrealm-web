@@ -11,6 +11,7 @@ type MusicTrackCardProps = {
   duration?: string;
   cta?: string;
   buttonLabel?: string;
+  labelAudio?: boolean;
 };
 
 export default function MusicTrackCard({
@@ -21,6 +22,7 @@ export default function MusicTrackCard({
   duration,
   cta,
   buttonLabel,
+  labelAudio,
 }: MusicTrackCardProps) {
   const track = trackManifest.find((item) => item.id === id);
 
@@ -50,6 +52,7 @@ export default function MusicTrackCard({
           <p className="mt-4 text-sm font-semibold text-cyan-100">{cta}</p>
         ) : null}
         <audio
+          aria-label={labelAudio ? `${track.title} by ${track.artist}` : undefined}
           controls
           controlsList="nodownload noplaybackrate"
           src={track.src}
