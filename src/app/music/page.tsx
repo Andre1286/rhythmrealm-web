@@ -63,7 +63,7 @@ export default function MusicPage() {
 
         <div className="mt-12 grid gap-5">
           {featuredTracks.map((track) => (
-            <MusicTrackCard key={track.id} {...track} />
+            <MusicTrackCard key={track.id} {...track} labelAudio />
           ))}
         </div>
 
