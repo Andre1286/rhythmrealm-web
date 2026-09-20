@@ -31,6 +31,13 @@ const featuredTracks = [
     description:
       "A reflective pop single about searching for a better way forward when the world feels divided.",
   },
+  {
+    id: "track-2",
+    href: "/contact",
+    cover: "/rhythm-realm-logo.png",
+    description:
+      "A Rhythm Realm track from Andre Washington with heart, melody, and direct-to-listener energy.",
+  },
 ];
 
 export const metadata: Metadata = {
