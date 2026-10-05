@@ -25,16 +25,29 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
     headline: post.title,
     description: post.description,
     url: absoluteUrl(post.canonicalPath),
-    mainEntityOfPage: absoluteUrl(post.canonicalPath),
-    author: {
-      "@type": "Person",
-      name: "Andre Washington",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: absoluteUrl("/"),
-    },
+    mainEntityOfPage: post.editorialCredit
+      ? {
+          "@type": "WebPage",
+          "@id": absoluteUrl(post.canonicalPath),
+          url: absoluteUrl(post.canonicalPath),
+          reviewedBy: {
+            "@id": absoluteUrl("/#andre-washington"),
+          },
+        }
+      : absoluteUrl(post.canonicalPath),
+    author: post.editorialCredit
+      ? { "@id": absoluteUrl("/#organization") }
+      : {
+          "@type": "Person",
+          name: "Andre Washington",
+        },
+    publisher: post.editorialCredit
+      ? { "@id": absoluteUrl("/#organization") }
+      : {
+          "@type": "Organization",
+          name: SITE_NAME,
+          url: absoluteUrl("/"),
+        },
     ...(post.image ? { image: absoluteUrl(post.image.src) } : {}),
     articleSection: post.category,
     keywords: post.tags?.join(", "),
@@ -107,6 +120,26 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
           <p className="mt-4 text-sm font-semibold text-cyan-100/80">
             {post.byline}
           </p>
+        ) : null}
+        {post.editorialCredit ? (
+          <div className="mt-4 space-y-1 text-sm leading-relaxed text-white/68">
+            <p className="font-semibold text-cyan-100/80">
+              Rhythm Realm Editorial
+            </p>
+            <p>
+              Reviewed and approved by{" "}
+              <RhythmRealmLink
+                href="/about-andre-washington"
+                target="_self"
+                className="text-cyan-100 underline underline-offset-4 hover:text-white"
+              >
+                Andre Washington
+              </RhythmRealmLink>
+            </p>
+            {post.firsthandPerspective ? (
+              <p>Based on Andre Washington&apos;s firsthand artist perspective.</p>
+            ) : null}
+          </div>
         ) : null}
         {post.image ? (
           <Image

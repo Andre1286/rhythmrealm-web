@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import EmailSignupForm from "@/components/EmailSignupForm";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
-export const metadata: Metadata = {
+const pageMetadata: Metadata = {
   title: "Contact and Email Signup",
   description:
     "Contact Andre Washington and join the Rhythm Realm email list for music updates.",
@@ -13,6 +13,21 @@ export const metadata: Metadata = {
     canonical: "/contact",
   },
 };
+
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const parentMetadata = await parent;
+
+  return {
+    ...pageMetadata,
+    openGraph: {
+      ...parentMetadata.openGraph,
+      url: "https://www.rhythmrealm.net/contact",
+    },
+  };
+}
 
 export default function ContactPage() {
   return (

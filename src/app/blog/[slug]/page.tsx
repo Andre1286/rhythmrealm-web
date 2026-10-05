@@ -57,7 +57,7 @@ export async function generateMetadata({
       title: socialTitle,
       description: socialDescription,
       url: absoluteUrl(post.canonicalPath),
-      authors: ["Andre Washington"],
+      ...(post.editorialCredit ? {} : { authors: ["Andre Washington"] }),
       tags: post.tags,
       ...(socialImage ? { images: [socialImage] } : {}),
     },
