@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
-export const metadata: Metadata = {
+const pageMetadata: Metadata = {
   title: "Behind the Music",
   description:
     "Explore the stories, creative process, and emotional ideas behind Andre Washington's Rhythm Realm music.",
@@ -13,20 +13,41 @@ export const metadata: Metadata = {
   },
 };
 
-const notes = [
+const stories = [
   {
-    title: "Song First",
-    text: "Every page starts with the song: melody, rhythm, feeling, and the reason the idea needed to become music.",
+    title: "Trying to Let You Go",
+    description:
+      "Explore the meaning and studio process behind an acoustic pop-soul song about caring for someone while learning to move forward.",
+    href: "/blog/trying-to-let-you-go-behind-the-song",
   },
   {
-    title: "Direct Connection",
-    text: "Rhythm Realm is built around listeners coming straight to the source for music, stories, videos, and updates.",
+    title: "Do You Ever Wonder?",
+    description:
+      "Discover Andre’s melody-first writing process and the questions about life, choices, and possibility behind the song.",
+    href: "/blog/story-behind-do-you-ever-wonder",
   },
   {
-    title: "Real Emotion",
-    text: "The site should feel cinematic and modern, but the center stays personal: songs that carry reflection, hope, and heart.",
+    title: "Coming Over Yesterday",
+    description:
+      "Read the story of a soulful love song about making time and being ready to show up when someone needs you.",
+    href: "/blog/coming-over-yesterday",
   },
 ];
+
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const parentMetadata = await parent;
+
+  return {
+    ...pageMetadata,
+    openGraph: {
+      ...parentMetadata.openGraph,
+      url: "https://www.rhythmrealm.net/behind-the-music",
+    },
+  };
+}
 
 export default function BehindTheMusicPage() {
   return (
@@ -39,47 +60,34 @@ export default function BehindTheMusicPage() {
             Behind the Music
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-            The story, process, and feeling behind Rhythm Realm.
+            The stories behind the songs.
           </h1>
           <p className="mt-5 text-base leading-relaxed text-white/68 sm:text-lg">
-            Behind the Music is where Andre Washington can share the ideas that
-            surround each release: what sparked the song, what it means, and how
-            the sound came together.
+            Explore the ideas, feelings, and creative choices behind three Rhythm
+            Realm songs. Choose a story to go deeper.
           </p>
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {notes.map((note) => (
+          {stories.map((story) => (
             <article
-              key={note.title}
+              key={story.href}
               className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
             >
-              <h2 className="text-xl font-semibold">{note.title}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-white/68">{note.text}</p>
+              <h2 className="text-xl font-semibold">{story.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-white/68">
+                {story.description}
+              </p>
+              <RhythmRealmLink
+                href={story.href}
+                target="_self"
+                className="mt-6 inline-flex min-h-11 items-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100"
+              >
+                Read the {story.title} story
+              </RhythmRealmLink>
             </article>
           ))}
         </div>
-
-        <section className="mt-14 border-t border-white/10 pt-10">
-          <div className="max-w-3xl">
-            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">
-              Featured Story
-            </div>
-            <h2 className="mt-3 text-3xl font-semibold">Do You Ever Wonder?</h2>
-            <p className="mt-4 text-base leading-relaxed text-white/70">
-              The first song page goes deeper into lyrics, video, and story. It
-              sets the pattern for future releases: listen first, then understand
-              the emotion and meaning behind the track.
-            </p>
-            <RhythmRealmLink
-              href="/do-you-ever-wonder"
-              target="_self"
-              className="mt-6 inline-flex rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100"
-            >
-              Read the Song Story
-            </RhythmRealmLink>
-          </div>
-        </section>
       </section>
 
       <SiteFooter />

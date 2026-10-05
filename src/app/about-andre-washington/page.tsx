@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
-export const metadata: Metadata = {
+const pageMetadata: Metadata = {
   title: "About Andre Washington",
   description:
     "Learn about Andre Washington, the independent recording artist behind Rhythm Realm.",
@@ -13,6 +13,21 @@ export const metadata: Metadata = {
     canonical: "/about-andre-washington",
   },
 };
+
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const parentMetadata = await parent;
+
+  return {
+    ...pageMetadata,
+    openGraph: {
+      ...parentMetadata.openGraph,
+      url: "https://www.rhythmrealm.net/about-andre-washington",
+    },
+  };
+}
 
 export default function AboutAndreWashingtonPage() {
   return (

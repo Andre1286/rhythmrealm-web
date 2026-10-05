@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       title: post.seoTitle,
       description: post.description,
       url: absoluteUrl(post.canonicalPath),
-      authors: ["Andre Washington"],
+      ...(post.editorialCredit ? {} : { authors: ["Andre Washington"] }),
       tags: post.tags,
     },
   };

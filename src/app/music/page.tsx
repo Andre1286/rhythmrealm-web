@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import MusicTrackCard from "@/components/MusicTrackCard";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
@@ -40,7 +40,7 @@ const featuredTracks = [
   },
 ];
 
-export const metadata: Metadata = {
+const pageMetadata: Metadata = {
   title: "Music",
   description:
     "Listen to Coming Over Yesterday, Do You Ever Wonder?, and more direct-to-listener releases from Rhythm Realm.",
@@ -48,6 +48,21 @@ export const metadata: Metadata = {
     canonical: "/music",
   },
 };
+
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const parentMetadata = await parent;
+
+  return {
+    ...pageMetadata,
+    openGraph: {
+      ...parentMetadata.openGraph,
+      url: "https://www.rhythmrealm.net/music",
+    },
+  };
+}
 
 export default function MusicPage() {
   return (
