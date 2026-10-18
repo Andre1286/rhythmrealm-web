@@ -74,6 +74,31 @@ export default function AboutAndreWashingtonPage() {
         />
       </section>
 
+      <section
+        aria-labelledby="inside-the-studio"
+        className="mx-auto grid w-full max-w-6xl gap-10 px-6 pb-16 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-center"
+      >
+        <div className="border-t border-white/10 pt-10">
+          <h2 id="inside-the-studio" className="text-3xl font-semibold tracking-tight">
+            Inside the Studio
+          </h2>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/72">
+            Rhythm Realm songs are built hands-on. Andre develops the writing,
+            arrangement, recording, production, and mix from his own studio,
+            shaping the music from the first idea until the song feels finished.
+          </p>
+        </div>
+
+        <Image
+          src="/images/about/andre-washington-studio.jpg"
+          alt="Andre Washington in the Rhythm Realm studio with Ableton Live and a MIDI keyboard"
+          width={2736}
+          height={3648}
+          sizes="(min-width: 1024px) 320px, (max-width: 367px) calc(100vw - 48px), 320px"
+          className="mx-auto h-auto w-full max-w-[320px] rounded-lg border border-white/10 lg:-translate-y-4"
+        />
+      </section>
+
       <SiteFooter />
     </main>
   );
