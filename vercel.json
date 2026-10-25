@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "rhythmrealm-web\\.vercel\\.app"
+        }
+      ],
+      "destination": "https://www.rhythmrealm.net/:path*",
+      "permanent": true
+    }
+  ]
+}
