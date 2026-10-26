@@ -2,9 +2,12 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const ROOT_DOMAIN = "rhythmrealm.net";
 const WWW_DOMAIN = "www.rhythmrealm.net";
+const VERCEL_PRODUCTION_DOMAIN = "rhythmrealm-web.vercel.app";
 
 export function proxy(request: NextRequest) {
-  if (request.nextUrl.hostname.toLowerCase() !== ROOT_DOMAIN) {
+  const hostname = request.nextUrl.hostname.toLowerCase();
+
+  if (hostname !== ROOT_DOMAIN && hostname !== VERCEL_PRODUCTION_DOMAIN) {
     return NextResponse.next();
   }
 
