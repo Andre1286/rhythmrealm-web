@@ -156,6 +156,28 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
           {post.dek ?? post.description}
         </p>
 
+        {isTryingToLetYouGo ? (
+          <nav
+            aria-label="Explore Trying to Let You Go"
+            className="mt-6 flex flex-col gap-3 text-sm sm:flex-row sm:flex-wrap sm:gap-6"
+          >
+            <RhythmRealmLink
+              href="/trying-to-let-you-go"
+              target="_self"
+              className="text-cyan-100 underline underline-offset-4 hover:text-white"
+            >
+              Listen to &ldquo;Trying to Let You Go&rdquo;
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/lyrics/trying-to-let-you-go"
+              target="_self"
+              className="text-cyan-100 underline underline-offset-4 hover:text-white"
+            >
+              Read the official &ldquo;Trying to Let You Go&rdquo; lyrics
+            </RhythmRealmLink>
+          </nav>
+        ) : null}
+
         {isComingOverYesterday ? (
           <section aria-label="Listen to Coming Over Yesterday" className="mt-7">
             <audio
@@ -360,20 +382,6 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
             aria-label="Continue exploring Trying to Let You Go"
             className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-8 sm:flex-row sm:flex-wrap"
           >
-            <RhythmRealmLink
-              href="/trying-to-let-you-go"
-              target="_self"
-              className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
-            >
-              Listen to Trying to Let You Go
-            </RhythmRealmLink>
-            <RhythmRealmLink
-              href="/lyrics/trying-to-let-you-go"
-              target="_self"
-              className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
-            >
-              Read the Official Lyrics
-            </RhythmRealmLink>
             <RhythmRealmLink
               href="/music"
               target="_self"

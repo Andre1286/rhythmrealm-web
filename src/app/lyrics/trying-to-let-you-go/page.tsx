@@ -206,6 +206,13 @@ export default function TryingToLetYouGoLyricsPage() {
               Listen to the Song
             </RhythmRealmLink>
             <RhythmRealmLink
+              href="/blog/trying-to-let-you-go-behind-the-song"
+              target="_self"
+              className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
+            >
+              Read the story behind &ldquo;Trying to Let You Go&rdquo;
+            </RhythmRealmLink>
+            <RhythmRealmLink
               href="/music"
               target="_self"
               className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
