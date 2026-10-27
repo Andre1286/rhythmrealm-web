@@ -91,6 +91,17 @@ export default function TheArtistNobodyHeardSeriesPage() {
             voice, own his creative path, and reach the listeners who truly
             connect with his music.
           </p>
+          <p className="mt-6 text-base leading-relaxed text-white/68">
+            Three issues are currently available. Read them in order, starting
+            with Issue #1.
+          </p>
+          <RhythmRealmLink
+            href="/comics/the-artist-nobody-heard/issue-1"
+            target="_self"
+            className="mt-6 inline-flex rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
+          >
+            Start with Issue #1 &mdash; Heard in the Noise
+          </RhythmRealmLink>
         </div>
       </section>
 

@@ -181,6 +181,32 @@ export default function TheArtistNobodyHeardIssueTwoPage() {
             </li>
           ))}
         </ol>
+        <nav
+          aria-label="Continue the series"
+          className="mt-8 grid gap-3 sm:grid-cols-3"
+        >
+          <RhythmRealmLink
+            href="/comics/the-artist-nobody-heard/issue-1"
+            target="_self"
+            className={navigationLinkClass}
+          >
+            Previous Issue: Issue #1 &mdash; Heard in the Noise
+          </RhythmRealmLink>
+          <RhythmRealmLink
+            href="/comics/the-artist-nobody-heard"
+            target="_self"
+            className={navigationLinkClass}
+          >
+            Back to Series
+          </RhythmRealmLink>
+          <RhythmRealmLink
+            href="/comics/the-artist-nobody-heard/issue-3"
+            target="_self"
+            className={navigationLinkClass}
+          >
+            Next Issue: Issue #3 &mdash; The Price of Attention
+          </RhythmRealmLink>
+        </nav>
       </section>
 
       <section className="border-y border-white/10 bg-cyan-200/[0.055]">

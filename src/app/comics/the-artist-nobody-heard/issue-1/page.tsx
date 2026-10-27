@@ -93,6 +93,9 @@ export const metadata: Metadata = {
   },
 };
 
+const navigationLinkClass =
+  "inline-flex justify-center rounded-lg border border-white/18 px-4 py-3 text-center text-sm font-semibold text-white/82 transition hover:border-cyan-200/40 hover:bg-cyan-100 hover:text-black";
+
 export default function TheArtistNobodyHeardIssueOnePage() {
   return (
     <main className="min-h-screen bg-black text-white">
@@ -115,6 +118,25 @@ export default function TheArtistNobodyHeardIssueOnePage() {
             the silence gets too loud, he begins to discover that the answer may
             not be chasing the feed &mdash; it may be building a home for his art.
           </p>
+          <nav
+            aria-label="Issue navigation"
+            className="mt-8 grid gap-3 sm:grid-cols-2"
+          >
+            <RhythmRealmLink
+              href="/comics/the-artist-nobody-heard"
+              target="_self"
+              className={navigationLinkClass}
+            >
+              Series hub
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/comics/the-artist-nobody-heard/issue-2"
+              target="_self"
+              className={navigationLinkClass}
+            >
+              Next Issue: Issue #2 &mdash; Unknown Source
+            </RhythmRealmLink>
+          </nav>
         </div>
       </section>
 
@@ -142,6 +164,25 @@ export default function TheArtistNobodyHeardIssueOnePage() {
             </li>
           ))}
         </ol>
+        <nav
+          aria-label="Continue the series"
+          className="mt-8 grid gap-3 sm:grid-cols-2"
+        >
+          <RhythmRealmLink
+            href="/comics/the-artist-nobody-heard"
+            target="_self"
+            className={navigationLinkClass}
+          >
+            Back to Series
+          </RhythmRealmLink>
+          <RhythmRealmLink
+            href="/comics/the-artist-nobody-heard/issue-2"
+            target="_self"
+            className={navigationLinkClass}
+          >
+            Next Issue: Issue #2 &mdash; Unknown Source
+          </RhythmRealmLink>
+        </nav>
       </section>
 
       <section className="border-y border-white/10 bg-cyan-200/[0.055]">
