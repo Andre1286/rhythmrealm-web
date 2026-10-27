@@ -198,6 +198,28 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
           </div>
         ) : null}
 
+        {post.slug === "story-behind-do-you-ever-wonder" ? (
+          <nav
+            aria-label="Explore Do You Ever Wonder"
+            className="mt-6 flex flex-col gap-3 text-sm sm:flex-row sm:flex-wrap sm:gap-6"
+          >
+            <RhythmRealmLink
+              href="/do-you-ever-wonder"
+              target="_self"
+              className="text-cyan-100 underline underline-offset-4 hover:text-white"
+            >
+              Listen to &ldquo;Do You Ever Wonder?&rdquo; by Andre Washington
+            </RhythmRealmLink>
+            <RhythmRealmLink
+              href="/lyrics/do-you-ever-wonder"
+              target="_self"
+              className="text-cyan-100 underline underline-offset-4 hover:text-white"
+            >
+              Read the official &ldquo;Do You Ever Wonder&rdquo; lyrics
+            </RhythmRealmLink>
+          </nav>
+        ) : null}
+
         {post.answerCapsule ? (
           <section className="mt-10 rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-5">
             <h2 className="text-xl font-semibold">Answer Capsule</h2>

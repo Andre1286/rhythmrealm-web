@@ -145,11 +145,11 @@ export default function DoYouEverWonderPage() {
               Read the Full &ldquo;Do You Ever Wonder&rdquo; Lyrics
             </RhythmRealmLink>
             <RhythmRealmLink
-              href="#story-behind-the-song"
+              href="/blog/story-behind-do-you-ever-wonder"
               target="_self"
               className="rounded-lg border border-white/18 px-5 py-3 text-center text-sm font-semibold transition hover:bg-white hover:text-black"
             >
-              Story Behind the Song
+              Read the meaning and story behind &ldquo;Do You Ever Wonder?&rdquo;
             </RhythmRealmLink>
             <RhythmRealmLink
               href="/music"
