@@ -1,33 +1,42 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
-const pageMetadata: Metadata = {
-  title: "About Andre Washington",
-  description:
-    "Learn about Andre Washington, the independent recording artist behind Rhythm Realm.",
+const artistTitle =
+  "Andre Washington — Recording Artist & Songwriter | Rhythm Realm";
+const artistDescription =
+  "Meet Andre Washington, the independent artist, songwriter and producer behind Rhythm Realm. Explore his pop music with rhythm and soul, songs and stories.";
+const artistPortrait = {
+  url: "https://www.rhythmrealm.net/andre-washington.png",
+  width: 1024,
+  height: 1024,
+  alt: "Portrait of Andre Washington, the recording artist behind Rhythm Realm",
+};
+
+export const metadata: Metadata = {
+  title: { absolute: artistTitle },
+  description: artistDescription,
   alternates: {
     canonical: "/about-andre-washington",
   },
+  openGraph: {
+    title: artistTitle,
+    description: artistDescription,
+    url: "https://www.rhythmrealm.net/about-andre-washington",
+    siteName: "Rhythm Realm",
+    type: "website",
+    images: [artistPortrait],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: artistTitle,
+    description: artistDescription,
+    images: [artistPortrait],
+  },
 };
-
-export async function generateMetadata(
-  _props: unknown,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const parentMetadata = await parent;
-
-  return {
-    ...pageMetadata,
-    openGraph: {
-      ...parentMetadata.openGraph,
-      url: "https://www.rhythmrealm.net/about-andre-washington",
-    },
-  };
-}
 
 export default function AboutAndreWashingtonPage() {
   return (
@@ -40,7 +49,7 @@ export default function AboutAndreWashingtonPage() {
             About Andre Washington
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-            A songwriter, artist, and producer building songs from the inside out.
+            Andre Washington — Recording Artist, Songwriter &amp; Producer
           </h1>
           <div className="mt-7 space-y-5 text-base leading-relaxed text-white/72">
             <p>
@@ -48,6 +57,15 @@ export default function AboutAndreWashingtonPage() {
               music with rhythm and soul. He writes, records, and produces with a
               hands-on approach, shaping each song from the first idea to the final
               mix.
+            </p>
+            <p>
+              <RhythmRealmLink
+                href="/do-you-ever-wonder"
+                target="_self"
+                className="text-cyan-100 underline underline-offset-4 hover:text-white"
+              >
+                Listen to &ldquo;Do You Ever Wonder?&rdquo; by Andre Washington
+              </RhythmRealmLink>
             </p>
             <p>
               Before releasing music as a solo artist, Andre was part of IROC,
@@ -61,6 +79,20 @@ export default function AboutAndreWashingtonPage() {
               connection behind the music.
             </p>
           </div>
+          <nav aria-label="Songs and stories" className="mt-7">
+            <ul className="space-y-3 text-sm text-cyan-100">
+              <li>
+                <RhythmRealmLink href="/trying-to-let-you-go" target="_self" className="underline underline-offset-4 hover:text-white">
+                  Listen to &ldquo;Trying to Let You Go&rdquo;
+                </RhythmRealmLink>
+              </li>
+              <li>
+                <RhythmRealmLink href="/blog/story-behind-do-you-ever-wonder" target="_self" className="underline underline-offset-4 hover:text-white">
+                  Read the story behind &ldquo;Do You Ever Wonder?&rdquo;
+                </RhythmRealmLink>
+              </li>
+            </ul>
+          </nav>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <RhythmRealmLink
               href="/music"
