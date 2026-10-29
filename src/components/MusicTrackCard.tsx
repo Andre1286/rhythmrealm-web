@@ -12,6 +12,8 @@ type MusicTrackCardProps = {
   cta?: string;
   buttonLabel?: string;
   labelAudio?: boolean;
+  coverAspect?: "square" | "video";
+  anchorId?: string;
 };
 
 export default function MusicTrackCard({
@@ -23,6 +25,8 @@ export default function MusicTrackCard({
   cta,
   buttonLabel,
   labelAudio,
+  coverAspect = "square",
+  anchorId,
 }: MusicTrackCardProps) {
   const track = trackManifest.find((item) => item.id === id);
 
@@ -31,13 +35,14 @@ export default function MusicTrackCard({
   }
 
   return (
-    <article className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.04] p-5 md:grid-cols-[144px_minmax(0,1fr)] md:items-center">
+    <article id={anchorId} className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.04] p-5 md:grid-cols-[144px_minmax(0,1fr)] md:items-center">
       <Image
         src={cover}
         alt={`${track.title} artwork`}
         width={240}
-        height={240}
-        className="aspect-square w-full max-w-36 rounded-lg border border-white/10 object-cover"
+        height={coverAspect === "video" ? 135 : 240}
+        unoptimized={coverAspect === "video"}
+        className={`${coverAspect === "video" ? "aspect-video" : "aspect-square"} w-full max-w-36 rounded-lg border border-white/10 object-cover`}
       />
       <div>
         <div className="text-sm font-semibold text-white/55">
