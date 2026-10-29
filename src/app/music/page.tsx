@@ -1,11 +1,21 @@
 import type { Metadata, ResolvingMetadata } from "next";
+import type { ComponentProps } from "react";
 
 import MusicTrackCard from "@/components/MusicTrackCard";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
-const featuredTracks = [
+const featuredTracks: ComponentProps<typeof MusicTrackCard>[] = [
+  {
+    id: "find-your-way",
+    href: "/find-your-way",
+    cover: "/find-your-way/find-your-way-andre-washington.jpg",
+    coverAspect: "video",
+    duration: "2:30",
+    description: "A song of patient hope, missed moments, and enduring love from a distance.",
+    buttonLabel: "Open Song Page",
+  },
   {
     id: "coming-over-yesterday",
     duration: "3:23",
@@ -33,6 +43,7 @@ const featuredTracks = [
   },
   {
     id: "track-2",
+    anchorId: "if-only-for-the-love",
     href: "/contact",
     cover: "/rhythm-realm-logo.png",
     description:

@@ -18,6 +18,12 @@
     "src": "/audio/do-you-ever-wonder.mp3"
   },
   {
+    "id": "find-your-way",
+    "title": "Find Your Way",
+    "artist": "Andre Washington",
+    "src": "/audio/Find-Your-Way-Andre-Washington.mp3"
+  },
+  {
     "id": "track-2",
     "title": "If Only for the Love",
     "artist": "Andre Washington",
