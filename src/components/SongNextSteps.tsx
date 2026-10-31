@@ -1,3 +1,4 @@
+import { INSIDERS_BUTTON_LABEL, INSIDERS_PROMISE, INSIDERS_SIGNUP_HREF } from "@/lib/insiders";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 
 type SongNextStepsProps = {
@@ -8,7 +9,7 @@ type SongNextStepsProps = {
 
 export default function SongNextSteps({
   lyricsHref,
-  signupHref = "/contact#signup",
+  signupHref = INSIDERS_SIGNUP_HREF,
   className = "",
 }: SongNextStepsProps) {
   return (
@@ -26,8 +27,9 @@ export default function SongNextSteps({
         Enjoyed this song?
       </h2>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/68 sm:text-base">
-        Keep the music going, spend a little more time with the words, or get new
-        email updates about Rhythm Realm releases and stories.
+        {signupHref === "#signup"
+          ? "Keep exploring, or stay connected directly with Andre."
+          : INSIDERS_PROMISE}
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <RhythmRealmLink
@@ -49,7 +51,7 @@ export default function SongNextSteps({
           target="_self"
           className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
         >
-          Join the Rhythm Realm Insider List
+          {INSIDERS_BUTTON_LABEL}
         </RhythmRealmLink>
       </div>
     </section>

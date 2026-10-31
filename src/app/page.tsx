@@ -222,10 +222,7 @@ export default function Home() {
             <p className={styles.bodyCopy}>Stay connected to the world you just discovered.</p>
           </div>
           <div className={styles.signupPresentation}>
-            <EmailSignupForm
-              description="Sign up for email updates about Rhythm Realm music, comics, and behind-the-song stories."
-              buttonLabel="Join the Insider List"
-            />
+            <EmailSignupForm />
           </div>
         </section>
 

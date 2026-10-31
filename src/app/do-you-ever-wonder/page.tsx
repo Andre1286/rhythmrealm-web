@@ -1,3 +1,4 @@
+import { INSIDERS_TITLE } from "@/lib/insiders";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -265,10 +266,11 @@ export default function DoYouEverWonderPage() {
                 music.
               </p>
               <p>
+                Want to stay connected?{" "}
                 <RhythmRealmLink href="#signup" target="_self" className="text-cyan-100 underline underline-offset-4 hover:text-white">
-                  Join the Rhythm Realm Insider List
+                  {INSIDERS_TITLE}
                 </RhythmRealmLink>{" "}
-                for new music, comic releases, and behind-the-song updates.
+                for new music, stories, videos, comics, and selected updates.
               </p>
               <p>
                 Also listen to &ldquo;Coming Over Yesterday,&rdquo; by Terry T

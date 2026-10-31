@@ -1,3 +1,4 @@
+import InsiderCta from "@/components/InsiderCta";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -186,8 +187,7 @@ export default function TheArtistNobodyHeardIssueThreePage() {
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
             Revisit the series, listen to Rhythm Realm music, or explore the
-            stories behind the songs. Join the Insider List for new music and
-            comic updates.
+            stories behind the songs.
           </p>
           <nav aria-label="After the comic" className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <RhythmRealmLink href="/comics/the-artist-nobody-heard" target="_self" className={navigationLinkClass}>
@@ -199,10 +199,11 @@ export default function TheArtistNobodyHeardIssueThreePage() {
             <RhythmRealmLink href="/behind-the-music" target="_self" className={navigationLinkClass}>
               Behind the Music
             </RhythmRealmLink>
-            <RhythmRealmLink href="/#signup" target="_self" className={navigationLinkClass}>
-              Join the Insider List
-            </RhythmRealmLink>
           </nav>
+          <InsiderCta
+            introduction="Follow The Artist Nobody Heard and the wider Rhythm Realm experience."
+            className="mt-8 border-t border-white/10 pt-8"
+          />
         </div>
       </section>
 

@@ -1,3 +1,4 @@
+import InsiderCta from "@/components/InsiderCta";
 import type { Metadata, ResolvingMetadata } from "next";
 
 import RhythmRealmLink from "@/components/RhythmRealmLink";
@@ -88,6 +89,10 @@ export default function BehindTheMusicPage() {
             </article>
           ))}
         </div>
+        <InsiderCta
+          introduction="Stay connected to the music and the stories behind it."
+          className="mt-12 rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-6 sm:p-8"
+        />
       </section>
 
       <SiteFooter />
