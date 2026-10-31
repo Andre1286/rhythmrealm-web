@@ -1,3 +1,4 @@
+import InsiderCta from "@/components/InsiderCta";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -220,6 +221,10 @@ export default function TheArtistNobodyHeardIssueTwoPage() {
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
             Discover more on RhythmRealm.net &mdash; Thank you for listening.
           </p>
+          <InsiderCta
+            introduction="Follow The Artist Nobody Heard and the wider Rhythm Realm experience."
+            className="mt-8 border-t border-white/10 pt-8"
+          />
         </div>
       </section>
 

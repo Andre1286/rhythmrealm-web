@@ -1,3 +1,4 @@
+import { INSIDERS_BUTTON_LABEL, INSIDERS_SIGNUP_HREF } from "@/lib/insiders";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 
 const footerLinks = [
@@ -6,7 +7,7 @@ const footerLinks = [
   { href: "/comics/the-artist-nobody-heard", label: "Comic" },
   { href: "/blog", label: "Stories" },
   { href: "/about-andre-washington", label: "About Andre" },
-  { href: "/#signup", label: "Join" },
+  { href: INSIDERS_SIGNUP_HREF, label: INSIDERS_BUTTON_LABEL },
   { href: "/behind-the-music", label: "Behind the Music" },
   { href: "/contact", label: "Contact" },
 ];

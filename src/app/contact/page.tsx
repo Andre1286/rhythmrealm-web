@@ -8,7 +8,7 @@ import SiteHeader from "@/components/SiteHeader";
 const pageMetadata: Metadata = {
   title: "Contact and Email Signup",
   description:
-    "Contact Andre Washington and join the Rhythm Realm email list for music updates.",
+    "Contact Andre Washington and join Rhythm Realm Insiders for new songs, stories, videos, comic releases, and selected updates.",
   alternates: {
     canonical: "/contact",
   },
@@ -44,8 +44,8 @@ export default function ContactPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-lg">
             For collaborations, music inquiries, or direct messages, use email.
-            Join the Rhythm Realm Insider List for email updates about music and
-            behind-the-song stories from Andre Washington.
+            Join Rhythm Realm Insiders to stay connected to the songs, stories,
+            videos, and comics directly with Andre.
           </p>
           <div className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5">
             <div className="text-xs uppercase tracking-[0.18em] text-white/45">

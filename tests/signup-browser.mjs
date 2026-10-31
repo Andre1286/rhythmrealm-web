@@ -3,7 +3,7 @@
  * Uses an existing Playwright installation; does not add dependencies.
  */
 import assert from "node:assert/strict";
-import { resolve } from "node:path";
+import { resolve, dirname, join } from "node:path";
 import { pathToFileURL } from "node:url";
 const { chromium } = await import(process.argv[2]
   ? pathToFileURL(resolve(process.argv[2], "index.mjs")).href
@@ -122,20 +122,73 @@ const base = "http://127.0.0.1:3210";
     // Existing comic CTA preserves recognized referring content at completion.
     await page.goto(`${base}/comics/the-artist-nobody-heard/issue-3`);
     assert.equal(await page.locator('img[alt^="Comic page"]').count(), 8);
-    await page.getByRole("link", { name: "Join the Insider List", exact: true }).click();
-    await page.waitForURL(`${base}/#signup`);
+    await page.getByRole("region", { name: "Rhythm Realm Insiders invitation" }).getByRole("link", { name: "Join Insiders", exact: true }).click();
+    await page.waitForURL(`${base}/contact#signup`);
     await email.fill("listener@example.com");
     await button.click();
     await page.waitForFunction(() => window.signupEvents.length === 1);
     assert.equal((await page.evaluate(() => window.signupEvents))[0].data.referring_page, "/comics/the-artist-nobody-heard/issue-3");
 
-    await page.setViewportSize({ width: 1440, height: 1000 });
-    for (const path of ["/blog/coming-over-yesterday", "/music", "/do-you-ever-wonder", "/lyrics/do-you-ever-wonder", "/trying-to-let-you-go", "/lyrics/trying-to-let-you-go", "/contact"]) {
-      const response = await page.goto(`${base}${path}`);
-      assert.equal(response.status(), 200, path);
-      assert.ok((await page.locator("h1").innerText()).length > 0, path);
-      assert.ok(await page.locator("#signup").count() <= 1, path);
+    const routes = [
+      "/", "/contact", "/find-your-way", "/do-you-ever-wonder",
+      "/trying-to-let-you-go", "/lyrics/do-you-ever-wonder",
+      "/lyrics/trying-to-let-you-go", "/behind-the-music", "/music",
+      "/blog/coming-over-yesterday", "/blog/story-behind-do-you-ever-wonder",
+      "/blog/trying-to-let-you-go-behind-the-song",
+      "/post/unveiling-the-essence-of-soulful-music",
+      "/post/where-did-the-time-go-pop-songs-that-capture-the-feeling-of-time-slipping-away",
+      "/comics/the-artist-nobody-heard",
+      ...[1, 2, 3].map((issue) => `/comics/the-artist-nobody-heard/issue-${issue}`),
+    ];
+    const promise = "Get new songs, behind-the-song stories, videos, comic releases, and selected updates directly from Andre—without relying on an algorithm to find them.";
+    const contextualRoutes = new Set(routes.filter((path) =>
+      path.includes("/comics/") || path.startsWith("/post/") ||
+      ["/blog/trying-to-let-you-go-behind-the-song", "/behind-the-music", "/music"].includes(path),
+    ));
+    for (const width of [320, 390, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 1000 });
+      for (const path of routes) {
+        const response = await page.goto(`${base}${path}`, { waitUntil: "domcontentloaded" });
+        assert.equal(response.status(), 200, path);
+        assert.ok((await page.locator("h1").innerText()).length > 0, path);
+        assert.ok(await page.locator("#signup").count() <= 1, path);
+        assert.equal(await page.getByText(promise, { exact: true }).count(), 1, `Full promise appears once on ${path}`);
+        const nextSteps = page.getByRole("region", { name: "Enjoyed this song?", exact: true });
+        if (await nextSteps.count()) {
+          const signupLink = nextSteps.getByRole("link", { name: "Join Insiders", exact: true });
+          const hasForm = await page.locator("#signup").count() === 1;
+          assert.equal(await signupLink.getAttribute("href"), hasForm ? "#signup" : "/contact#signup", path);
+          if (hasForm) {
+            assert.equal(await nextSteps.getByText("Keep exploring, or stay connected directly with Andre.", { exact: true }).count(), 1, path);
+          } else {
+            assert.equal(await nextSteps.getByText(promise, { exact: true }).count(), 1, path);
+          }
+        }
+        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${path} at ${width}px`);
+        for (const nav of ["Primary navigation", "Footer navigation"]) {
+          assert.equal(await page.getByRole("navigation", { name: nav, exact: true }).getByRole("link", { name: "Join Insiders", exact: true }).getAttribute("href"), "/contact#signup");
+        }
+        if (contextualRoutes.has(path)) {
+          const invitation = page.getByRole("region", { name: "Rhythm Realm Insiders invitation", exact: true });
+          assert.equal(await invitation.count(), 1, path);
+          assert.equal(await invitation.getByRole("link", { name: "Join Insiders", exact: true }).getAttribute("href"), "/contact#signup");
+        }
+        if (await page.locator("#signup").count()) {
+          const signupInput = page.locator("#signup input[type=email]");
+          const signupButton = page.locator("#signup button[type=submit]");
+          await signupInput.scrollIntoViewIfNeeded();
+          const inputBounds = await signupInput.boundingBox();
+          const buttonBounds = await signupButton.boundingBox();
+          assert.ok(inputBounds.width >= 120, `Input width on ${path} at ${width}px`);
+          assert.ok(buttonBounds.width >= 44 && buttonBounds.height >= 44);
+          if (width < 640) assert.ok(buttonBounds.y >= inputBounds.y + inputBounds.height);
+          if (process.argv[3] && [390, 1024].includes(width) && ["/", "/contact", "/find-your-way"].includes(path)) {
+            await page.locator("#signup").screenshot({ path: join(dirname(process.argv[3]), `insiders-${path === "/" ? "home" : path.slice(1)}-${width}.png`) });
+          }
+        }
+      }
     }
+    await page.goto(`${base}/contact`);
     assert.equal(await page.locator("#licensing").count(), 1);
     assert.ok(await page.locator('a[href^="mailto:"]').count() > 0);
     assert.deepEqual(errors, []);

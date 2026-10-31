@@ -1,3 +1,4 @@
+import { INSIDERS_BUTTON_LABEL } from "@/lib/insiders";
 import type { Metadata } from "next";
 
 import EmailSignupForm from "@/components/EmailSignupForm";
@@ -208,7 +209,7 @@ export default function DoYouEverWonderLyricsPage() {
               target="_self"
               className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
             >
-              Join the Insider List
+              {INSIDERS_BUTTON_LABEL}
             </RhythmRealmLink>
           </div>
         </div>

@@ -8,6 +8,8 @@ import {
   SIGNUP_SUCCESS_MESSAGE,
 } from "@/lib/signup-feedback";
 
+import { INSIDERS_TITLE, INSIDERS_PROMISE, INSIDERS_BUTTON_LABEL } from "@/lib/insiders";
+
 type EmailSignupFormProps = {
   title?: string;
   description?: string;
@@ -15,9 +17,9 @@ type EmailSignupFormProps = {
 };
 
 export default function EmailSignupForm({
-  title = "Join the Rhythm Realm Insider List",
-  description = "Sign up for email updates from Andre Washington about Rhythm Realm music and the stories behind it.",
-  buttonLabel = "Join the Insider List",
+  title = INSIDERS_TITLE,
+  description = INSIDERS_PROMISE,
+  buttonLabel = INSIDERS_BUTTON_LABEL,
 }: EmailSignupFormProps) {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");

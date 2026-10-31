@@ -1,3 +1,4 @@
+import InsiderCta from "@/components/InsiderCta";
 import type { Metadata, ResolvingMetadata } from "next";
 import type { ComponentProps } from "react";
 
@@ -104,10 +105,8 @@ export default function MusicPage() {
           <RhythmRealmLink href="/behind-the-music" target="_self" className="text-sm text-cyan-100 underline underline-offset-4 hover:text-white">
             Behind the Music
           </RhythmRealmLink>
-          <RhythmRealmLink href="/#signup" target="_self" className="text-sm text-cyan-100 underline underline-offset-4 hover:text-white">
-            Join the Insider List
-          </RhythmRealmLink>
         </nav>
+        <InsiderCta className="mt-10 rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-6 sm:p-8" />
       </section>
 
       <SiteFooter />

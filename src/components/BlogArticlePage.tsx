@@ -1,3 +1,4 @@
+import InsiderCta from "@/components/InsiderCta";
 import Image from "next/image";
 
 import type { BlogPost } from "@/lib/blogPosts";
@@ -369,13 +370,6 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
             >
               More Behind the Music
             </RhythmRealmLink>
-            <RhythmRealmLink
-              href="/#signup"
-              target="_self"
-              className="rounded-lg border border-cyan-200/30 px-5 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black"
-            >
-              Join the Rhythm Realm Insider List
-            </RhythmRealmLink>
           </nav>
         ) : isTryingToLetYouGo ? (
           <nav
@@ -417,6 +411,12 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
             </RhythmRealmLink>
           </div>
         )}
+        {isUpcomingSong || isTryingToLetYouGo || !isSongStory ? (
+          <InsiderCta
+            introduction="Stay connected to the music and the stories behind it."
+            className="mt-12 rounded-lg border border-cyan-200/20 bg-cyan-200/[0.06] p-6 sm:p-8"
+          />
+        ) : null}
         {isComingOverYesterday ? (
           <p className="mt-6 text-sm leading-relaxed text-white/68">
             For film, TV, or other projects:{" "}
