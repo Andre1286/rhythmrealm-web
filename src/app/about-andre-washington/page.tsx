@@ -6,9 +6,9 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
 const artistTitle =
-  "Andre Washington — Recording Artist & Songwriter | Rhythm Realm";
+  "Andre Washington | Independent Recording Artist & Songwriter";
 const artistDescription =
-  "Meet Andre Washington, the independent artist, songwriter and producer behind Rhythm Realm. Explore his pop music with rhythm and soul, songs and stories.";
+  "Meet Andre Washington, an independent recording artist, songwriter and producer behind Rhythm Realm, creating original pop music with rhythm and soul.";
 const artistPortrait = {
   url: "https://www.rhythmrealm.net/andre-washington.png",
   width: 1024,
@@ -49,14 +49,17 @@ export default function AboutAndreWashingtonPage() {
             About Andre Washington
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-            Andre Washington — Recording Artist, Songwriter &amp; Producer
+            Andre Washington — Independent Recording Artist &amp; Songwriter
           </h1>
           <div className="mt-7 space-y-5 text-base leading-relaxed text-white/72">
             <p>
-              Andre Washington is an independent recording artist creating pop
-              music with rhythm and soul. He writes, records, and produces with a
-              hands-on approach, shaping each song from the first idea to the final
-              mix.
+              Andre Washington is an independent recording artist, songwriter,
+              and producer creating pop music with rhythm and soul. He writes,
+              records, and produces with a hands-on approach, shaping each song
+              from the first idea to the final mix. The focus is on songs that
+              carry feeling: a melody that stays with you, a rhythm you can feel,
+              and words that give you something to think about after the music
+              stops.
             </p>
             <p>
               <RhythmRealmLink
@@ -76,7 +79,41 @@ export default function AboutAndreWashingtonPage() {
             <p>
               Rhythm Realm is Andre&apos;s official music home now: a direct place for
               songs, videos, lyrics, stories, and updates without losing the human
-              connection behind the music.
+              connection behind the music. You can start with the{" "}
+              <RhythmRealmLink href="/music" target="_self" className="text-cyan-100 hover:text-white">
+                music
+              </RhythmRealmLink>
+              , then follow a song into the ideas and emotions that shaped it.
+              It is a way to hear the finished recording and spend more time with
+              what the song is trying to say.
+            </p>
+            <p>
+              &ldquo;Do You Ever Wonder?&rdquo; brings that approach into focus.
+              The song asks questions about life, division, faith, and hope,
+              looking for a better way forward when the world feels cold. Read
+              the{" "}
+              <RhythmRealmLink href="/lyrics/do-you-ever-wonder" target="_self" className="text-cyan-100 hover:text-white">
+                official lyrics
+              </RhythmRealmLink>{" "}
+              alongside the recording, or explore the{" "}
+              <RhythmRealmLink href="/blog/story-behind-do-you-ever-wonder" target="_self" className="text-cyan-100 hover:text-white">
+                story behind the song
+              </RhythmRealmLink>{" "}
+              for a closer look at its meaning. The words, music, and story offer
+              different ways into the same feeling.
+            </p>
+            <p>
+              Visual storytelling also has a place here. The{" "}
+              <RhythmRealmLink href="/do-you-ever-wonder#official-video" target="_self" className="text-cyan-100 hover:text-white">
+                song videos
+              </RhythmRealmLink>{" "}
+              give listeners another way to experience the music, while{" "}
+              <RhythmRealmLink href="/comics/the-artist-nobody-heard" target="_self" className="text-cyan-100 hover:text-white">
+                The Artist Nobody Heard
+              </RhythmRealmLink>{" "}
+              explores music, artistic identity, ownership, and finding a real
+              audience through comics. Each is part of Rhythm Realm&apos;s wider
+              interest in stories and a direct connection with listeners.
             </p>
           </div>
           <nav aria-label="Songs and stories" className="mt-7">
@@ -133,6 +170,24 @@ export default function AboutAndreWashingtonPage() {
             Rhythm Realm songs are built hands-on. Andre develops the writing,
             arrangement, recording, production, and mix from his own studio,
             shaping the music from the first idea until the song feels finished.
+            Songwriting and recording are connected parts of that work: the
+            arrangement gives the words a setting, and the production shapes how
+            the emotion reaches the listener.
+          </p>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/72">
+            The story of &ldquo;Trying to Let You Go&rdquo; offers a closer look
+            at those decisions. Its acoustic foundation, clear vocal, and space
+            around the performance support a song about caring while learning to
+            move forward. The{" "}
+            <RhythmRealmLink href="/blog/trying-to-let-you-go-behind-the-song" target="_self" className="text-cyan-100 hover:text-white">
+              studio story
+            </RhythmRealmLink>{" "}
+            follows the writing, recording, and mix choices behind that feeling.
+            For more of the ideas surrounding the songs, visit{" "}
+            <RhythmRealmLink href="/behind-the-music" target="_self" className="text-cyan-100 hover:text-white">
+              Behind the Music
+            </RhythmRealmLink>{" "}
+            and keep exploring at your own pace.
           </p>
         </div>
 

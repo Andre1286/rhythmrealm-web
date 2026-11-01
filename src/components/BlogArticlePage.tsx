@@ -21,6 +21,10 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
   const isUpcomingSong = post.releaseStatus === "upcoming";
   const isSongStory =
     isComingOverYesterday || post.slug === "story-behind-do-you-ever-wonder";
+  const isDoYouEverWonder = post.slug === "story-behind-do-you-ever-wonder";
+  const schemaImage =
+    post.image?.src ??
+    (isDoYouEverWonder ? "/do-you-ever-wonder/cover-art.png" : undefined);
   const blogPostingJsonLd = {
     "@type": "BlogPosting",
     headline: post.title,
@@ -42,14 +46,19 @@ export default function BlogArticlePage({ post }: BlogArticlePageProps) {
           "@type": "Person",
           name: "Andre Washington",
         },
-    publisher: post.editorialCredit
-      ? { "@id": absoluteUrl("/#organization") }
-      : {
-          "@type": "Organization",
-          name: SITE_NAME,
-          url: absoluteUrl("/"),
-        },
-    ...(post.image ? { image: absoluteUrl(post.image.src) } : {}),
+    publisher: {
+      ...(post.editorialCredit
+        ? { "@id": absoluteUrl("/#organization") }
+        : {
+            "@type": "Organization",
+            name: SITE_NAME,
+            url: absoluteUrl("/"),
+          }),
+      ...(isDoYouEverWonder
+        ? { logo: absoluteUrl("/rhythm-realm-logo.png") }
+        : {}),
+    },
+    ...(schemaImage ? { image: absoluteUrl(schemaImage) } : {}),
     articleSection: post.category,
     keywords: post.tags?.join(", "),
   };
