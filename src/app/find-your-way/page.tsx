@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     title: seoTitle,
     description: seoDescription,
     url: absoluteUrl(songPath),
-    images: [{ url: artworkPath, width: 1280, height: 720, alt: "Find Your Way — official music video artwork" }],
+    images: [{ url: artworkPath, width: 1254, height: 1254, alt: "Find Your Way — Andre Washington cover artwork" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -109,7 +109,7 @@ export default function FindYourWayPage() {
       <SiteHeader />
 
       <section className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 lg:grid-cols-2 lg:items-center">
-        <Image src={artworkPath} alt="Find Your Way official music video artwork: a silhouetted person on a blue road toward the sunset" width={1280} height={720} sizes="(max-width: 1024px) 100vw, 50vw" unoptimized priority className="h-auto w-full rounded-lg border border-white/10 shadow-2xl" />
+        <Image src={artworkPath} alt="Find Your Way cover artwork: a woman beside a brick wall and a man walking along a sunlit street" width={1254} height={1254} sizes="(max-width: 1024px) 100vw, 50vw" unoptimized priority className="h-auto w-full rounded-lg border border-white/10 shadow-2xl" />
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">Rhythm Realm · Andre Washington</p>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">Find Your Way</h1>
