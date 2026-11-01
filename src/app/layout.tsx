@@ -56,6 +56,7 @@ export default function RootLayout({
         name: SITE_NAME,
         url: SITE_HOME_URL,
         description: SITE_DESCRIPTION,
+        logo: "https://www.rhythmrealm.net/rhythm-realm-logo.png",
         founder: {
           "@id": `${SITE_HOME_URL}#andre-washington`,
         },

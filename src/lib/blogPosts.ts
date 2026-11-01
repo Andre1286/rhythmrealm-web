@@ -242,8 +242,10 @@ export const BLOG_POSTS: BlogPost[] = [
     editorialCredit: true,
     title: 'The Story Behind "Do You Ever Wonder?"',
     seoTitle:
-      'The Story Behind "Do You Ever Wonder?" by Andre Washington | Rhythm Realm',
+      "Do You Ever Wonder? Meaning & Story | Andre Washington",
     description:
+      'Explore the meaning and story behind "Do You Ever Wonder?" by Andre Washington, a Rhythm Realm song about life, division, faith, hope, and a better way forward.',
+    dek:
       "Discover the questions behind “Do You Ever Wonder?” and Andre Washington’s melody-first songwriting process, with reflections on choice, faith, and vocal delivery.",
     excerpt:
       "Andre Washington’s firsthand perspective on the questions, melody-first writing, and vocal delivery behind “Do You Ever Wonder?”",
