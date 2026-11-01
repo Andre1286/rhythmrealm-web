@@ -12,7 +12,7 @@ const featuredTracks: ComponentProps<typeof MusicTrackCard>[] = [
     id: "find-your-way",
     href: "/find-your-way",
     cover: "/find-your-way/find-your-way-andre-washington.jpg",
-    coverAspect: "video",
+    coverAspect: "square",
     duration: "2:30",
     description: "A song of patient hope, missed moments, and enduring love from a distance.",
     buttonLabel: "Open Song Page",
