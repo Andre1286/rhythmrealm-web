@@ -7,7 +7,10 @@ import PlaylistAudioPlayer from "@/components/PlaylistAudioPlayer";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { getMotionComicVideoUrl, motionComicPath, motionComicWatchPath } from "@/lib/motionComic";
 import { absoluteUrl, SITE_DESCRIPTION, SITE_HOME_URL, SITE_TITLE } from "@/lib/seo";
+
+const hasMotionComic = Boolean(getMotionComicVideoUrl());
 
 const featuredSong = {
   id: "coming-over-yesterday",
@@ -186,19 +189,33 @@ export default function Home() {
               <p className={styles.eyebrow}>03 / Another chapter</p>
               <p className={styles.bridge}>Music connects us.<br />Some stories ask what it takes to be heard.</p>
               <h2 id="comic-heading" className={styles.comicTitle}>The Artist<br />Nobody Heard</h2>
-              <p className={styles.issue}>Issue #3: The Price of Attention</p>
-              <p className={styles.bodyCopy}>Julian finally gets the attention he wanted, but new opportunities force him to confront what visibility, ownership, and independence may cost.</p>
-              <nav aria-label="Comic spotlight navigation">
-                <div className={styles.actions}>
-                  <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-3" target="_self" className={playButtonClass}>Read Issue #3 <span aria-hidden="true">↗</span></RhythmRealmLink>
-                  <RhythmRealmLink href="/comics/the-artist-nobody-heard" target="_self" className={outlineButtonClass}>Explore the Series</RhythmRealmLink>
-                </div>
-                <div className={styles.catchUp}>
-                  <span>Catch up</span>
-                  <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-1" target="_self" className={outlineButtonClass}>Start with Issue #1</RhythmRealmLink>
-                  <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-2" target="_self" className={outlineButtonClass}>Read Issue #2</RhythmRealmLink>
-                </div>
-              </nav>
+              {hasMotionComic ? (
+                <>
+                  <p className={styles.issue}>Motion comic</p>
+                  <p className={styles.bodyCopy}>Follow Julian as he searches for a way to protect his artistic voice and reach the listeners who connect with his music.</p>
+                  <div className={styles.actions}>
+                    <RhythmRealmLink href={motionComicWatchPath} target="_self" className={playButtonClass}>
+                      Watch the motion comic
+                    </RhythmRealmLink>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className={styles.issue}>Issue #3: The Price of Attention</p>
+                  <p className={styles.bodyCopy}>Julian finally gets the attention he wanted, but new opportunities force him to confront what visibility, ownership, and independence may cost.</p>
+                  <nav aria-label="Comic spotlight navigation">
+                    <div className={styles.actions}>
+                      <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-3" target="_self" className={playButtonClass}>Read Issue #3 <span aria-hidden="true">↗</span></RhythmRealmLink>
+                      <RhythmRealmLink href="/comics/the-artist-nobody-heard" target="_self" className={outlineButtonClass}>Explore the Series</RhythmRealmLink>
+                    </div>
+                    <div className={styles.catchUp}>
+                      <span>Catch up</span>
+                      <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-1" target="_self" className={outlineButtonClass}>Start with Issue #1</RhythmRealmLink>
+                      <RhythmRealmLink href="/comics/the-artist-nobody-heard/issue-2" target="_self" className={outlineButtonClass}>Read Issue #2</RhythmRealmLink>
+                    </div>
+                  </nav>
+                </>
+              )}
             </div>
             <figure className={styles.comicArtwork}>
               <Image
@@ -254,7 +271,7 @@ export default function Home() {
             {[
               { href: "/music", title: "Music", detail: "Find your next song" },
               { href: "/blog", title: "Stories", detail: "Go beyond the song" },
-              { href: "/comics/the-artist-nobody-heard", title: "The Artist Nobody Heard", detail: "Explore all three issues" },
+              { href: hasMotionComic ? motionComicWatchPath : motionComicPath, title: "The Artist Nobody Heard", detail: hasMotionComic ? "Watch the motion comic" : "Explore all three issues" },
             ].map((destination) => (
               <RhythmRealmLink key={destination.title} href={destination.href} target="_self" className={styles.destination}>
                 <span className={styles.destinationTitle}>{destination.title}<span aria-hidden="true">↗</span></span>

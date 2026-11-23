@@ -5,9 +5,13 @@ import Image from "next/image";
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { getMotionComicVideoUrl, motionComicPath } from "@/lib/motionComic";
 import { absoluteUrl } from "@/lib/seo";
 
-const seriesPath = "/comics/the-artist-nobody-heard";
+const videoUrl = getMotionComicVideoUrl();
+const seriesDescription = videoUrl
+  ? "Watch The Artist Nobody Heard, a Rhythm Realm motion comic about music, artistic identity, ownership, and finding a real audience."
+  : "Read The Artist Nobody Heard, a Rhythm Realm comic series about music, artistic identity, ownership, and finding a real audience.";
 
 const issues = [
   {
@@ -52,16 +56,14 @@ export const metadata: Metadata = {
   title: {
     absolute: "The Artist Nobody Heard | Rhythm Realm Comics",
   },
-  description:
-    "Read The Artist Nobody Heard, a Rhythm Realm comic series about music, artistic identity, ownership, and finding a real audience.",
+  description: seriesDescription,
   alternates: {
-    canonical: seriesPath,
+    canonical: motionComicPath,
   },
   openGraph: {
     title: "The Artist Nobody Heard | Rhythm Realm Comics",
-    description:
-      "Read The Artist Nobody Heard, a Rhythm Realm comic series about music, artistic identity, ownership, and finding a real audience.",
-    url: absoluteUrl(seriesPath),
+    description: seriesDescription,
+    url: absoluteUrl(motionComicPath),
     type: "website",
     images: [
       {
@@ -92,17 +94,39 @@ export default function TheArtistNobodyHeardSeriesPage() {
             voice, own his creative path, and reach the listeners who truly
             connect with his music.
           </p>
-          <p className="mt-6 text-base leading-relaxed text-white/68">
-            Three issues are currently available. Read them in order, starting
-            with Issue #1.
-          </p>
-          <RhythmRealmLink
-            href="/comics/the-artist-nobody-heard/issue-1"
-            target="_self"
-            className="mt-6 inline-flex rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
-          >
-            Start with Issue #1 &mdash; Heard in the Noise
-          </RhythmRealmLink>
+          {videoUrl ? (
+            <div id="watch" className="mt-8 max-w-4xl scroll-mt-6">
+              <h2 id="motion-comic-title" className="text-2xl font-semibold sm:text-3xl">
+                Watch the motion comic
+              </h2>
+              <video
+                aria-labelledby="motion-comic-title"
+                className="mt-4 aspect-[1280/718] w-full rounded-lg border border-white/15 bg-black object-contain focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200"
+                width={1280}
+                height={718}
+                controls
+                playsInline
+                preload="none"
+              >
+                <source src={videoUrl} type="video/mp4" />
+                Your browser does not support video playback.
+              </video>
+            </div>
+          ) : (
+            <>
+              <p className="mt-6 text-base leading-relaxed text-white/68">
+                Three issues are currently available. Read them in order, starting
+                with Issue #1.
+              </p>
+              <RhythmRealmLink
+                href={issues[0].href}
+                target="_self"
+                className="mt-6 inline-flex rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
+              >
+                Start with Issue #1 &mdash; Heard in the Noise
+              </RhythmRealmLink>
+            </>
+          )}
         </div>
       </section>
 
