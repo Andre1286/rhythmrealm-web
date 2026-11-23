@@ -46,16 +46,9 @@
 .artistLink { display: inline-flex; align-items: center; gap: 18px; min-height: 44px; color: var(--accent); font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 5px; }
 .artistLink:hover { color: var(--paper); }
 .comicScene { background: #0b1115; }
-.comicLayout { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; padding-block: 90px; }
-.bridge { margin-top: 30px; color: var(--muted); font-size: 15px; line-height: 1.8; }
+.comicLayout { padding-block: 90px; }
+.comicCopy { max-width: 640px; }
 .comicTitle { margin-block: 30px 22px; font-size: clamp(40px, 4.4vw, 60px); font-weight: 500; line-height: 1.07; letter-spacing: -.045em; }
-.issue { margin-bottom: 18px; color: var(--accent); font-size: 15px; }
-.catchUp { display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: center; margin-top: 22px; }
-.catchUp > span { width: 100%; color: var(--muted); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
-.catchUp .textLink { font-size: 13px; }
-.comicArtwork { width: 100%; max-width: 520px; margin: 0 0 0 auto; }
-.comicPage { width: 100%; height: auto; box-shadow: 0 24px 64px #0006; }
-.comicCaption { margin-top: 16px; color: var(--muted); font-size: 10px; line-height: 1.7; letter-spacing: .09em; text-transform: uppercase; }
 .insiders { display: grid; grid-template-columns: .9fr 1.1fr; gap: 90px; align-items: center; padding-block: 120px; }
 .invitationTitle { margin-block: 18px 24px; font-size: clamp(38px, 4.4vw, 58px); font-weight: 500; line-height: 1.06; letter-spacing: -.045em; }
 .signupPresentation { min-width: 0; padding-block: 20px; }
@@ -72,7 +65,7 @@
 .trackActions .textLink { font-size: 12px; }
 .smallPlay { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 64px; padding: 10px 18px; border: 1px solid #91afb5; border-radius: 4px; color: var(--accent); font-size: 13px; font-weight: 600; cursor: pointer; }
 .smallPlay:hover { background: var(--paper); color: #080b0c; }
-.destinations { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 36px; margin-top: 50px; }
+.destinations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 36px; margin-top: 50px; }
 .destination { display: block; padding-block: 18px; border-bottom: 1px solid #ffffff21; }
 .destinationTitle { display: flex; gap: 12px; justify-content: space-between; font-size: 24px; line-height: 1.4; }
 .destinationTitle > span { color: var(--accent); }
@@ -91,7 +84,7 @@
   .artist { grid-template-columns: 1fr; gap: 18px; }
   .artistPortrait { grid-row: auto; }
   .artistDetails { grid-column: 1; }
-  .comicLayout, .insiders { gap: 48px; }
+  .insiders { gap: 48px; }
   .trackRow { grid-template-columns: 80px 1fr; gap: 16px 24px; }
   .trackActions { grid-column: 2; }
   .trackCover { grid-row: span 2; align-self: start; }
@@ -108,9 +101,7 @@
   .artist { grid-template-columns: 160px minmax(0, 1fr); max-width: 560px; gap: 0 24px; }
   .artistPortrait { width: 160px; grid-row: span 2; }
   .artistDetails { grid-column: 2; }
-  .comicLayout { grid-template-columns: 1fr; gap: 40px; padding-block: 60px; }
-  .comicArtwork { max-width: 480px; margin-inline: auto; }
-  .comicCopy { max-width: 560px; }
+  .comicLayout { padding-block: 60px; }
   .insiders { grid-template-columns: 1fr; gap: 20px; padding-block: 72px; }
   .signupPresentation { max-width: 620px; }
 }
@@ -137,9 +128,7 @@
   .artist h3 { font-size: 20px; }
   .artist .bodyCopy { margin-top: 0; font-size: 15px; }
   .comicTitle { font-size: 42px; }
-  .comicLayout { padding-block: 48px; gap: 32px; }
-  .bridge { margin-top: 20px; font-size: 14px; }
-  .comicCaption { font-size: 9px; }
+  .comicLayout { padding-block: 48px; }
   .insiders { padding-block: 60px; gap: 18px; }
   .invitationTitle { font-size: 42px; }
   .signupPresentation { padding-block: 0; }
