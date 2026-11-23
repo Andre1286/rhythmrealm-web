@@ -46,3 +46,6 @@ dev-server.err
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Development-only motion comic preview
+/public/videos/the-artist-nobody-heard.local.mp4

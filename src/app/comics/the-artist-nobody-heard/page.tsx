@@ -1,155 +1,92 @@
 import InsiderCta from "@/components/InsiderCta";
 import type { Metadata } from "next";
-import Image from "next/image";
 
 import RhythmRealmLink from "@/components/RhythmRealmLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import {
+  motionComicDescription,
+  motionComicPath,
+  motionComicTitle,
+  motionComicVideoPath,
+  motionComicWatchPath,
+} from "@/lib/motionComic";
 import { absoluteUrl } from "@/lib/seo";
 
-const seriesPath = "/comics/the-artist-nobody-heard";
-
-const issues = [
-  {
-    href: "/comics/the-artist-nobody-heard/issue-1",
-    issue: "Issue #1",
-    title: "Heard in the Noise",
-    description:
-      "Julian tries to make meaningful music in a world ruled by endless scrolling, low numbers, and outside pressure.",
-    image:
-      "/comics/the-artist-nobody-heard/issue-1/page-01-the-endless-scroll.png",
-    alt: "The Artist Nobody Heard Issue #1 cover artwork showing Julian facing an endless social media scroll.",
-    width: 941,
-    height: 1672,
-  },
-  {
-    href: "/comics/the-artist-nobody-heard/issue-2",
-    issue: "Issue #2",
-    title: "Unknown Source",
-    description:
-      "Julian meets SYPHER and must choose between industry pressure and a direct connection with the people his music was meant to reach.",
-    image:
-      "/comics/the-artist-nobody-heard/issue-2/page-01-the-message-returns.png",
-    alt: "The Artist Nobody Heard Issue #2 cover artwork showing Julian receiving the mysterious Unknown Source signal again.",
-    width: 941,
-    height: 1672,
-  },
-  {
-    href: "/comics/the-artist-nobody-heard/issue-3",
-    issue: "Issue #3",
-    title: "The Price of Attention",
-    description:
-      "Julian finally gets the attention he wanted, but new opportunities force him to confront what visibility, ownership, and independence may cost.",
-    image:
-      "/comics/the-artist-nobody-heard/issue-3/issue-3-page-01.png",
-    alt: "The Artist Nobody Heard Issue #3 cover artwork showing Julian watching his music spread online.",
-    width: 1055,
-    height: 1491,
-  },
-];
+const pageTitle = `${motionComicTitle} | Rhythm Realm Motion Comic`;
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "The Artist Nobody Heard | Rhythm Realm Comics",
-  },
-  description:
-    "Read The Artist Nobody Heard, a Rhythm Realm comic series about music, artistic identity, ownership, and finding a real audience.",
-  alternates: {
-    canonical: seriesPath,
-  },
+  title: { absolute: pageTitle },
+  description: motionComicDescription,
+  alternates: { canonical: motionComicPath },
   openGraph: {
-    title: "The Artist Nobody Heard | Rhythm Realm Comics",
-    description:
-      "Read The Artist Nobody Heard, a Rhythm Realm comic series about music, artistic identity, ownership, and finding a real audience.",
-    url: absoluteUrl(seriesPath),
+    title: pageTitle,
+    description: motionComicDescription,
+    url: absoluteUrl(motionComicPath),
     type: "website",
-    images: [
-      {
-        url: issues[2].image,
-        width: issues[2].width,
-        height: issues[2].height,
-        alt: issues[2].alt,
-      },
-    ],
+  },
+  twitter: {
+    card: "summary",
+    title: pageTitle,
+    description: motionComicDescription,
+  },
+};
+
+const motionComic = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": absoluteUrl(motionComicWatchPath),
+  name: motionComicTitle,
+  description: motionComicDescription,
+  genre: "Motion comic",
+  url: absoluteUrl(motionComicPath),
+  encoding: {
+    "@type": "MediaObject",
+    contentUrl: absoluteUrl(motionComicVideoPath),
+    encodingFormat: "video/mp4",
+    duration: "PT5M12.12S",
   },
 };
 
 export default function TheArtistNobodyHeardSeriesPage() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-black text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(motionComic).replace(/</g, "\\u003c") }}
+      />
       <SiteHeader />
 
       <section className="border-b border-white/10 bg-white/[0.035]">
         <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 sm:py-18">
           <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
-            Rhythm Realm Comic Series
+            Rhythm Realm Motion Comic
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-            The Artist Nobody Heard
+            {motionComicTitle}
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/68 sm:text-lg">
             Follow Julian as he searches for a way to protect his artistic
             voice, own his creative path, and reach the listeners who truly
             connect with his music.
           </p>
-          <p className="mt-6 text-base leading-relaxed text-white/68">
-            Three issues are currently available. Read them in order, starting
-            with Issue #1.
-          </p>
-          <RhythmRealmLink
-            href="/comics/the-artist-nobody-heard/issue-1"
-            target="_self"
-            className="mt-6 inline-flex rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-cyan-100"
-          >
-            Start with Issue #1 &mdash; Heard in the Noise
-          </RhythmRealmLink>
-        </div>
-      </section>
-
-      <section
-        aria-labelledby="available-issues"
-        className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-6 sm:py-16"
-      >
-        <h2
-          id="available-issues"
-          className="text-3xl font-semibold tracking-tight sm:text-4xl"
-        >
-          Available issues
-        </h2>
-        <div className="mt-8 grid gap-8 lg:grid-cols-2">
-          {issues.map((issue) => (
-            <article
-              key={issue.href}
-              className="grid min-w-0 gap-6 overflow-hidden rounded-xl border border-white/10 bg-white/[0.035] p-5 shadow-2xl shadow-cyan-950/10 sm:grid-cols-[minmax(180px,0.72fr)_minmax(0,1fr)] sm:items-center sm:p-6"
+          <div id="watch" className="mt-8 max-w-4xl scroll-mt-6">
+            <h2 id="motion-comic-title" className="text-2xl font-semibold sm:text-3xl">
+              Watch the motion comic
+            </h2>
+            <video
+              aria-labelledby="motion-comic-title"
+              className="mt-4 aspect-[1280/718] w-full rounded-lg border border-white/15 bg-black object-contain focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200"
+              width={1280}
+              height={718}
+              controls
+              playsInline
+              preload="none"
             >
-              <Image
-                src={issue.image}
-                alt={issue.alt}
-                width={issue.width}
-                height={issue.height}
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 280px, 240px"
-                className="mx-auto h-auto w-full max-w-sm rounded-lg border border-white/10 bg-black object-contain"
-              />
-              <div className="min-w-0">
-                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200/80">
-                  {issue.issue}
-                </div>
-                <h3 className="mt-3 text-2xl font-semibold tracking-tight">
-                  {issue.title}
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-white/68 sm:text-base">
-                  {issue.description}
-                </p>
-                <RhythmRealmLink
-                  href={issue.href}
-                  target="_self"
-                  className="mt-6 inline-flex rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100"
-                >
-                  Read {issue.issue}
-                </RhythmRealmLink>
-              </div>
-            </article>
-          ))}
+              <source src={motionComicVideoPath} type="video/mp4" />
+              Your browser does not support video playback.
+            </video>
+          </div>
         </div>
       </section>
 
