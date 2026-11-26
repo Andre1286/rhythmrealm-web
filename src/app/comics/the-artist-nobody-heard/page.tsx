@@ -115,6 +115,9 @@ export default function TheArtistNobodyHeardSeriesPage() {
               </section>
             ))}
           </div>
+          <p className="mt-6 text-sm text-white/60">
+            Motion Comic Production: Terry
+          </p>
         </div>
       </section>
 

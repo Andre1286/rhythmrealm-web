@@ -305,3 +305,109 @@ was left untouched. Preview binds to loopback only. Owner review is the next ste
 - Preview deployment identity, hosted playback, seeking, ranges, responsive QA,
   and unchanged production alias will be verified after the feature-branch push
   and reported separately. No production release is authorized by this record.
+
+## Final technical and mobile checkpoint — November 26, 2026
+
+Owner-reported real-device checkpoint: Google Pixel 10 Pro XL. The owner confirms
+that all three posters display correctly, all three issue navigation buttons
+work, all three videos play with sound, fullscreen works, and there is no
+unexpected buffering or layout trouble. Mobile presentation and playback are
+owner-approved. This is the owner's real-device evidence, not agent device
+emulation, and resolves the outstanding Android playback checkpoint. No claim
+of iOS testing is made.
+
+Approved release candidate remains
+`66b60d987618b8b829086eb10a6df8b2159eea12` on
+`codex/motion-comic-issues-2-3`; fresh GitHub remote-head verification matches it.
+Preview deployment `dpl_5SyuY7kqcscz1qNVw3kq5puTTFPf` remains READY and identifies
+that exact commit and branch in the correct project.
+
+Preview URL:
+`https://rhythmrealm-gpue0hrib-andre-dee-washingtons-projects.vercel.app/comics/the-artist-nobody-heard`.
+
+### Hosted partial-content verification
+
+Six authenticated GET requests tested the first 1,024 bytes and a separate
+1,024-byte range beginning 60% through each delivered MP4. Every request returned
+HTTP 206, `Content-Type: video/mp4`, `Accept-Ranges: bytes`, and
+`Content-Length: 1024`. All six response bodies matched the corresponding bytes
+of the approved local files exactly. No videos were saved, modified or processed.
+
+| Issue | First Content-Range | Middle Content-Range |
+| --- | --- | --- |
+| #1 | `bytes 0-1023/36312608` | `bytes 21787564-21788587/36312608` |
+| #2 | `bytes 0-1023/35831335` | `bytes 21498801-21499824/35831335` |
+| #3 | `bytes 0-1023/41544993` | `bytes 24926995-24928018/41544993` |
+
+The first samples also returned `Cache-Control: public, max-age=0, must-revalidate`,
+ETag and Last-Modified validators, `X-Vercel-Cache: HIT`, and no Content-Encoding.
+The deployment requires Vercel authentication: an unauthenticated probe returned
+a 302 protection redirect. The Vercel connector created its standard temporary
+23-hour deployment share link for the authenticated checks. The link and cookies
+were held only in process memory, not stored in this repository or exposed in
+the report. Browser security, project protection, billing and domain settings
+were not changed. The temporary access link is not a production publication.
+
+### Final disposition
+
+Technical GO for the tested video delivery, native seeking and owner-approved
+Pixel playback. No outstanding functional media-delivery blocker was found.
+Captions/transcripts and final contributor-credit wording remain accessibility
+and attribution release decisions. Prior Edge playback interruptions were
+explicitly attributed by the browser to McAfee Web Boost; its settings were left
+unchanged. No claim of independently repeated full-length desktop playback.
+
+Fresh production checks confirm `www.rhythmrealm.net` still points to
+`dpl_H2m6Jv5NrWgWSqtf5Mp6pEkmrje9`, and both deployed production metadata and
+remote main remain at `eb36f1f2a91586e145dd582532b8d13778c943fb`.
+Only this local documentation checkpoint was added; it is intentionally uncommitted
+and does not change the approved release-candidate commit or deployed assets.
+No new commit, staging, push, merge, production deployment or publication.
+Explicit owner production authorization is still required.
+
+## Final owner production authorization — November 26, 2026
+
+The owner's explicit FINAL OWNER AUTHORIZATION — PRODUCTION RELEASE approves
+publication to RhythmRealm.net from the reviewed release candidate
+`66b60d987618b8b829086eb10a6df8b2159eea12`, plus the exact contributor credit
+`Motion Comic Production: Terry` and these release records. This supersedes the
+historical preview-only restrictions above. The existing uncommitted mobile
+and HTTP range checkpoint has been preserved in full.
+
+The approved videos, cinematic posters, official Design A logo, current website
+presentation, desktop playback and Google Pixel 10 Pro XL playback are approved
+and locked. The sole presentation addition is the exact credit in a small text
+paragraph below the three players, using existing text styling. No media asset,
+player behavior, issue anchor, shared navigation, music or signup code changes.
+
+Captions and transcripts are explicitly deferred by the owner as an accessibility
+follow-up. Track preparation of accurate captions/transcripts for all three
+issues, owner review, native caption-track integration and accessibility QA as
+future authorized work. Do not invent or generate caption wording in this release.
+No iOS testing is claimed by the existing Pixel checkpoint.
+
+Before final changes, production alias `www.rhythmrealm.net` still points to
+`dpl_H2m6Jv5NrWgWSqtf5Mp6pEkmrje9`; remote main remains
+`eb36f1f2a91586e145dd582532b8d13778c943fb`. That previous READY production
+deployment is the rollback reference; this approval does not request a rollback.
+The remote release branch and READY preview still identify approved commit
+`66b60d987618b8b829086eb10a6df8b2159eea12`.
+
+Authorized workflow: run final lint/typecheck/tests/build, commit and push only
+the page credit and this report (including the preserved checkpoint), verify the
+updated preview is READY and displays the credit, then use the repository's
+GitHub pull-request merge workflow into main. The existing Git integration may
+create the production deployment and automatically assign its production domains.
+Verify the exact production commit, READY state, domain mapping and live website
+before declaring publication successful. No paid add-on, billing change, security
+or protection-setting change, destructive Git operation or unrelated change is
+authorized. Stop and report unexpected changes, conflicts, check failures or
+deployment errors without taking corrective action.
+
+Final local validation of the exact credit addition: `npm run lint`,
+`npm run typecheck`, all 19 existing mocked tests and `npm run build` passed.
+The three delivered MP4 and three WebP SHA-256 values remain identical to the
+approved values above. `git diff --check` passed. Only this report and the page's
+three-line credit addition differ from the original approved release candidate.
+The existing test module-type warning is unchanged. No live subscriber write,
+dependency installation, media processing or design change was performed.
