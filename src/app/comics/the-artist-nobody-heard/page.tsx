@@ -6,10 +6,9 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import {
   motionComicDescription,
+  motionComicIssues,
   motionComicPath,
   motionComicTitle,
-  motionComicVideoPath,
-  motionComicWatchPath,
 } from "@/lib/motionComic";
 import { absoluteUrl } from "@/lib/seo";
 
@@ -35,17 +34,24 @@ export const metadata: Metadata = {
 const motionComic = {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
-  "@id": absoluteUrl(motionComicWatchPath),
+  "@id": absoluteUrl(`${motionComicPath}#series`),
   name: motionComicTitle,
   description: motionComicDescription,
   genre: "Motion comic",
   url: absoluteUrl(motionComicPath),
-  encoding: {
-    "@type": "MediaObject",
-    contentUrl: absoluteUrl(motionComicVideoPath),
-    encodingFormat: "video/mp4",
-    duration: "PT5M12.12S",
-  },
+  hasPart: motionComicIssues.map((issue) => ({
+    "@type": "CreativeWork",
+    "@id": absoluteUrl(`${motionComicPath}#${issue.anchor}`),
+    name: `${motionComicTitle} — Issue #${issue.number}`,
+    url: absoluteUrl(`${motionComicPath}#${issue.anchor}`),
+    genre: "Motion comic",
+    encoding: {
+      "@type": "MediaObject",
+      contentUrl: absoluteUrl(issue.videoPath),
+      encodingFormat: "video/mp4",
+      duration: issue.duration,
+    },
+  })),
 };
 
 export default function TheArtistNobodyHeardSeriesPage() {
@@ -70,23 +76,48 @@ export default function TheArtistNobodyHeardSeriesPage() {
             voice, own his creative path, and reach the listeners who truly
             connect with his music.
           </p>
-          <div id="watch" className="mt-8 max-w-4xl scroll-mt-6">
-            <h2 id="motion-comic-title" className="text-2xl font-semibold sm:text-3xl">
-              Watch the motion comic
-            </h2>
-            <video
-              aria-labelledby="motion-comic-title"
-              className="mt-4 aspect-[1280/718] w-full rounded-lg border border-white/15 bg-black object-contain focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200"
-              width={1280}
-              height={718}
-              controls
-              playsInline
-              preload="none"
-            >
-              <source src={motionComicVideoPath} type="video/mp4" />
-              Your browser does not support video playback.
-            </video>
+          <nav aria-label="Motion comic issues" className="mt-8 flex flex-wrap gap-3">
+            {motionComicIssues.map((issue) => (
+              <a
+                key={issue.number}
+                href={`#${issue.anchor}`}
+                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-cyan-200/30 px-5 py-3 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-100 hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200"
+              >
+                Watch Issue #{issue.number}
+              </a>
+            ))}
+          </nav>
+          <div className="mt-10 grid max-w-4xl gap-12 sm:gap-16">
+            {motionComicIssues.map((issue) => (
+              <section
+                key={issue.number}
+                id={issue.anchor}
+                aria-labelledby={issue.headingId}
+                className="min-w-0 scroll-mt-6"
+              >
+                <h2 id={issue.headingId} className="text-2xl font-semibold sm:text-3xl">
+                  Watch Issue #{issue.number}
+                </h2>
+                <video
+                  aria-labelledby={issue.headingId}
+                  className="mt-4 w-full rounded-lg border border-white/15 bg-black object-contain focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200"
+                  style={{ aspectRatio: `${issue.width} / ${issue.height}` }}
+                  width={issue.width}
+                  height={issue.height}
+                  controls
+                  playsInline
+                  preload="none"
+                  poster={issue.posterPath}
+                >
+                  <source src={issue.videoPath} type="video/mp4" />
+                  Your browser does not support video playback.
+                </video>
+              </section>
+            ))}
           </div>
+          <p className="mt-6 text-sm text-white/60">
+            Motion Comic Production: Terry
+          </p>
         </div>
       </section>
 
